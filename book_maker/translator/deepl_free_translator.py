@@ -1,108 +1,125 @@
 import time
-import random
-import re
 import requests
 
 from book_maker.utils import LANGUAGES, TO_LANGUAGE_CODE
-
 from .base_translator import Base
 from rich import print
 
 
 class DeepLFree(Base):
     """
-    DeepL free translator using official DeepL Free API
-    Requires API key from https://www.deepl.com/pro-api
+    DeepL Free translator using official DeepL Free API
     """
 
     def __init__(self, key, language, **kwargs) -> None:
-        super().__init__(key, language)
-
         # Validate API key
         if not key or key == "no-key-required":
             raise Exception("DeepL Free requires an API key. Get one from https://www.deepl.com/pro-api")
 
-        # Set up API endpoint for free tier
+        super().__init__(key, language)
         self.api_url = "https://api-free.deepl.com/v2/translate"
-        self.headers = {
-            "Authorization": f"DeepL-Auth-Key {key}",
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
 
-        # Map language to DeepL format
-        l = language if language in LANGUAGES else TO_LANGUAGE_CODE.get(language)
+        # Map language codes to DeepL format
+        if language == "zh-cn":
+            language = "ZH"
+        elif language in LANGUAGES:
+            language = language.upper()
+        elif language in TO_LANGUAGE_CODE:
+            language = TO_LANGUAGE_CODE[language].upper()
+        else:
+            language = language.upper()
 
-        # DeepL supported languages (updated list)
+        # Validate supported languages for DeepL
         supported_languages = [
-            "bg", "cs", "da", "de", "el", "en", "en-US", "en-GB",
-            "es", "et", "fi", "fr", "hu", "id", "it", "ja", "ko",
-            "lt", "lv", "nb", "nl", "pl", "pt", "pt-PT", "pt-BR",
-            "ro", "ru", "sk", "sl", "sv", "tr", "uk", "zh", "zh-CN"
+            "BG", "CS", "DA", "DE", "EL", "EN", "ES", "ET", "FI", "FR",
+            "HU", "ID", "IT", "JA", "KO", "LT", "LV", "NB", "NL", "PL",
+            "PT", "RO", "RU", "SK", "SL", "SV", "TR", "UK", "ZH"
         ]
 
-        # Handle Chinese language variants
-        if l in ["zh-cn", "zh"]:
-            l = "zh-CN"
-        elif l == "pt":
-            l = "pt-PT"
-        elif l == "en":
-            l = "en-US"
+        if language not in supported_languages:
+            raise Exception(f"DeepL does not support language: {language}")
 
-        if l not in supported_languages:
-            raise Exception(f"DeepL does not support language: {l}")
+        self.language = language
 
-        self.language = l
-        self.time_random = [0.5, 0.8, 1.0, 1.2, 1.5]  # Reduced delays for API
+        # Test API key validity immediately
+        self._test_api_key()
 
     def rotate_key(self):
-        pass
+        """Rotate to next API key in the cycle"""
+        pass  # Single key usage - no rotation needed for now
 
-    def translate(self, text):
-        print(text)
+    def _test_api_key(self):
+        """Test if the API key is valid by making a simple request"""
+        headers = {
+            "Authorization": f"DeepL-Auth-Key {next(self.keys)}",
+            "Content-Type": "application/json"
+        }
 
-        # Prepare request data
-        data = {
-            "text": text,
-            "target_lang": self.language,
-            "source_lang": "auto"  # Auto-detect source language
+        payload = {
+            "text": ["Hello"],
+            "target_lang": self.language
         }
 
         try:
-            # Make API request
             response = requests.post(
                 self.api_url,
-                headers=self.headers,
-                data=data,
+                headers=headers,
+                json=payload,
+                timeout=10
+            )
+
+            if response.status_code == 403:
+                raise Exception("Invalid DeepL API key. Please check your API key.")
+            elif response.status_code == 456:
+                raise Exception("DeepL quota exceeded. Please check your usage limits.")
+            elif response.status_code != 200:
+                raise Exception(f"DeepL API error: {response.status_code} - {response.text}")
+
+        except requests.exceptions.RequestException as e:
+            raise Exception(f"Failed to connect to DeepL API: {str(e)}")
+
+    def translate(self, text):
+        """Translate text using DeepL Free API"""
+        headers = {
+            "Authorization": f"DeepL-Auth-Key {next(self.keys)}",
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "text": [text],
+            "target_lang": self.language
+        }
+
+        try:
+            response = requests.post(
+                self.api_url,
+                headers=headers,
+                json=payload,
                 timeout=30
             )
 
-            # Check for errors
             if response.status_code == 403:
-                raise Exception("DeepL API key is invalid or quota exceeded")
+                raise Exception("Invalid DeepL API key")
             elif response.status_code == 456:
                 raise Exception("DeepL quota exceeded")
             elif response.status_code != 200:
                 raise Exception(f"DeepL API error: {response.status_code} - {response.text}")
 
-            # Parse response
             result = response.json()
+            translated_text = result.get("translations", [{}])[0].get("text", "")
 
-            if "translations" not in result or not result["translations"]:
-                raise Exception("No translation returned from DeepL")
+            if not translated_text:
+                raise Exception("DeepL returned empty translation")
 
-            t_text = result["translations"][0]["text"]
+            print(f"[bold blue]Original:[/bold blue] {text}")
+            print(f"[bold green]Translated:[/bold green] {translated_text}")
 
-            # Rate limiting
-            time.sleep(random.choice(self.time_random))
-
-            print("[bold green]" + re.sub("\n{3,}", "\n\n", t_text) + "[/bold green]")
-            return t_text
+            return translated_text
 
         except requests.exceptions.RequestException as e:
-            raise Exception(f"DeepL API request failed: {str(e)}")
+            print(f"DeepL API request failed: {e}")
+            time.sleep(5)
+            raise Exception(f"DeepL translation failed: {str(e)}")
         except Exception as e:
-            # If it's already our custom exception, re-raise
-            if "DeepL" in str(e):
-                raise
-            else:
-                raise Exception(f"DeepL translation failed: {str(e)}")
+            print(f"DeepL translation error: {e}")
+            raise
