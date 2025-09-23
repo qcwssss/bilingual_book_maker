@@ -126,6 +126,7 @@ class AsyncEPUBTranslator:
 
         # Set up progress callback
         def progress_callback(update: ProgressUpdate):
+            logger.info(f"Progress callback triggered for job {update.job_id}: {update.current}/{update.total} ({update.percentage:.1f}%)")
             job_manager.update_job_progress(
                 job_id=update.job_id,
                 processed=update.current,
@@ -253,7 +254,9 @@ class AsyncEPUBTranslator:
             output_path = job_manager.get_output_path(job_id, job.filename)
 
             # Execute translation with progress monitoring
+            logger.info(f"Starting translation with progress monitoring for job {job_id}")
             with global_progress_tracker.create_tqdm_patch(job_id):
+                logger.info(f"TqdmInterceptor patch applied for job {job_id}")
                 self._translate_with_loader(
                     input_path=str(upload_path),
                     output_path=str(output_path),
@@ -262,6 +265,7 @@ class AsyncEPUBTranslator:
                     job=job,
                     **kwargs
                 )
+                logger.info(f"Translation completed for job {job_id}")
 
             # Signal successful completion
             timeout_occurred.set()
@@ -338,6 +342,12 @@ class AsyncEPUBTranslator:
             'temperature': job.temperature,
             'source_lang': job.source_language,
         }
+
+        # Only add job_id for EPUB loader (other loaders don't support it yet)
+        if file_type == 'epub':
+            loader_kwargs['job_id'] = job.job_id
+            # Pass the same progress tracker instance used for callback registration
+            loader_kwargs['progress_tracker'] = global_progress_tracker
 
         # Add file-specific parameter based on loader type
         if file_type == 'epub':

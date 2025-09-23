@@ -22,6 +22,7 @@ from .models import (
 from .async_translator import async_translator
 from .job_manager import job_manager
 from .progress_monitor import global_progress_tracker
+from .config import settings, HttpStatusConstants
 
 
 # Configure logging
@@ -57,19 +58,28 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Add CORS middleware
+# Configure security settings using configuration system
+logger.info(f"Environment: {settings.environment}")
+logger.info(f"CORS Origins: {settings.get_cors_origins()}")
+logger.info(f"CORS Methods: {settings.get_cors_methods()}")
+logger.info(f"Trusted Hosts: {settings.get_trusted_hosts()}")
+logger.info(f"API Host: {settings.api_host}:{settings.api_port}")
+logger.info(f"Max Workers: {settings.max_workers}")
+logger.info(f"Job TTL: {settings.job_ttl_hours}h")
+
+# Add CORS middleware with configuration-based settings
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=settings.get_cors_origins(),
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=settings.get_cors_methods(),
+    allow_headers=settings.get_cors_headers(),
 )
 
-# Add trusted host middleware
+# Add trusted host middleware with configuration-based settings
 app.add_middleware(
     TrustedHostMiddleware,
-    allowed_hosts=["*"]  # Configure appropriately for production
+    allowed_hosts=settings.get_trusted_hosts()
 )
 
 
@@ -78,7 +88,7 @@ async def global_exception_handler(request, exc):
     """Global exception handler"""
     logger.error(f"Unhandled exception: {exc}", exc_info=True)
     return JSONResponse(
-        status_code=500,
+        status_code=HttpStatusConstants.INTERNAL_SERVER_ERROR,
         content=ErrorResponse(
             error="Internal server error",
             detail=str(exc),
@@ -173,7 +183,7 @@ async def start_translation(
     """
     # Validate file
     if not file.filename:
-        raise HTTPException(status_code=400, detail="No file provided")
+        raise HTTPException(status_code=HttpStatusConstants.BAD_REQUEST, detail="No file provided")
 
     # Check supported file formats
     supported_formats = ['.epub', '.txt', '.srt', '.md']
@@ -181,17 +191,17 @@ async def start_translation(
 
     if file_ext not in supported_formats:
         raise HTTPException(
-            status_code=400,
+            status_code=HttpStatusConstants.BAD_REQUEST,
             detail=f"Unsupported file format. Supported formats: {', '.join(supported_formats)}"
         )
 
     # Validate required parameters
     if not key:
-        raise HTTPException(status_code=400, detail="API key is required")
+        raise HTTPException(status_code=HttpStatusConstants.BAD_REQUEST, detail="API key is required")
 
     # Validate temperature
     if not 0.0 <= temperature <= 2.0:
-        raise HTTPException(status_code=400, detail="Temperature must be between 0.0 and 2.0")
+        raise HTTPException(status_code=HttpStatusConstants.BAD_REQUEST, detail="Temperature must be between 0.0 and 2.0")
 
     try:
         # Create unique upload path to avoid conflicts
@@ -208,7 +218,7 @@ async def start_translation(
             resume_file_path = f"{unique_upload_path.parent}/.{unique_upload_path.stem}.temp.bin"
             if not os.path.exists(resume_file_path):
                 raise HTTPException(
-                    status_code=400,
+                    status_code=HttpStatusConstants.BAD_REQUEST,
                     detail=f"Resume requested but no resume file found. Start a new translation without resume option first."
                 )
 
@@ -242,12 +252,12 @@ async def start_translation(
         )
 
     except FileNotFoundError as e:
-        raise HTTPException(status_code=404, detail=str(e))
+        raise HTTPException(status_code=HttpStatusConstants.NOT_FOUND, detail=str(e))
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=HttpStatusConstants.BAD_REQUEST, detail=str(e))
     except Exception as e:
         logger.error(f"Error starting translation: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Failed to start translation: {str(e)}")
+        raise HTTPException(status_code=HttpStatusConstants.INTERNAL_SERVER_ERROR, detail=f"Failed to start translation: {str(e)}")
 
 
 @app.get("/status/{job_id}", response_model=JobStatusResponse)
@@ -256,7 +266,7 @@ async def get_job_status(job_id: str):
     job = async_translator.get_job_status(job_id)
 
     if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
+        raise HTTPException(status_code=HttpStatusConstants.NOT_FOUND, detail="Job not found")
 
     # Build download URL if job is completed
     download_url = None
@@ -334,10 +344,10 @@ async def cancel_job(job_id: str):
     if not success:
         job = async_translator.get_job_status(job_id)
         if not job:
-            raise HTTPException(status_code=404, detail="Job not found")
+            raise HTTPException(status_code=HttpStatusConstants.NOT_FOUND, detail="Job not found")
         else:
             raise HTTPException(
-                status_code=400,
+                status_code=HttpStatusConstants.BAD_REQUEST,
                 detail=f"Cannot cancel job in {job.status} status"
             )
 
@@ -352,14 +362,14 @@ async def download_result(job_id: str):
     if not file_path:
         job = async_translator.get_job_status(job_id)
         if not job:
-            raise HTTPException(status_code=404, detail="Job not found")
+            raise HTTPException(status_code=HttpStatusConstants.NOT_FOUND, detail="Job not found")
         elif job.status != JobStatus.COMPLETED:
             raise HTTPException(
-                status_code=400,
+                status_code=HttpStatusConstants.BAD_REQUEST,
                 detail=f"Job is not completed. Current status: {job.status}"
             )
         else:
-            raise HTTPException(status_code=404, detail="Translated file not found")
+            raise HTTPException(status_code=HttpStatusConstants.NOT_FOUND, detail="Translated file not found")
 
     # Get original filename and create download filename
     job = async_translator.get_job_status(job_id)
@@ -391,12 +401,12 @@ async def delete_job(job_id: str):
     """Delete a job and its associated files"""
     job = async_translator.get_job_status(job_id)
     if not job:
-        raise HTTPException(status_code=404, detail="Job not found")
+        raise HTTPException(status_code=HttpStatusConstants.NOT_FOUND, detail="Job not found")
 
     # Can only delete completed, failed, or cancelled jobs
     if job.status in [JobStatus.PENDING, JobStatus.PROCESSING]:
         raise HTTPException(
-            status_code=400,
+            status_code=HttpStatusConstants.BAD_REQUEST,
             detail="Cannot delete active job. Cancel it first."
         )
 
@@ -404,7 +414,7 @@ async def delete_job(job_id: str):
     success = job_manager._remove_job(job_id)
 
     if not success:
-        raise HTTPException(status_code=500, detail="Failed to delete job")
+        raise HTTPException(status_code=HttpStatusConstants.INTERNAL_SERVER_ERROR, detail="Failed to delete job")
 
     return {"message": f"Job {job_id} deleted successfully"}
 
@@ -448,11 +458,11 @@ async def get_system_stats():
 
 
 if __name__ == "__main__":
-    # Development server
+    # Development server with configurable settings
     uvicorn.run(
         "main:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
+        host=settings.api_host,
+        port=settings.api_port,
+        reload=settings.reload,
+        log_level=settings.log_level.lower()
     )

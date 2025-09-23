@@ -10,11 +10,12 @@ from typing import Dict, List, Optional, Callable
 from concurrent.futures import ThreadPoolExecutor, Future
 import logging
 import os
-import shutil
 from pathlib import Path
 
 from .models import TranslationJob, JobStatus
+from .log_parser import progress_parser
 from .progress_monitor import ProgressUpdate, global_progress_tracker
+from .config import settings
 
 
 logger = logging.getLogger(__name__)
@@ -26,32 +27,44 @@ class JobManager:
     Handles job storage, lifecycle management, and cleanup
     """
 
-    def __init__(self, max_workers: int = 4, job_ttl_hours: int = 3):
+    # Class constants for magic numbers
+    INITIAL_COUNT = 0
+    INCREMENT_STEP = 1
+    UUID_PREFIX_LENGTH = 8
+
+    def __init__(self, max_workers: int = None, job_ttl_hours: int = None, cleanup_interval_minutes: int = None):
         """
-        Initialize job manager
+        Initialize job manager with configurable settings
 
         Args:
-            max_workers: Maximum number of concurrent translation jobs
-            job_ttl_hours: Time-to-live for completed jobs in hours
+            max_workers: Maximum number of concurrent translation jobs (uses config default if None)
+            job_ttl_hours: Time-to-live for completed jobs in hours (uses config default if None)
+            cleanup_interval_minutes: Cleanup interval in minutes (uses config default if None)
         """
+        # Use configuration defaults if not provided
+        max_workers = max_workers or settings.max_workers
+        job_ttl_hours = job_ttl_hours or settings.job_ttl_hours
+        cleanup_interval_minutes = cleanup_interval_minutes or settings.cleanup_interval_minutes
+
         self._jobs: Dict[str, TranslationJob] = {}
         self._job_futures: Dict[str, Future] = {}
         self._lock = threading.RLock()
         self._executor = ThreadPoolExecutor(max_workers=max_workers, thread_name_prefix="translation-")
         self._job_ttl = timedelta(hours=job_ttl_hours)
-        self._cleanup_interval = timedelta(minutes=30)
+        self._cleanup_interval = timedelta(minutes=cleanup_interval_minutes)
         self._last_cleanup = datetime.now()
 
-        # Storage paths
-        self._upload_dir = Path("uploads")
-        self._output_dir = Path("outputs")
-        self._temp_dir = Path("temp")
+        # Storage paths from configuration
+        self._upload_dir = Path(settings.upload_dir)
+        self._output_dir = Path(settings.output_dir)
+        self._temp_dir = Path(settings.temp_dir)
 
         # Create directories
         for directory in [self._upload_dir, self._output_dir, self._temp_dir]:
             directory.mkdir(exist_ok=True)
 
-        logger.info(f"JobManager initialized with {max_workers} workers, {job_ttl_hours}h TTL")
+        logger.info(f"JobManager initialized with {max_workers} workers, {job_ttl_hours}h TTL, {cleanup_interval_minutes}min cleanup interval")
+        logger.info(f"Storage paths - Upload: {self._upload_dir}, Output: {self._output_dir}, Temp: {self._temp_dir}")
 
     def create_job(
         self,
@@ -226,6 +239,28 @@ class JobManager:
             with self._lock:
                 job.update_progress(processed, total)
 
+    def update_progress_from_logs(self, job_id: str) -> bool:
+        """
+        Update job progress by parsing Docker logs
+
+        Returns:
+            True if progress was updated, False otherwise
+        """
+        try:
+            progress_info = progress_parser.get_job_progress(job_id)
+            if progress_info:
+                self.update_job_progress(
+                    job_id=job_id,
+                    processed=progress_info['current'],
+                    total=progress_info['total']
+                )
+                logger.debug(f"Updated progress from logs for job {job_id}: {progress_info['current']}/{progress_info['total']} ({progress_info['percentage']}%)")
+                return True
+            return False
+        except Exception as e:
+            logger.error(f"Error updating progress from logs for job {job_id}: {e}")
+            return False
+
     def cleanup_expired_jobs(self) -> int:
         """
         Clean up expired jobs and their associated files
@@ -244,12 +279,12 @@ class JobManager:
                     jobs_to_remove.append(job_id)
 
         # Remove expired jobs
-        cleaned_count = 0
+        cleaned_count = self.INITIAL_COUNT
         for job_id in jobs_to_remove:
             if self._remove_job(job_id):
-                cleaned_count += 1
+                cleaned_count += self.INCREMENT_STEP
 
-        if cleaned_count > 0:
+        if cleaned_count > self.INITIAL_COUNT:
             logger.info(f"Cleaned up {cleaned_count} expired jobs")
 
         self._last_cleanup = datetime.now()
@@ -310,27 +345,27 @@ class JobManager:
         with self._lock:
             stats = {
                 "total": len(self._jobs),
-                "pending": 0,
-                "processing": 0,
-                "completed": 0,
-                "failed": 0,
-                "cancelled": 0,
-                "active": 0
+                "pending": self.INITIAL_COUNT,
+                "processing": self.INITIAL_COUNT,
+                "completed": self.INITIAL_COUNT,
+                "failed": self.INITIAL_COUNT,
+                "cancelled": self.INITIAL_COUNT,
+                "active": self.INITIAL_COUNT
             }
 
             for job in self._jobs.values():
                 status_key = job.status.value
-                stats[status_key] = stats.get(status_key, 0) + 1
+                stats[status_key] = stats.get(status_key, self.INITIAL_COUNT) + self.INCREMENT_STEP
 
                 if job.status in [JobStatus.PENDING, JobStatus.PROCESSING]:
-                    stats["active"] += 1
+                    stats["active"] += self.INCREMENT_STEP
 
             return stats
 
     def get_upload_path(self, filename: str) -> Path:
         """Get upload path for a file with unique prefix to avoid conflicts"""
         import uuid
-        unique_filename = f"{uuid.uuid4().hex[:8]}_{filename}"
+        unique_filename = f"{uuid.uuid4().hex[:self.UUID_PREFIX_LENGTH]}_{filename}"
         return self._upload_dir / unique_filename
 
     def get_output_path(self, job_id: str, filename: str) -> Path:
@@ -377,5 +412,5 @@ class JobManager:
         self.shutdown()
 
 
-# Global job manager instance
+# Global job manager instance with configuration-based settings
 job_manager = JobManager()
