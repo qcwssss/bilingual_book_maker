@@ -1,6 +1,7 @@
 """
 Async wrapper around bilingual_book_maker for non-blocking translation processing
 """
+
 import os
 import sys
 import shutil
@@ -17,12 +18,22 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from book_maker.loader import BOOK_LOADER_DICT
 from book_maker.translator import (
-    ChatGPTAPI, Claude, Gemini, DeepL, Google,
-    GroqClient, QwenTranslator, XAIClient, Caiyun, TencentTranSmart,
-    DeepLFree, CustomAPI
+    ChatGPTAPI,
+    Claude,
+    Gemini,
+    DeepL,
+    Google,
+    GroqClient,
+    QwenTranslator,
+    XAIClient,
+    Caiyun,
+    TencentTranSmart,
+    DeepLFree,
+    CustomAPI,
 )
 
 from .models import TranslationJob, JobStatus, TranslationModel
+from .config import ValidationConstants
 from .job_manager import job_manager
 from .progress_monitor import global_progress_tracker, ProgressUpdate
 
@@ -32,6 +43,7 @@ logger = logging.getLogger(__name__)
 
 class TranslationTimeoutError(Exception):
     """Raised when translation exceeds timeout"""
+
     pass
 
 
@@ -71,7 +83,8 @@ class AsyncEPUBTranslator:
         model: TranslationModel,
         key: str,
         language: str = "zh-cn",
-        **kwargs
+        file_size_bytes: int = ValidationConstants.INITIAL_VALUE,
+        **kwargs,
     ) -> str:
         """
         Start a non-blocking translation job
@@ -81,6 +94,7 @@ class AsyncEPUBTranslator:
             model: Translation model to use
             key: API key for the translation service
             language: Target language code
+            file_size_bytes: File size in bytes for monitoring (default: 0)
             **kwargs: Additional translation parameters
 
         Returns:
@@ -95,11 +109,13 @@ class AsyncEPUBTranslator:
             raise FileNotFoundError(f"Input file not found: {file_path}")
 
         # Check supported file formats
-        supported_formats = ['.epub', '.txt', '.srt', '.md']
-        file_ext = '.' + file_path.lower().split('.')[-1] if '.' in file_path else ''
+        supported_formats = [".epub", ".txt", ".srt", ".md"]
+        file_ext = "." + file_path.lower().split(".")[-1] if "." in file_path else ""
 
         if file_ext not in supported_formats:
-            raise ValueError(f"Unsupported file format. Supported formats: {', '.join(supported_formats)}")
+            raise ValueError(
+                f"Unsupported file format. Supported formats: {', '.join(supported_formats)}"
+            )
 
         # Validate model
         if model not in self.MODEL_CLASSES:
@@ -109,16 +125,17 @@ class AsyncEPUBTranslator:
         filename = os.path.basename(file_path)
         job = job_manager.create_job(
             filename=filename,
+            file_size_bytes=file_size_bytes,
             model=model.value,
             target_language=language,
-            source_language=kwargs.get('source_lang', 'auto'),
-            model_api_base=kwargs.get('model_api_base'),
-            temperature=kwargs.get('temperature', 1.0),
-            context_flag=kwargs.get('context_flag', False),
-            context_paragraph_limit=kwargs.get('context_paragraph_limit', 0),
-            single_translate=kwargs.get('single_translate', False),
-            is_test=kwargs.get('is_test', False),
-            test_num=kwargs.get('test_num', 5),
+            source_language=kwargs.get("source_lang", ValidationConstants.DEFAULT_SOURCE_LANGUAGE),
+            model_api_base=kwargs.get("model_api_base"),
+            temperature=kwargs.get("temperature", ValidationConstants.DEFAULT_TEMPERATURE),
+            context_flag=kwargs.get("context_flag", False),
+            context_paragraph_limit=kwargs.get("context_paragraph_limit", ValidationConstants.INITIAL_VALUE),
+            single_translate=kwargs.get("single_translate", False),
+            is_test=kwargs.get("is_test", False),
+            test_num=kwargs.get("test_num", ValidationConstants.DEFAULT_TEST_PARAGRAPH_COUNT),
         )
 
         # File is already saved at the correct path, no need to copy again
@@ -126,18 +143,20 @@ class AsyncEPUBTranslator:
 
         # Set up progress callback
         def progress_callback(update: ProgressUpdate):
-            logger.info(f"Progress callback triggered for job {update.job_id}: {update.current}/{update.total} ({update.percentage:.1f}%)")
+            logger.info(
+                f"Progress callback triggered for job {update.job_id}: {update.current}/{update.total} ({update.percentage:.1f}%)"
+            )
             job_manager.update_job_progress(
-                job_id=update.job_id,
-                processed=update.current,
-                total=update.total
+                job_id=update.job_id, processed=update.current, total=update.total
             )
 
         # Start the translation job
         success = job_manager.start_job(
             job_id=job.job_id,
-            translation_func=lambda j: self._execute_translation(j, model, key, upload_path, **kwargs),
-            progress_callback=progress_callback
+            translation_func=lambda j: self._execute_translation(
+                j, model, key, upload_path, **kwargs
+            ),
+            progress_callback=progress_callback,
         )
 
         if not success:
@@ -186,7 +205,9 @@ class AsyncEPUBTranslator:
                 return job.output_path
         return None
 
-    def list_jobs(self, status_filter: Optional[JobStatus] = None) -> list[TranslationJob]:
+    def list_jobs(
+        self, status_filter: Optional[JobStatus] = None
+    ) -> list[TranslationJob]:
         """
         List all jobs, optionally filtered by status
 
@@ -215,7 +236,7 @@ class AsyncEPUBTranslator:
         model: TranslationModel,
         key: str,
         file_path: str,
-        **kwargs
+        **kwargs,
     ) -> str:
         """
         Execute the actual translation in a separate thread
@@ -254,7 +275,9 @@ class AsyncEPUBTranslator:
             output_path = job_manager.get_output_path(job_id, job.filename)
 
             # Execute translation with progress monitoring
-            logger.info(f"Starting translation with progress monitoring for job {job_id}")
+            logger.info(
+                f"Starting translation with progress monitoring for job {job_id}"
+            )
             with global_progress_tracker.create_tqdm_patch(job_id):
                 logger.info(f"TqdmInterceptor patch applied for job {job_id}")
                 self._translate_with_loader(
@@ -263,7 +286,7 @@ class AsyncEPUBTranslator:
                     model=model,
                     key=key,
                     job=job,
-                    **kwargs
+                    **kwargs,
                 )
                 logger.info(f"Translation completed for job {job_id}")
 
@@ -271,7 +294,9 @@ class AsyncEPUBTranslator:
             timeout_occurred.set()
 
             if not os.path.exists(output_path):
-                raise RuntimeError("Translation completed but output file was not created")
+                raise RuntimeError(
+                    "Translation completed but output file was not created"
+                )
 
             logger.info(f"Translation completed for job {job_id}: {output_path}")
             return str(output_path)
@@ -287,11 +312,14 @@ class AsyncEPUBTranslator:
 
                 # Exponential backoff
                 import time
-                time.sleep(2 ** job.retry_count)
+
+                time.sleep(2**job.retry_count)
 
                 return self._execute_translation(job, model, key, file_path, **kwargs)
             else:
-                logger.error(f"Translation failed for job {job_id} after {job.retry_count + 1} attempts: {e}")
+                logger.error(
+                    f"Translation failed for job {job_id} after {job.retry_count + 1} attempts: {e}"
+                )
                 raise
 
     def _translate_with_loader(
@@ -301,7 +329,7 @@ class AsyncEPUBTranslator:
         model: TranslationModel,
         key: str,
         job: TranslationJob,
-        **kwargs
+        **kwargs,
     ) -> None:
         """
         Execute translation using appropriate loader
@@ -320,7 +348,7 @@ class AsyncEPUBTranslator:
             raise ValueError(f"Unsupported model: {model}")
 
         # Determine file type and get appropriate loader
-        file_ext = '.' + input_path.lower().split('.')[-1] if '.' in input_path else ''
+        file_ext = "." + input_path.lower().split(".")[-1] if "." in input_path else ""
         file_type = file_ext[1:]  # Remove the dot
 
         loader_class = BOOK_LOADER_DICT.get(file_type)
@@ -329,46 +357,46 @@ class AsyncEPUBTranslator:
 
         # Prepare parameters for the loader
         loader_kwargs = {
-            'model': model_class,
-            'key': key,
-            'resume': kwargs.get('resume', False),
-            'language': job.target_language,
-            'model_api_base': job.model_api_base,
-            'is_test': job.is_test,
-            'test_num': job.test_num,
-            'single_translate': job.single_translate,
-            'context_flag': job.context_flag,
-            'context_paragraph_limit': job.context_paragraph_limit,
-            'temperature': job.temperature,
-            'source_lang': job.source_language,
+            "model": model_class,
+            "key": key,
+            "resume": kwargs.get("resume", False),
+            "language": job.target_language,
+            "model_api_base": job.model_api_base,
+            "is_test": job.is_test,
+            "test_num": job.test_num,
+            "single_translate": job.single_translate,
+            "context_flag": job.context_flag,
+            "context_paragraph_limit": job.context_paragraph_limit,
+            "temperature": job.temperature,
+            "source_lang": job.source_language,
         }
 
         # Only add job_id for EPUB loader (other loaders don't support it yet)
-        if file_type == 'epub':
-            loader_kwargs['job_id'] = job.job_id
+        if file_type == "epub":
+            loader_kwargs["job_id"] = job.job_id
             # Pass the same progress tracker instance used for callback registration
-            loader_kwargs['progress_tracker'] = global_progress_tracker
+            loader_kwargs["progress_tracker"] = global_progress_tracker
 
         # Add file-specific parameter based on loader type
-        if file_type == 'epub':
-            loader_kwargs['epub_name'] = input_path
-        elif file_type == 'txt':
-            loader_kwargs['txt_name'] = input_path
-        elif file_type == 'srt':
-            loader_kwargs['srt_name'] = input_path
-        elif file_type == 'md':
-            loader_kwargs['md_name'] = input_path
+        if file_type == "epub":
+            loader_kwargs["epub_name"] = input_path
+        elif file_type == "txt":
+            loader_kwargs["txt_name"] = input_path
+        elif file_type == "srt":
+            loader_kwargs["srt_name"] = input_path
+        elif file_type == "md":
+            loader_kwargs["md_name"] = input_path
 
         # Add any additional prompt config
-        if 'prompt_config' in kwargs:
-            loader_kwargs['prompt_config'] = kwargs['prompt_config']
+        if "prompt_config" in kwargs:
+            loader_kwargs["prompt_config"] = kwargs["prompt_config"]
 
         try:
             # Create loader instance
             loader = loader_class(**loader_kwargs)
 
             # Execute translation with format-specific handling
-            if file_type == 'epub':
+            if file_type == "epub":
                 # Monkey patch the loader to use our output path
                 original_make_bilingual_book = loader.make_bilingual_book
 
@@ -383,7 +411,9 @@ class AsyncEPUBTranslator:
                     if os.path.exists(generated_file):
                         shutil.move(generated_file, output_path)
                     else:
-                        raise RuntimeError("Translation completed but bilingual file was not generated")
+                        raise RuntimeError(
+                            "Translation completed but bilingual file was not generated"
+                        )
 
                 loader.make_bilingual_book = patched_make_bilingual_book
                 loader.make_bilingual_book()
@@ -403,14 +433,16 @@ class AsyncEPUBTranslator:
                     possible_files = [
                         f"{name}.txt",
                         f"{name}_translated{ext}",
-                        f"{name}_bilingual{ext}"
+                        f"{name}_bilingual{ext}",
                     ]
                     for possible_file in possible_files:
                         if os.path.exists(possible_file):
                             shutil.move(possible_file, output_path)
                             break
                     else:
-                        raise RuntimeError(f"Translation completed but output file was not found. Expected: {generated_file}")
+                        raise RuntimeError(
+                            f"Translation completed but output file was not found. Expected: {generated_file}"
+                        )
 
         except KeyboardInterrupt:
             raise RuntimeError("Translation was interrupted")

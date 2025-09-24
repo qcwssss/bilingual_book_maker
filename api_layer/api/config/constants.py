@@ -64,6 +64,7 @@ class HttpStatusConstants:
     NOT_FOUND = 404
     METHOD_NOT_ALLOWED = 405
     CONFLICT = 409
+    PAYLOAD_TOO_LARGE = 413
     UNPROCESSABLE_ENTITY = 422
 
     # 5xx Server Error
@@ -84,8 +85,8 @@ class DefaultValues:
     # API Server Defaults
     DEFAULT_API_HOST = "0.0.0.0"
     DEFAULT_API_PORT = 8000
-    DEFAULT_RELOAD = True
-    DEFAULT_DEBUG = True
+    DEFAULT_RELOAD = False  # Changed to False for production safety
+    DEFAULT_DEBUG = False   # Changed to False for production safety
 
     # Storage Defaults
     DEFAULT_UPLOAD_DIR = "uploads"
@@ -175,9 +176,18 @@ class TimeConstants:
 class ValidationConstants:
     """Validation-related constants"""
 
+    # Size conversion constants
+    BYTES_PER_KB = 1024
+    BYTES_PER_MB = 1024 * 1024
+
     # Size limits
-    MAX_FILE_SIZE_MB = 100
+    MAX_FILE_SIZE_MB = 0.5  # 500KB limit for all users
+    MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * BYTES_PER_MB  # Convert MB to bytes
     MAX_FILENAME_LENGTH = 255
+
+    # TODO: Future user-based file size limits
+    # MAX_FILE_SIZE_REGISTERED_MB = 3  # For registered users
+    # MAX_FILE_SIZE_PAID_MB = 10       # For paid users
 
     # String lengths
     MIN_PASSWORD_LENGTH = 8
@@ -186,3 +196,57 @@ class ValidationConstants:
     # Temperature ranges for AI models
     MIN_TEMPERATURE = 0.0
     MAX_TEMPERATURE = 2.0
+    DEFAULT_TEMPERATURE = 1.0
+
+    # File validation constants
+    SUPPORTED_FILE_EXTENSIONS = [".epub", ".txt", ".srt", ".md"]
+    ALLOWED_MIME_TYPES = {
+        ".epub": ["application/epub+zip"],
+        ".txt": ["text/plain", "text/plain; charset=utf-8"],
+        ".srt": ["application/x-subrip", "text/plain", "text/plain; charset=utf-8"],
+        ".md": ["text/markdown", "text/plain", "text/plain; charset=utf-8"]
+    }
+
+    # Filename sanitization constants
+    ALLOWED_FILENAME_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.()"
+    PATH_TRAVERSAL_PATTERNS = ["../", "..\\", "/..", "\\..", "..", "/etc/", "/usr/", "/var/", "/root/", "\\windows\\", "\\system32\\", "c:\\"]
+    FORBIDDEN_FILENAMES = [
+        # Windows reserved names
+        "CON", "PRN", "AUX", "NUL",
+        "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
+        "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
+        # Unix reserved names
+        ".", "..", "/", "\\",
+        # Other dangerous names
+        "desktop.ini", "thumbs.db", ".htaccess", ".htpasswd"
+    ]
+    REPLACEMENT_CHAR = "_"  # Character to replace invalid chars with
+
+    # Content validation
+    MAX_CONTENT_SCAN_BYTES = 1024  # First 1KB to scan for malicious content
+    SUSPICIOUS_CONTENT_PATTERNS = [
+        b"<script",  # JavaScript
+        b"<?php",    # PHP code
+        b"#!/bin/",  # Shell scripts
+        b"eval(",    # Code evaluation
+        b"exec(",    # Code execution
+        b"\x4d\x5a",  # PE executable header (MZ)
+        b"\x7f\x45\x4c\x46",  # ELF executable header
+    ]
+
+    # File magic bytes for validation
+    FILE_MAGIC_BYTES = {
+        ".epub": [b"PK\x03\x04"],  # ZIP file signature (EPUB is ZIP-based)
+        ".txt": [],  # Text files don't have magic bytes
+        ".srt": [],  # SRT files are plain text
+        ".md": []    # Markdown files are plain text
+    }
+
+    # Common defaults
+    INITIAL_VALUE = 0  # For progress, counts, retries, etc.
+    PROGRESS_COMPLETE = 100
+    DEFAULT_TEST_PARAGRAPH_COUNT = 5
+
+    # Language defaults
+    DEFAULT_SOURCE_LANGUAGE = "auto"
+    DEFAULT_TARGET_LANGUAGE = "zh-cn"
