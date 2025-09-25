@@ -57,7 +57,7 @@ class AsyncEPUBTranslator:
     MODEL_CLASSES = {
         TranslationModel.CHATGPT: ChatGPTAPI,
         TranslationModel.CLAUDE: Claude,
-        TranslationModel.GEMINI: Gemini,
+        TranslationModel.GEMINI_FLASH: Gemini,
         TranslationModel.DEEPL: DeepL,
         TranslationModel.DEEPL_FREE: DeepLFree,
         TranslationModel.GOOGLE: Google,
@@ -357,7 +357,7 @@ class AsyncEPUBTranslator:
 
         # Prepare parameters for the loader
         loader_kwargs = {
-            "model": model_class,
+            "model": model_class,  # Pass the model class so loader can instantiate it
             "key": key,
             "resume": kwargs.get("resume", False),
             "language": job.target_language,
@@ -394,6 +394,10 @@ class AsyncEPUBTranslator:
         try:
             # Create loader instance
             loader = loader_class(**loader_kwargs)
+
+            # For Gemini model, configure Flash models after loader creation
+            if model == TranslationModel.GEMINI_FLASH:
+                loader.translate_model.set_geminiflash_models()
 
             # Execute translation with format-specific handling
             if file_type == "epub":
