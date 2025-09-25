@@ -1,0 +1,1980 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Bilingual Book Maker API Layer - Comprehensive Documentation - bilingual book maker</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bilingual-book-maker-api-layer-comprehensive-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="bilingual book maker" class="md-header__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bilingual book maker
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bilingual Book Maker API Layer - Comprehensive Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../model_lang/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../disclaimer/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Disclaimer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="bilingual book maker" class="md-nav__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    bilingual book maker
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickStart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model_lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model and languages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cmd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command line options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../book_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Translate from different source
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment setting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tweak the prompt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disclaimer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-system-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. System Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. System Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-level-component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Level Component Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-flow-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Flow Diagram
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-request-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Request Lifecycle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-components-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Core Components Deep Dive
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core Components Deep Dive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-layer-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Layer Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Layer Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mainpy-fastapi-application-core" class="md-nav__link">
+    <span class="md-ellipsis">
+      main.py - FastAPI Application Core
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#async_translatorpy-translation-orchestration" class="md-nav__link">
+    <span class="md-ellipsis">
+      async_translator.py - Translation Orchestration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job_managerpy-job-lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      job_manager.py - Job Lifecycle Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress_monitorpy-real-time-progress-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      progress_monitor.py - Real-time Progress Tracking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelspy-data-models-and-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      models.py - Data Models and Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config-configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      config/ - Configuration Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#book-maker-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Book Maker Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Book Maker Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epub_loaderpy-epub-processing-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      epub_loader.py - EPUB Processing Engine
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-loaders-txt-srt-md" class="md-nav__link">
+    <span class="md-ellipsis">
+      Other Loaders (TXT, SRT, MD)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base_loaderpy-abstract-base-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      base_loader.py - Abstract Base Class
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-progress-tracking-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Progress Tracking System
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Progress Tracking System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-architecture-fix" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Architecture Fix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callback-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Callback Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-throttling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Throttling
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-translation-flow-step-by-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Translation Flow Step-by-Step
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Translation Flow Step-by-Step">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#complete-request-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Complete Request Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-update-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Update Flow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-key-patterns-and-design-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Key Patterns and Design Decisions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Key Patterns and Design Decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#asyncthreading-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Async/Threading Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#singleton-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Singleton Pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monkey-patching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monkey Patching
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-common-issues-and-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Common Issues and Debugging
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Common Issues and Debugging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instance-reference-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instance Reference Problem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#threading-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threading Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-path-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Path Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-not-updating" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Not Updating
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-leaks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Leaks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translation-model-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Translation Model Errors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-code-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Code Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Code Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-new-endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a New Endpoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modifying-progress-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modifying Progress Tracking
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-a-new-file-format-loader" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding a New File Format Loader
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-progress-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debugging Progress Issues
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-translation-model-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Translation Model Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="bilingual-book-maker-api-layer-comprehensive-documentation">Bilingual Book Maker API Layer - Comprehensive Documentation</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-system-architecture-overview">System Architecture Overview</a></li>
+<li><a href="#2-core-components-deep-dive">Core Components Deep Dive</a></li>
+<li><a href="#3-progress-tracking-system">Progress Tracking System</a></li>
+<li><a href="#4-translation-flow-step-by-step">Translation Flow Step-by-Step</a></li>
+<li><a href="#5-key-patterns-and-design-decisions">Key Patterns and Design Decisions</a></li>
+<li><a href="#6-common-issues-and-debugging">Common Issues and Debugging</a></li>
+<li><a href="#7-code-examples">Code Examples</a></li>
+</ol>
+<hr />
+<h2 id="1-system-architecture-overview">1. System Architecture Overview</h2>
+<h3 id="high-level-component-architecture">High-Level Component Architecture</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                        FastAPI Application                       │
+│                           (main.py)                             │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌──────────────┐    ┌─────────────────┐    ┌───────────────┐  │
+│  │   Endpoints  │───▶│ AsyncTranslator │───▶│  JobManager   │  │
+│  │  /translate  │    │                 │    │               │  │
+│  │   /status    │    │  Orchestration  │    │ Thread Pool   │  │
+│  │  /download   │    │                 │    │   Executor    │  │
+│  └──────────────┘    └─────────────────┘    └───────────────┘  │
+│          │                    │                      │          │
+│          ▼                    ▼                      ▼          │
+│  ┌──────────────┐    ┌─────────────────┐    ┌───────────────┐  │
+│  │   Models     │    │ Progress Monitor│    │   Storage     │  │
+│  │              │    │                 │    │               │  │
+│  │ Data Types   │    │ TqdmInterceptor │    │  Upload Dir   │  │
+│  │ Validation   │    │ AsyncTracker    │    │  Output Dir   │  │
+│  └──────────────┘    └─────────────────┘    └───────────────┘  │
+│                              │                                  │
+└──────────────────────────────┼──────────────────────────────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │   Book Maker Core    │
+                    │                      │
+                    │  ┌──────────────┐    │
+                    │  │ EPUB Loader  │    │
+                    │  │ TXT Loader   │    │
+                    │  │ SRT Loader   │    │
+                    │  │ MD Loader    │    │
+                    │  └──────────────┘    │
+                    │          │            │
+                    │          ▼            │
+                    │  ┌──────────────┐    │
+                    │  │ Translation  │    │
+                    │  │   Engines    │    │
+                    │  │              │    │
+                    │  │ ChatGPT      │    │
+                    │  │ Claude       │    │
+                    │  │ Gemini       │    │
+                    │  │ DeepL        │    │
+                    │  │ Google       │    │
+                    │  └──────────────┘    │
+                    └──────────────────────┘
+</code></pre>
+<h3 id="data-flow-diagram">Data Flow Diagram</h3>
+<pre><code>User Request → FastAPI → Job Creation → Thread Pool → Translation Engine → Progress Updates → Response
+
+1. HTTP Request (/translate)
+   ↓
+2. File Upload &amp; Validation
+   ↓
+3. Job Creation (UUID generation)
+   ↓ 
+4. Thread Submission (async execution) 
+   ↓
+5. File Processing (EPUB/TXT/SRT/MD)
+   ↓
+6. Translation Engine Invocation
+   ↓ (with progress callbacks)
+7. Progress Updates via TqdmInterceptor
+   ↓
+8. Output File Generation
+   ↓
+9. Job Completion &amp; File Storage
+</code></pre>
+<h3 id="api-request-lifecycle">API Request Lifecycle</h3>
+<pre><code>1. Request Reception
+   - FastAPI endpoint receives multipart/form-data
+   - File validation (format, size)
+   - Parameter validation (model, language, API key)
+
+2. Job Initialization
+   - UUID generation for job_id
+   - File storage with unique prefix
+   - Job record creation in JobManager
+
+3. Async Processing
+   - Thread pool executor submission
+   - Translation function execution
+   - Progress monitoring activation
+
+4. Translation Execution
+   - Loader instantiation (EPUB/TXT/etc.)
+   - Model initialization (ChatGPT/Claude/etc.)
+   - Paragraph-by-paragraph translation
+   - Progress updates via callbacks
+
+5. Completion Handling
+   - Output file generation
+   - Job status update
+   - Resource cleanup scheduling
+   - Download URL availability
+</code></pre>
+<hr />
+<h2 id="2-core-components-deep-dive">2. Core Components Deep Dive</h2>
+<h3 id="api-layer-components">API Layer Components</h3>
+<h4 id="mainpy-fastapi-application-core"><code>main.py</code> - FastAPI Application Core</h4>
+<p><strong>Purpose</strong>: Entry point and HTTP endpoint management</p>
+<p><strong>Key Responsibilities</strong>:
+- Request validation and routing
+- Middleware configuration (CORS, TrustedHost)
+- Exception handling and error responses
+- File upload/download management
+- Job lifecycle endpoints</p>
+<p><strong>Critical Functions</strong>:</p>
+<pre><code class="language-python">- start_translation(): Creates and starts translation jobs
+- get_job_status(): Returns current job progress and status
+- download_result(): Serves completed translation files
+- list_jobs(): Provides job listing with filtering
+</code></pre>
+<p><strong>Configuration Integration</strong>:
+- Uses <code>settings</code> from config for environment-based behavior
+- Dynamically adjusts CORS origins based on environment
+- Configurable worker pools and TTL settings</p>
+<h4 id="async_translatorpy-translation-orchestration"><code>async_translator.py</code> - Translation Orchestration</h4>
+<p><strong>Purpose</strong>: Bridge between API and book_maker core</p>
+<p><strong>Key Responsibilities</strong>:
+- Job execution management
+- Model class mapping and initialization
+- File type detection and loader selection
+- Progress callback integration
+- Retry logic with exponential backoff</p>
+<p><strong>Translation Flow</strong>:</p>
+<pre><code class="language-python">1. start_translation()
+   - Validates input file
+   - Creates job record
+   - Registers progress callbacks
+   - Submits to thread pool
+
+2. _execute_translation()
+   - Sets up timeout monitoring
+   - Creates TqdmInterceptor patch
+   - Invokes appropriate loader
+   - Handles retries on failure
+
+3. _translate_with_loader()
+   - Determines file type
+   - Instantiates correct loader
+   - Manages output file placement
+   - Handles format-specific quirks
+</code></pre>
+<p><strong>Model Mapping</strong>:</p>
+<pre><code class="language-python">MODEL_CLASSES = {
+    TranslationModel.CHATGPT: ChatGPTAPI,
+    TranslationModel.CLAUDE: Claude,
+    TranslationModel.GEMINI: Gemini,
+    TranslationModel.DEEPL: DeepL,
+    TranslationModel.GOOGLE: Google,
+    # ... more models
+}
+</code></pre>
+<h4 id="job_managerpy-job-lifecycle-management"><code>job_manager.py</code> - Job Lifecycle Management</h4>
+<p><strong>Purpose</strong>: Thread-safe job storage and execution</p>
+<p><strong>Key Features</strong>:
+- Thread pool executor for concurrent translations
+- Job TTL and automatic cleanup
+- File management (upload/output/temp)
+- Progress tracking integration
+- Statistics and monitoring</p>
+<p><strong>Thread Safety</strong>:</p>
+<pre><code class="language-python">- Uses threading.RLock for all job operations
+- Thread-safe collections for job storage
+- Atomic status transitions
+- Safe cleanup operations
+</code></pre>
+<p><strong>Storage Management</strong>:</p>
+<pre><code class="language-python">- Upload directory: Unique prefixed files
+- Output directory: Job-specific outputs
+- Temp directory: Working files
+- Automatic cleanup after TTL expiration
+</code></pre>
+<h4 id="progress_monitorpy-real-time-progress-tracking"><code>progress_monitor.py</code> - Real-time Progress Tracking</h4>
+<p><strong>Purpose</strong>: Intercept and relay translation progress</p>
+<p><strong>Architecture</strong>:</p>
+<pre><code class="language-python">ProgressMonitor (Core)
+    ├── Callback Registry (job_id → callback)
+    ├── Progress Storage (current/total tracking)
+    └── Update Broadcasting
+
+TqdmInterceptor (Patching)
+    ├── Inherits from tqdm
+    ├── Overrides update() method
+    └── Forwards to ProgressMonitor
+
+AsyncProgressTracker (Singleton)
+    ├── Global instance
+    ├── High-level API
+    └── Context managers for patching
+</code></pre>
+<p><strong>Key Innovation</strong>:
+The TqdmInterceptor monkey-patches the tqdm library used by book_maker, allowing transparent progress tracking without modifying the core translation code.</p>
+<h4 id="modelspy-data-models-and-validation"><code>models.py</code> - Data Models and Validation</h4>
+<p><strong>Purpose</strong>: Type safety and data validation</p>
+<p><strong>Model Categories</strong>:
+1. <strong>Enums</strong>:
+   - <code>JobStatus</code>: pending, processing, completed, failed, cancelled
+   - <code>TranslationModel</code>: chatgpt, claude, gemini, deepl, google, etc.</p>
+<ol>
+<li><strong>Dataclasses</strong>:</li>
+<li>
+<p><code>TranslationJob</code>: Complete job state and metadata</p>
+</li>
+<li>
+<p><strong>Pydantic Models</strong>:</p>
+</li>
+<li>Request validation (TranslationRequest)</li>
+<li>Response serialization (TranslationResponse, JobStatusResponse)</li>
+<li>Error handling (ErrorResponse)</li>
+</ol>
+<h4 id="config-configuration-management"><code>config/</code> - Configuration Management</h4>
+<p><strong>Purpose</strong>: Environment-based settings</p>
+<p><strong>Structure</strong>:</p>
+<pre><code class="language-python">settings.py
+    ├── SecurityConfig (CORS, Trusted Hosts)
+    ├── Settings (Pydantic BaseSettings)
+    └── Environment detection
+
+constants.py
+    ├── NetworkConstants (ports, hosts)
+    ├── SecurityConstants (methods, headers)
+    ├── HttpStatusConstants (status codes)
+    └── DefaultValues (fallbacks)
+</code></pre>
+<h3 id="book-maker-components">Book Maker Components</h3>
+<h4 id="epub_loaderpy-epub-processing-engine"><code>epub_loader.py</code> - EPUB Processing Engine</h4>
+<p><strong>Purpose</strong>: Handle EPUB file translation</p>
+<p><strong>Key Features</strong>:
+- BeautifulSoup HTML parsing
+- Paragraph extraction and translation
+- Progress callback integration
+- Resume capability with pickle
+- Context-aware translation support</p>
+<p><strong>Progress Integration</strong>:</p>
+<pre><code class="language-python">def _update_global_progress(self, current, total):
+    if self.progress_tracker and self.job_id:
+        self.progress_tracker.monitor.update_progress(
+            self.job_id, current, total
+        )
+</code></pre>
+<h4 id="other-loaders-txt-srt-md">Other Loaders (TXT, SRT, MD)</h4>
+<p><strong>Purpose</strong>: Format-specific handlers</p>
+<p><strong>Common Pattern</strong>:</p>
+<pre><code class="language-python">class XXXLoader(BaseBookLoader):
+    def __init__(self, file_name, model, key, ...):
+        # Initialize translator
+        # Set up file handling
+
+    def make_bilingual_book(self):
+        # Read source file
+        # Process content
+        # Translate segments
+        # Generate output file
+</code></pre>
+<h4 id="base_loaderpy-abstract-base-class"><code>base_loader.py</code> - Abstract Base Class</h4>
+<p><strong>Purpose</strong>: Define loader interface</p>
+<p><strong>Required Methods</strong>:
+- <code>_make_new_book()</code>: Create output structure
+- <code>make_bilingual_book()</code>: Main translation logic
+- <code>load_state()</code>: Resume functionality
+- <code>_save_progress()</code>: Checkpoint creation</p>
+<hr />
+<h2 id="3-progress-tracking-system">3. Progress Tracking System</h2>
+<h3 id="the-architecture-fix">The Architecture Fix</h3>
+<p><strong>Original Problem</strong>:
+The progress tracking system had an instance reference issue where the <code>AsyncProgressTracker</code> singleton wasn't properly maintaining callback references across thread boundaries.</p>
+<p><strong>Solution Architecture</strong>:</p>
+<pre><code class="language-python"># Global singleton instance
+global_progress_tracker = AsyncProgressTracker()
+
+# Registration in job_manager.py
+global_progress_tracker.start_tracking(job_id, callback)
+
+# Patching in async_translator.py
+with global_progress_tracker.create_tqdm_patch(job_id):
+    # Translation happens here
+    # tqdm is monkey-patched to use TqdmInterceptor
+
+# Update flow in epub_loader.py
+self.progress_tracker.monitor.update_progress(job_id, current, total)
+</code></pre>
+<h3 id="callback-flow">Callback Flow</h3>
+<pre><code>1. Job Start
+   └─&gt; job_manager.start_job()
+       └─&gt; global_progress_tracker.start_tracking(job_id, callback)
+           └─&gt; Registers callback in ProgressMonitor
+
+2. Translation Execution
+   └─&gt; async_translator._execute_translation()
+       └─&gt; Creates TqdmInterceptor patch
+           └─&gt; Replaces tqdm.tqdm with TqdmInterceptor
+
+3. Progress Updates (two paths):
+
+   Path A: Via tqdm
+   └─&gt; book_maker uses tqdm(iterable)
+       └─&gt; TqdmInterceptor.update()
+           └─&gt; ProgressMonitor.update_progress()
+               └─&gt; Callback execution
+
+   Path B: Direct call
+   └─&gt; epub_loader._update_global_progress()
+       └─&gt; ProgressMonitor.update_progress()
+           └─&gt; Callback execution
+
+4. Job Completion
+   └─&gt; job_manager cleans up
+       └─&gt; global_progress_tracker.stop_tracking(job_id)
+           └─&gt; Unregisters callback
+</code></pre>
+<h3 id="update-throttling">Update Throttling</h3>
+<p>The system implements intelligent throttling to prevent excessive updates:</p>
+<pre><code class="language-python">should_update = (
+    self._last_update_time is None or                    # First update
+    now - self._last_update_time &gt;= interval or          # Time-based
+    self.n == 1 or                                       # Start
+    (self.total and self.n &gt;= self.total) or            # End
+    (self.total and (self.n * 100 // self.total) % 5 == 0)  # 5% milestones
+)
+</code></pre>
+<hr />
+<h2 id="4-translation-flow-step-by-step">4. Translation Flow Step-by-Step</h2>
+<h3 id="complete-request-flow">Complete Request Flow</h3>
+<pre><code class="language-python"># 1. HTTP Request Reception
+POST /translate
+Content-Type: multipart/form-data
+- file: example.epub
+- model: chatgpt
+- key: sk-xxx
+- language: zh-cn
+
+# 2. FastAPI Endpoint Processing (main.py)
+async def start_translation():
+    # Validate file format
+    # Save with unique prefix
+    unique_path = job_manager.get_upload_path(file.filename)
+    # Start translation job
+    job_id = async_translator.start_translation(...)
+
+# 3. Job Creation (async_translator.py)
+def start_translation():
+    # Create job record
+    job = job_manager.create_job(...)
+    # Register progress callback
+    def progress_callback(update):
+        job_manager.update_job_progress(...)
+    # Submit to thread pool
+    job_manager.start_job(job_id, translation_func, progress_callback)
+
+# 4. Thread Execution (job_manager.py)
+def _execute_job():
+    # Update status to PROCESSING
+    # Call translation function
+    output_path = translation_func(job)
+    # Mark as COMPLETED or FAILED
+    # Clean up resources
+
+# 5. Translation Processing (async_translator.py)
+def _execute_translation():
+    # Set up timeout monitoring
+    # Apply TqdmInterceptor patch
+    with global_progress_tracker.create_tqdm_patch(job_id):
+        self._translate_with_loader(...)
+
+# 6. Loader Execution (epub_loader.py)
+def make_bilingual_book():
+    # Parse EPUB structure
+    # Extract paragraphs
+    for paragraph in tqdm(paragraphs):
+        # Translate paragraph
+        translated = self.translate_model.translate(text)
+        # Update progress
+        self._update_global_progress(current, total)
+        # Save checkpoint periodically
+
+# 7. Output Generation
+# Move generated file to output directory
+shutil.move(generated_file, output_path)
+
+# 8. Job Completion
+# Update job record
+job.mark_completed(output_path)
+# Stop progress tracking
+global_progress_tracker.stop_tracking(job_id)
+
+# 9. Client Polling
+GET /status/{job_id}
+# Returns progress, status, download_url
+
+# 10. File Download
+GET /download/{job_id}
+# Serves completed file
+</code></pre>
+<h3 id="progress-update-flow">Progress Update Flow</h3>
+<pre><code class="language-python"># Real-time updates during translation
+1. tqdm iteration in book_maker
+   ↓
+2. TqdmInterceptor.update() intercepts
+   ↓
+3. ProgressMonitor.update_progress() called
+   ↓
+4. Registered callback executed
+   ↓
+5. JobManager.update_job_progress()
+   ↓
+6. TranslationJob.progress updated
+   ↓
+7. Available via GET /status/{job_id}
+</code></pre>
+<hr />
+<h2 id="5-key-patterns-and-design-decisions">5. Key Patterns and Design Decisions</h2>
+<h3 id="asyncthreading-architecture">Async/Threading Architecture</h3>
+<p><strong>Design Choice</strong>: Thread Pool Executor instead of asyncio
+- <strong>Reason</strong>: book_maker core is synchronous and CPU-intensive
+- <strong>Implementation</strong>: ThreadPoolExecutor with configurable max_workers
+- <strong>Benefits</strong>: True parallelism for CPU-bound translation tasks</p>
+<pre><code class="language-python">self._executor = ThreadPoolExecutor(
+    max_workers=max_workers,
+    thread_name_prefix=&quot;translation-&quot;
+)
+</code></pre>
+<h3 id="singleton-pattern">Singleton Pattern</h3>
+<p><strong>Used For</strong>: Progress tracking and job management
+- <strong>Global Instances</strong>: <code>job_manager</code>, <code>async_translator</code>, <code>global_progress_tracker</code>
+- <strong>Benefits</strong>: Consistent state across all components
+- <strong>Thread Safety</strong>: All operations protected by locks</p>
+<h3 id="monkey-patching">Monkey Patching</h3>
+<p><strong>Purpose</strong>: Intercept tqdm progress without modifying book_maker</p>
+<pre><code class="language-python"># Temporary replacement of tqdm
+import tqdm as tqdm_module
+original_tqdm = tqdm_module.tqdm
+tqdm_module.tqdm = TqdmInterceptor
+try:
+    # Translation happens here
+finally:
+    tqdm_module.tqdm = original_tqdm
+</code></pre>
+<h3 id="error-handling-strategy">Error Handling Strategy</h3>
+<p><strong>Multi-Level Protection</strong>:
+1. <strong>Global Exception Handler</strong>: Catches all unhandled exceptions
+2. <strong>Job-Level Try-Catch</strong>: Each job isolated from others
+3. <strong>Retry Logic</strong>: Exponential backoff for transient failures
+4. <strong>Graceful Degradation</strong>: Failed jobs don't affect system</p>
+<pre><code class="language-python">try:
+    output_path = translation_func(job)
+    job.mark_completed(output_path)
+except Exception as e:
+    job.mark_failed(str(e))
+    if job.retry_count &lt; self.max_retries:
+        # Retry with backoff
+</code></pre>
+<h3 id="file-management">File Management</h3>
+<p><strong>Three-Tier Storage</strong>:</p>
+<pre><code class="language-python">uploads/     # Original files with UUID prefix
+├── a1b2c3d4_book.epub
+├── e5f6g7h8_document.txt
+
+outputs/     # Completed translations
+├── book_bilingual_job123.epub
+├── document_bilingual_job456.txt
+
+temp/        # Working files and checkpoints
+├── job123/
+│   ├── .book.temp.bin
+</code></pre>
+<p><strong>Cleanup Strategy</strong>:
+- TTL-based expiration (configurable, default 24 hours)
+- Periodic cleanup task
+- Manual cleanup endpoint
+- Automatic on shutdown</p>
+<h3 id="configuration-management">Configuration Management</h3>
+<p><strong>Environment-Based Settings</strong>:</p>
+<pre><code class="language-python">ENVIRONMENT=development  # development, staging, production
+├── Different CORS origins
+├── Different security settings
+├── Different logging levels
+└── Different resource limits
+</code></pre>
+<p><strong>Override Hierarchy</strong>:
+1. Environment variables (highest priority)
+2. .env file
+3. Default values in code (lowest priority)</p>
+<hr />
+<h2 id="6-common-issues-and-debugging">6. Common Issues and Debugging</h2>
+<h3 id="instance-reference-problem">Instance Reference Problem</h3>
+<p><strong>Symptom</strong>: Progress updates not reaching API despite being logged
+<strong>Cause</strong>: Different object instances between registration and update
+<strong>Solution</strong>: Use singleton pattern with global instance</p>
+<pre><code class="language-python"># WRONG - Creates new instance
+progress_tracker = AsyncProgressTracker()
+
+# CORRECT - Uses global singleton
+from .progress_monitor import global_progress_tracker
+</code></pre>
+<h3 id="threading-issues">Threading Issues</h3>
+<p><strong>Common Problems</strong>:
+1. <strong>Deadlocks</strong>: Always use timeout on locks
+2. <strong>Race Conditions</strong>: Protected by RLock
+3. <strong>Resource Leaks</strong>: Ensure cleanup in finally blocks</p>
+<p><strong>Debugging Approach</strong>:</p>
+<pre><code class="language-python"># Add extensive logging
+logger.warning(f&quot;DEBUG: Thread {threading.current_thread().name}&quot;)
+logger.warning(f&quot;DEBUG: Lock acquired: {self._lock}&quot;)
+</code></pre>
+<h3 id="file-path-issues">File Path Issues</h3>
+<p><strong>Problem</strong>: Import errors or file not found
+<strong>Common Causes</strong>:
+- Relative vs absolute paths
+- Working directory changes
+- Docker volume mounting</p>
+<p><strong>Solution</strong>:</p>
+<pre><code class="language-python"># Always use absolute paths
+from pathlib import Path
+absolute_path = Path(__file__).parent.parent / &quot;uploads&quot; / filename
+</code></pre>
+<h3 id="progress-not-updating">Progress Not Updating</h3>
+<p><strong>Debugging Checklist</strong>:
+1. Check callback registration:
+   <code>python
+   logger.warning(f"Registered callbacks: {list(self._callbacks.keys())}")</code></p>
+<ol>
+<li>
+<p>Verify job_id consistency:
+   <code>python
+   logger.warning(f"Job ID in tracker: {self.job_id}")
+   logger.warning(f"Job ID in update: {job_id}")</code></p>
+</li>
+<li>
+<p>Confirm patch is active:
+   <code>python
+   logger.warning(f"TqdmInterceptor active: {isinstance(tqdm.tqdm, TqdmInterceptor)}")</code></p>
+</li>
+<li>
+<p>Monitor update frequency:
+   <code>python
+   logger.warning(f"Update throttled: {not should_update}")</code></p>
+</li>
+</ol>
+<h3 id="memory-leaks">Memory Leaks</h3>
+<p><strong>Potential Sources</strong>:
+- Uncleaned job records
+- Unremoved callbacks
+- Temporary files not deleted</p>
+<p><strong>Prevention</strong>:</p>
+<pre><code class="language-python"># Always clean up in finally blocks
+try:
+    # Processing
+finally:
+    self._callbacks.pop(job_id, None)
+    self._active_jobs.pop(job_id, None)
+    # Remove temp files
+</code></pre>
+<h3 id="translation-model-errors">Translation Model Errors</h3>
+<p><strong>Common Issues</strong>:
+1. <strong>API Key Invalid</strong>: Check key format and permissions
+2. <strong>Rate Limiting</strong>: Implement backoff and retry
+3. <strong>Network Timeouts</strong>: Configure appropriate timeouts
+4. <strong>Model Unavailable</strong>: Fallback to alternative models</p>
+<p><strong>Error Handling Pattern</strong>:</p>
+<pre><code class="language-python">try:
+    result = model.translate(text)
+except RateLimitError:
+    time.sleep(2 ** retry_count)
+    return self.retry_translation()
+except AuthenticationError:
+    logger.error(&quot;Invalid API key&quot;)
+    job.mark_failed(&quot;Authentication failed&quot;)
+</code></pre>
+<hr />
+<h2 id="7-code-examples">7. Code Examples</h2>
+<h3 id="adding-a-new-endpoint">Adding a New Endpoint</h3>
+<pre><code class="language-python"># In main.py
+
+@app.post(&quot;/translate-batch&quot;)
+async def batch_translation(
+    files: List[UploadFile] = File(...),
+    model: TranslationModel = Form(...),
+    key: str = Form(...)
+):
+    &quot;&quot;&quot;Start batch translation of multiple files&quot;&quot;&quot;
+    job_ids = []
+
+    for file in files:
+        # Validate each file
+        if not file.filename.endswith(('.epub', '.txt', '.srt', '.md')):
+            continue
+
+        # Save file
+        upload_path = job_manager.get_upload_path(file.filename)
+        with open(upload_path, &quot;wb&quot;) as f:
+            content = await file.read()
+            f.write(content)
+
+        # Start translation
+        try:
+            job_id = async_translator.start_translation(
+                file_path=str(upload_path),
+                model=model,
+                key=key,
+                language=&quot;zh-cn&quot;
+            )
+            job_ids.append(job_id)
+        except Exception as e:
+            logger.error(f&quot;Failed to start translation for {file.filename}: {e}&quot;)
+
+    return {
+        &quot;message&quot;: f&quot;Started {len(job_ids)} translation jobs&quot;,
+        &quot;job_ids&quot;: job_ids
+    }
+</code></pre>
+<h3 id="modifying-progress-tracking">Modifying Progress Tracking</h3>
+<pre><code class="language-python"># Add custom progress metrics
+
+class ExtendedProgressUpdate(ProgressUpdate):
+    &quot;&quot;&quot;Extended progress with additional metrics&quot;&quot;&quot;
+    words_per_minute: float = 0.0
+    estimated_completion: Optional[datetime] = None
+    quality_score: float = 0.0
+
+# In progress_monitor.py
+def update_progress_with_metrics(
+    self,
+    job_id: str,
+    current: int,
+    total: int,
+    start_time: datetime
+):
+    # Calculate words per minute
+    elapsed = (datetime.now() - start_time).total_seconds() / 60
+    wpm = (current * 50) / elapsed if elapsed &gt; 0 else 0  # Assume 50 words per paragraph
+
+    # Estimate completion
+    if current &gt; 0:
+        rate = current / elapsed
+        remaining = (total - current) / rate if rate &gt; 0 else 0
+        estimated = datetime.now() + timedelta(minutes=remaining)
+    else:
+        estimated = None
+
+    # Create extended update
+    update = ExtendedProgressUpdate(
+        job_id=job_id,
+        current=current,
+        total=total,
+        percentage=(current / total * 100) if total &gt; 0 else 0,
+        timestamp=datetime.now(),
+        words_per_minute=wpm,
+        estimated_completion=estimated
+    )
+
+    # Call callback
+    callback = self._callbacks.get(job_id)
+    if callback:
+        callback(update)
+</code></pre>
+<h3 id="adding-a-new-file-format-loader">Adding a New File Format Loader</h3>
+<pre><code class="language-python"># Create new loader in book_maker/loader/pdf_loader.py
+
+from .base_loader import BaseBookLoader
+import PyPDF2
+
+class PDFBookLoader(BaseBookLoader):
+    def __init__(self, pdf_name, model, key, **kwargs):
+        self.pdf_name = pdf_name
+        self.translate_model = model(key, **kwargs)
+        self.pages_to_save = []
+
+    def make_bilingual_book(self):
+        &quot;&quot;&quot;Main translation method for PDF files&quot;&quot;&quot;
+        # Read PDF
+        with open(self.pdf_name, 'rb') as file:
+            pdf_reader = PyPDF2.PdfReader(file)
+            pdf_writer = PyPDF2.PdfWriter()
+
+            total_pages = len(pdf_reader.pages)
+
+            # Process each page
+            for i, page in enumerate(tqdm(pdf_reader.pages, desc=&quot;Translating PDF&quot;)):
+                # Extract text
+                text = page.extract_text()
+
+                # Translate
+                translated = self.translate_model.translate(text)
+
+                # Create new page with translation
+                # (This is simplified - real implementation would be more complex)
+                new_page = self._create_bilingual_page(text, translated)
+                pdf_writer.add_page(new_page)
+
+                # Update progress if job_id exists
+                if hasattr(self, 'progress_tracker') and self.job_id:
+                    self.progress_tracker.monitor.update_progress(
+                        self.job_id, i + 1, total_pages
+                    )
+
+            # Save output
+            output_name = self.pdf_name.replace('.pdf', '_bilingual.pdf')
+            with open(output_name, 'wb') as output:
+                pdf_writer.write(output)
+
+    def _create_bilingual_page(self, original, translated):
+        &quot;&quot;&quot;Create a page with both original and translated text&quot;&quot;&quot;
+        # Implementation would depend on PDF library capabilities
+        pass
+
+    def load_state(self):
+        &quot;&quot;&quot;Load saved state for resume&quot;&quot;&quot;
+        # Implement pickle-based state loading
+        pass
+
+    def _save_progress(self):
+        &quot;&quot;&quot;Save current progress&quot;&quot;&quot;
+        # Implement checkpoint saving
+        pass
+
+    def _make_new_book(self, book):
+        &quot;&quot;&quot;Create new PDF structure&quot;&quot;&quot;
+        return PyPDF2.PdfWriter()
+
+# Register in BOOK_LOADER_DICT
+from book_maker.loader import BOOK_LOADER_DICT
+BOOK_LOADER_DICT['pdf'] = PDFBookLoader
+
+# Update supported formats in async_translator.py
+supported_formats = ['.epub', '.txt', '.srt', '.md', '.pdf']
+</code></pre>
+<h3 id="debugging-progress-issues">Debugging Progress Issues</h3>
+<pre><code class="language-python"># Add debug middleware to track progress flow
+
+class ProgressDebugMiddleware:
+    &quot;&quot;&quot;Middleware to debug progress tracking issues&quot;&quot;&quot;
+
+    def __init__(self):
+        self.events = []
+
+    def log_event(self, event_type: str, job_id: str, data: dict):
+        &quot;&quot;&quot;Log a progress-related event&quot;&quot;&quot;
+        self.events.append({
+            'timestamp': datetime.now(),
+            'event_type': event_type,
+            'job_id': job_id,
+            'thread': threading.current_thread().name,
+            'data': data
+        })
+
+    def get_job_timeline(self, job_id: str):
+        &quot;&quot;&quot;Get timeline of events for a specific job&quot;&quot;&quot;
+        return [e for e in self.events if e['job_id'] == job_id]
+
+    def print_timeline(self, job_id: str):
+        &quot;&quot;&quot;Print formatted timeline&quot;&quot;&quot;
+        timeline = self.get_job_timeline(job_id)
+        for event in timeline:
+            print(f&quot;{event['timestamp']} [{event['thread']}] {event['event_type']}: {event['data']}&quot;)
+
+# Use in progress_monitor.py
+debug_middleware = ProgressDebugMiddleware()
+
+def update_progress(self, job_id: str, current: int, total: int):
+    debug_middleware.log_event('progress_update', job_id, {
+        'current': current,
+        'total': total,
+        'callbacks_registered': list(self._callbacks.keys())
+    })
+    # ... rest of the method
+
+# Access debug info via endpoint
+@app.get(&quot;/debug/progress/{job_id}&quot;)
+async def get_progress_debug(job_id: str):
+    return {
+        &quot;timeline&quot;: debug_middleware.get_job_timeline(job_id),
+        &quot;current_callbacks&quot;: list(global_progress_tracker.monitor._callbacks.keys()),
+        &quot;active_jobs&quot;: list(global_progress_tracker.monitor._active_jobs.keys())
+    }
+</code></pre>
+<h3 id="custom-translation-model-integration">Custom Translation Model Integration</h3>
+<pre><code class="language-python"># Add a new translation model
+
+# In book_maker/translator/custom_model.py
+class CustomTranslator:
+    def __init__(self, key, language, **kwargs):
+        self.api_key = key
+        self.target_language = language
+        self.api_base = kwargs.get('api_base', 'https://api.custom.com')
+
+    def translate(self, text):
+        &quot;&quot;&quot;Translate single text&quot;&quot;&quot;
+        response = requests.post(
+            f&quot;{self.api_base}/translate&quot;,
+            json={
+                &quot;text&quot;: text,
+                &quot;target&quot;: self.target_language,
+                &quot;source&quot;: &quot;auto&quot;
+            },
+            headers={
+                &quot;Authorization&quot;: f&quot;Bearer {self.api_key}&quot;
+            }
+        )
+        return response.json()[&quot;translation&quot;]
+
+# Register in async_translator.py
+from book_maker.translator import CustomTranslator
+
+MODEL_CLASSES = {
+    # ... existing models
+    TranslationModel.CUSTOM: CustomTranslator
+}
+
+# Add to TranslationModel enum in models.py
+class TranslationModel(str, Enum):
+    # ... existing models
+    CUSTOM = &quot;custom&quot;
+</code></pre>
+<hr />
+<h2 id="summary">Summary</h2>
+<p>The Bilingual Book Maker API Layer is a sophisticated async translation system that:</p>
+<ol>
+<li><strong>Provides RESTful API</strong> for file translation with job tracking</li>
+<li><strong>Supports multiple file formats</strong> (EPUB, TXT, SRT, MD)</li>
+<li><strong>Integrates various translation models</strong> (ChatGPT, Claude, Gemini, DeepL, Google)</li>
+<li><strong>Offers real-time progress tracking</strong> through tqdm interception</li>
+<li><strong>Handles concurrent translations</strong> via thread pool execution</li>
+<li><strong>Manages file lifecycle</strong> with automatic cleanup</li>
+<li><strong>Ensures reliability</strong> through retry logic and error handling</li>
+<li><strong>Adapts to environments</strong> with configuration-based settings</li>
+</ol>
+<p>The architecture emphasizes:
+- <strong>Separation of Concerns</strong>: Clear boundaries between API, orchestration, and translation
+- <strong>Thread Safety</strong>: Careful synchronization for concurrent operations
+- <strong>Extensibility</strong>: Easy addition of new models and formats
+- <strong>Monitoring</strong>: Comprehensive progress and status tracking
+- <strong>Resilience</strong>: Graceful error handling and recovery</p>
+<p>This documentation provides both theoretical understanding and practical examples for maintaining, extending, and debugging the system.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

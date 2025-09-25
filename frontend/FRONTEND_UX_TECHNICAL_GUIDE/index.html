@@ -1,0 +1,2433 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Bilingual Book Maker - Service Architecture & UX Technical Guide - bilingual book maker</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bilingual-book-maker-service-architecture-ux-technical-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="bilingual book maker" class="md-header__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bilingual book maker
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bilingual Book Maker - Service Architecture &amp; UX Technical Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../model_lang/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../disclaimer/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Disclaimer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="bilingual book maker" class="md-nav__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    bilingual book maker
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickStart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model_lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model and languages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cmd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command line options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../book_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Translate from different source
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment setting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tweak the prompt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disclaimer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-service-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Service Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Service Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-service-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Service Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-architectural-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Architectural Patterns
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#service-capabilities-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Service Capabilities &amp; Constraints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-business-logic-user-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Business Logic &amp; User Tiers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Business Logic &amp; User Tiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#freemium-model-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Freemium Model Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Freemium Model Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anonymous-users-free-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anonymous Users (Free Tier)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registered-users-premium-tier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registered Users (Premium Tier)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#business-logic-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business Logic Validation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-api-contract-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. API Contract Specifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. API Contract Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Endpoints
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-translate-start-translation-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      POST /translate - Start Translation Job
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-statusjob_id-check-job-progress" class="md-nav__link">
+    <span class="md-ellipsis">
+      GET /status/{job_id} - Check Job Progress
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-downloadjob_id-download-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      GET /download/{job_id} - Download Result
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-user-experience-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. User Experience Flows
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. User Experience Flows">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flow-1-anonymous-user-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow 1: Anonymous User Translation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-2-premium-user-translation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow 2: Premium User Translation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flow-3-error-recovery-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flow 3: Error Recovery Patterns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-error-handling-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Error Handling Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Error Handling Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-categories-frontend-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Categories &amp; Frontend Responses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Categories &amp; Frontend Responses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-file-validation-errors-400-bad-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. File Validation Errors (400 Bad Request)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-authentication-errors-401-unauthorized" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Authentication Errors (401 Unauthorized)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-translation-service-errors-400-bad-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Translation Service Errors (400 Bad Request)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-rate-limiting-429-too-many-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Rate Limiting (429 Too Many Requests)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-job-processing-errors-job-status-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Job Processing Errors (Job Status: failed)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-recovery-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Recovery Strategies
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-real-time-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Real-time Communication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Real-time Communication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#progress-tracking-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Tracking Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Progress Tracking Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#polling-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Polling Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-granularity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Granularity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Optimizations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-security-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Security Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Security Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-upload-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Upload Security
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Upload Security">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-file-content-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. File Content Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-frontend-security-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Frontend Security Responsibilities
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-protection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Protection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cors-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      CORS Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-performance-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Performance Characteristics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Performance Characteristics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response-time-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response Time Expectations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Response Time Expectations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-response-times" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Response Times
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translation-processing-times" class="md-nav__link">
+    <span class="md-ellipsis">
+      Translation Processing Times
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scaling-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scaling Characteristics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend Performance Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend Performance Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-upload-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Upload Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-ui-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress UI Optimization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-integration-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Integration Guidelines
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Integration Guidelines">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#frontend-architecture-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend Architecture Recommendations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend Architecture Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-integration-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Integration Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Integration Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-first-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error-First Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retry-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retry Logic
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mock-api-for-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mock API for Development
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-development-environment-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Development Environment Setup
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Development Environment Setup">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backend-setup-for-frontend-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend Setup for Frontend Development
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend Setup for Frontend Development">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quick-start-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Start (Docker)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-development-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Development Setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Frontend Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-api-discovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. API Discovery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-development-api-key-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Development API Key Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-file-testing-assets" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. File Testing Assets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-error-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Error Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cors-configuration-for-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      CORS Configuration for Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-deployment-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production Deployment Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Production Deployment Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontend-build-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frontend Build Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="bilingual-book-maker-service-architecture-ux-technical-guide">Bilingual Book Maker - Service Architecture &amp; UX Technical Guide</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-service-architecture-overview">Service Architecture Overview</a></li>
+<li><a href="#2-business-logic--user-tiers">Business Logic &amp; User Tiers</a></li>
+<li><a href="#3-api-contract-specifications">API Contract Specifications</a></li>
+<li><a href="#4-user-experience-flows">User Experience Flows</a></li>
+<li><a href="#5-error-handling-patterns">Error Handling Patterns</a></li>
+<li><a href="#6-real-time-communication">Real-time Communication</a></li>
+<li><a href="#7-security-model">Security Model</a></li>
+<li><a href="#8-performance-characteristics">Performance Characteristics</a></li>
+<li><a href="#9-integration-guidelines">Integration Guidelines</a></li>
+<li><a href="#10-development-environment-setup">Development Environment Setup</a></li>
+</ol>
+<hr />
+<h2 id="1-service-architecture-overview">1. Service Architecture Overview</h2>
+<h3 id="core-service-components">Core Service Components</h3>
+<p>The bilingual book translation service is built on a production-ready FastAPI backend with async job processing. Understanding the architecture is crucial for designing appropriate user experiences.</p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│                Frontend Application                      │
+│             (Your UI/UX Implementation)                 │
+└─────────────────────┬───────────────────────────────────┘
+                      │ HTTP/REST API
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│              FastAPI Backend (localhost:8000)           │
+├─────────────────────────────────────────────────────────┤
+│ ┌─────────────┐ ┌─────────────────┐ ┌─────────────────┐ │
+│ │  Endpoints  │ │ AsyncTranslator │ │   JobManager    │ │
+│ │             │ │                 │ │                 │ │
+│ │ /translate  │ │ • Job Creation  │ │ • Thread Pool   │ │
+│ │ /status     │ │ • Progress      │ │ • Job Storage   │ │
+│ │ /download   │ │ • Translation   │ │ • TTL Cleanup   │ │
+│ │ /health     │ │   Orchestration │ │ • File Mgmt     │ │
+│ └─────────────┘ └─────────────────┘ └─────────────────┘ │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│            Translation Engine Layer                     │
+│                                                         │
+│  • ChatGPT/GPT-4    • Claude      • Google Translate   │
+│  • Gemini           • DeepL       • Groq               │
+│  • Qwen             • xAI Grok    • DeepL Free         │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="key-architectural-patterns">Key Architectural Patterns</h3>
+<p><strong>1. Async Request-Response Pattern</strong>
+- File upload returns immediate <code>job_id</code>
+- Translation happens in background thread
+- Client polls <code>/status/{job_id}</code> for progress
+- Download via <code>/download/{job_id}</code> when complete</p>
+<p><strong>2. Stateful Job Management</strong>
+- Jobs persist in memory with TTL (24 hours default)
+- Comprehensive job lifecycle tracking
+- Thread-safe concurrent processing
+- Automatic cleanup of expired jobs</p>
+<p><strong>3. File Processing Pipeline</strong>
+- Comprehensive validation (size, format, security)
+- Temporary file storage with unique paths
+- Progress tracking via tqdm interception
+- Output file generation with bilingual suffix</p>
+<h3 id="service-capabilities-constraints">Service Capabilities &amp; Constraints</h3>
+<p><strong>Supported File Formats:</strong>
+For MVP phase we set it to 500KB, will increased in the future.
+- EPUB (eBooks) - up to 500KB
+- TXT (Plain text) - up to 500KB
+- SRT (Subtitles) - up to 500KB
+- MD (Markdown) - up to 500KB</p>
+<p><strong>Processing Characteristics:</strong>
+- Concurrent job limit: 4 workers (configurable)
+- Job TTL: 24 hours (configurable)
+- Progress granularity: Per paragraph/chapter
+- Test mode: 5 paragraphs only</p>
+<hr />
+<h2 id="2-business-logic-user-tiers">2. Business Logic &amp; User Tiers</h2>
+<h3 id="freemium-model-implementation">Freemium Model Implementation</h3>
+<p>The service implements a freemium business model with two distinct user tiers:</p>
+<h4 id="anonymous-users-free-tier">Anonymous Users (Free Tier)</h4>
+<pre><code class="language-json">{
+  &quot;authentication&quot;: &quot;None required&quot;,
+  &quot;models_available&quot;: [&quot;google&quot;],
+  &quot;api_key_required&quot;: false,
+  &quot;rate_limits&quot;: &quot;None (Google Translate is free)&quot;,
+  &quot;quality&quot;: &quot;Basic translation&quot;,
+  &quot;features&quot;: [&quot;All file formats&quot;, &quot;Test mode&quot;, &quot;Progress tracking&quot;]
+}
+</code></pre>
+<h4 id="registered-users-premium-tier">Registered Users (Premium Tier)</h4>
+<pre><code class="language-json">{
+  &quot;authentication&quot;: &quot;Bearer token optional (MVP: unrestricted access)&quot;,
+  &quot;models_available&quot;: [
+    &quot;chatgpt&quot;, &quot;claude&quot;, &quot;gemini_flash&quot;, &quot;deepl&quot;,
+    &quot;deepl_free&quot;, &quot;groq&quot;, &quot;qwen&quot;, &quot;xai&quot;
+  ],
+  &quot;api_key_required&quot;: true,
+  &quot;rate_limits&quot;: &quot;None in MVP (users provide own API keys)&quot;,
+  &quot;quality&quot;: &quot;High-quality AI translation&quot;,
+  &quot;features&quot;: [&quot;All free features&quot;, &quot;Premium models&quot;, &quot;API management&quot;]
+}
+</code></pre>
+<h3 id="authentication-flow">Authentication Flow</h3>
+<p><strong>For Anonymous Users:</strong></p>
+<pre><code class="language-javascript">// No authentication needed
+const response = await fetch('/translate', {
+  method: 'POST',
+  body: formData // model: 'google'
+});
+</code></pre>
+<p><strong>For Premium Users:</strong></p>
+<pre><code class="language-javascript">// Bearer token optional in MVP (all models accessible with valid translation service API keys)
+const response = await fetch('/translate', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer bbm_your_api_key_here'
+  },
+  body: formData // model: 'chatgpt', 'claude', 'gemini_flash', etc.
+});
+</code></pre>
+<h3 id="business-logic-validation">Business Logic Validation</h3>
+<p>The backend enforces business rules automatically:</p>
+<ol>
+<li><strong>Model Access Control</strong>: Premium models require authentication</li>
+<li><strong>API Key Validation</strong>: Translation service keys validated per model</li>
+<li><strong>Rate Limiting</strong>: Per-user limits for premium tiers</li>
+<li><strong>Usage Tracking</strong>: Per-key usage statistics</li>
+</ol>
+<hr />
+<h2 id="3-api-contract-specifications">3. API Contract Specifications</h2>
+<h3 id="core-endpoints">Core Endpoints</h3>
+<h4 id="post-translate-start-translation-job">POST /translate - Start Translation Job</h4>
+<p><strong>Request Format:</strong></p>
+<pre><code class="language-http">POST /translate HTTP/1.1
+Content-Type: multipart/form-data
+Authorization: Bearer bbm_api_key (optional in MVP - all models accessible with valid translation service keys)
+
+file: [EPUB/TXT/SRT/MD file, max 500KB]
+model: &quot;google&quot; | &quot;chatgpt&quot; | &quot;claude&quot; | &quot;gemini_flash&quot; | &quot;deepl&quot; | &quot;deepl_free&quot; | &quot;groq&quot; | &quot;qwen&quot; | &quot;xai&quot;
+key: &quot;translation_service_api_key&quot; (default: &quot;no-key-required&quot;)
+language: &quot;zh-cn&quot; (default, target language code)
+is_test: false (boolean, test mode with 5 paragraphs)
+temperature: 1.0 (0.0-2.0, creativity level)
+model_api_base: &quot;https://custom-api.com&quot; (optional)
+resume: false (resume previous translation)
+single_translate: false (single vs dual language output)
+context_flag: false (use context for translation)
+source_lang: &quot;auto&quot; (source language detection)
+</code></pre>
+<p><strong>Response Format:</strong></p>
+<pre><code class="language-json">{
+  &quot;job_id&quot;: &quot;uuid-string&quot;,
+  &quot;status&quot;: &quot;pending&quot;,
+  &quot;message&quot;: &quot;Translation job started successfully&quot;,
+  &quot;estimated_duration&quot;: &quot;5-30 minutes depending on file size and model&quot;
+}
+</code></pre>
+<p><strong>Error Responses:</strong></p>
+<pre><code class="language-json">// File validation error (400)
+{
+  &quot;error&quot;: &quot;File validation failed&quot;,
+  &quot;detail&quot;: &quot;File too large: 1.2MB exceeds 0.5MB limit&quot;,
+  &quot;timestamp&quot;: &quot;2024-01-15T10:30:00Z&quot;
+}
+
+// Authentication required (401) - Note: In MVP, all models accessible with valid service API keys
+{
+  &quot;error&quot;: &quot;Authentication required&quot;,
+  &quot;detail&quot;: &quot;Authentication required for premium models (chatgpt, claude, gemini_flash, deepl, groq, qwen, xai). Available without auth: Google Translate (free)&quot;,
+  &quot;timestamp&quot;: &quot;2024-01-15T10:30:00Z&quot;
+}
+
+// Invalid API key (400)
+{
+  &quot;error&quot;: &quot;Invalid API key&quot;,
+  &quot;detail&quot;: &quot;Translation service API key is required for chatgpt&quot;,
+  &quot;timestamp&quot;: &quot;2024-01-15T10:30:00Z&quot;
+}
+</code></pre>
+<h4 id="get-statusjob_id-check-job-progress">GET /status/{job_id} - Check Job Progress</h4>
+<p><strong>Response Format:</strong></p>
+<pre><code class="language-json">{
+  &quot;job_id&quot;: &quot;uuid-string&quot;,
+  &quot;status&quot;: &quot;processing&quot;, // pending|processing|completed|failed|cancelled
+  &quot;progress&quot;: 45, // 0-100 percentage
+  &quot;filename&quot;: &quot;book.epub&quot;,
+  &quot;created_at&quot;: &quot;2024-01-15T10:30:00Z&quot;,
+  &quot;completed_at&quot;: null,
+  &quot;error_message&quot;: null,
+  &quot;download_url&quot;: null, // Available when status=completed
+  &quot;total_paragraphs&quot;: 150,
+  &quot;processed_paragraphs&quot;: 67,
+  &quot;model&quot;: &quot;chatgpt&quot;,
+  &quot;target_language&quot;: &quot;zh-cn&quot;
+}
+</code></pre>
+<p><strong>Real-time Progress Example:</strong></p>
+<pre><code class="language-json">// Initial state
+{&quot;status&quot;: &quot;pending&quot;, &quot;progress&quot;: 0}
+
+// Processing
+{&quot;status&quot;: &quot;processing&quot;, &quot;progress&quot;: 23, &quot;processed_paragraphs&quot;: 34, &quot;total_paragraphs&quot;: 148}
+
+// Completed
+{&quot;status&quot;: &quot;completed&quot;, &quot;progress&quot;: 100, &quot;download_url&quot;: &quot;/download/uuid-string&quot;}
+
+// Failed
+{&quot;status&quot;: &quot;failed&quot;, &quot;error_message&quot;: &quot;API key invalid or expired&quot;}
+</code></pre>
+<h4 id="get-downloadjob_id-download-result">GET /download/{job_id} - Download Result</h4>
+<p><strong>Response:</strong>
+- Content-Type: application/epub+zip | text/plain | application/x-subrip | text/markdown
+- Content-Disposition: attachment; filename="book_bilingual.epub"
+- File stream with translated content</p>
+<h4 id="additional-endpoints">Additional Endpoints</h4>
+<pre><code class="language-http">GET /health          # Service health check
+GET /jobs            # List user jobs (with pagination)
+POST /cancel/{job_id} # Cancel running job
+DELETE /jobs/{job_id} # Delete completed job
+GET /models          # List available models
+GET /stats           # System statistics
+POST /cleanup        # Manual cleanup of expired jobs (admin)
+</code></pre>
+<hr />
+<h2 id="4-user-experience-flows">4. User Experience Flows</h2>
+<h3 id="flow-1-anonymous-user-translation">Flow 1: Anonymous User Translation</h3>
+<p><strong>UX Design Considerations:</strong>
+1. <strong>No signup friction</strong> - Users can start immediately
+2. <strong>Clear model limitation</strong> - Google Translate only
+3. <strong>Progress feedback</strong> - Real-time progress bar
+4. <strong>File constraints</strong> - Clear 500KB limit messaging</p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant B as Backend
+
+    U-&gt;&gt;F: Upload EPUB file
+    F-&gt;&gt;F: Validate file size/format client-side
+    F-&gt;&gt;B: POST /translate (model: google)
+    B-&gt;&gt;B: Validate file, create job
+    B--&gt;&gt;F: 200 {job_id, status: pending}
+    F-&gt;&gt;F: Show &quot;Translation starting...&quot;
+
+    loop Every 2-3 seconds
+        F-&gt;&gt;B: GET /status/{job_id}
+        B--&gt;&gt;F: {status: processing, progress: 45%}
+        F-&gt;&gt;F: Update progress bar
+    end
+
+    B--&gt;&gt;F: {status: completed, download_url}
+    F-&gt;&gt;F: Show &quot;Translation complete!&quot;
+    U-&gt;&gt;F: Click download
+    F-&gt;&gt;B: GET /download/{job_id}
+    B--&gt;&gt;F: Translated file
+    F-&gt;&gt;U: Download bilingual book
+</code></pre>
+<p><strong>Key UX Timing Expectations:</strong>
+- <strong>Job creation</strong>: &lt; 500ms
+- <strong>Status polling</strong>: Every 2-3 seconds
+- <strong>Translation time</strong>: 3-15 minutes for typical EPUB
+- <strong>Download</strong>: Immediate once completed</p>
+<h3 id="flow-2-premium-user-translation">Flow 2: Premium User Translation</h3>
+<p><strong>UX Design Considerations:</strong>
+1. <strong>Authentication flow</strong> - API key entry/management
+2. <strong>Model selection</strong> - Dropdown with quality descriptions
+3. <strong>API key validation</strong> - Real-time feedback
+4. <strong>Advanced options</strong> - Collapsible settings panel</p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant U as User
+    participant F as Frontend
+    participant B as Backend
+
+    U-&gt;&gt;F: Enter API key &amp; select model
+    F-&gt;&gt;F: Store API key securely
+    U-&gt;&gt;F: Upload file, select &quot;Claude&quot;
+    F-&gt;&gt;B: POST /translate (Authorization: Bearer key)
+
+    alt Valid authentication &amp; API key
+        B--&gt;&gt;F: 200 {job_id, estimated_duration}
+        F-&gt;&gt;F: Show enhanced progress with model info
+    else Authentication failed
+        B--&gt;&gt;F: 401 {error: &quot;Authentication required&quot;}
+        F-&gt;&gt;F: Show upgrade prompt
+    else Invalid translation API key
+        B--&gt;&gt;F: 400 {error: &quot;Invalid Claude API key&quot;}
+        F-&gt;&gt;F: Show API key help
+    end
+</code></pre>
+<h3 id="flow-3-error-recovery-patterns">Flow 3: Error Recovery Patterns</h3>
+<p><strong>File Validation Errors:</strong></p>
+<pre><code class="language-javascript">// Handle client-side validation
+function validateFile(file) {
+  const maxSize = 500 * 1024 * 1024; // 500KB
+  const allowedTypes = ['.epub', '.txt', '.srt', '.md'];
+
+  if (file.size &gt; maxSize) {
+    return {
+      valid: false,
+      message: `File too large (${(file.size/1024/1024).toFixed(1)}MB). Maximum size is 500KB.`
+    };
+  }
+
+  const extension = file.name.toLowerCase().split('.').pop();
+  if (!allowedTypes.includes('.' + extension)) {
+    return {
+      valid: false,
+      message: `Unsupported format (.${extension}). Supported: EPUB, TXT, SRT, MD`
+    };
+  }
+
+  return {valid: true};
+}
+</code></pre>
+<p><strong>Translation Failure Recovery:</strong></p>
+<pre><code class="language-javascript">// Handle various failure modes
+function handleTranslationError(error) {
+  switch(error.status) {
+    case 401:
+      showAuthenticationModal();
+      break;
+    case 400:
+      if (error.detail.includes('API key')) {
+        showAPIKeyHelp();
+      } else {
+        showFileValidationError(error.detail);
+      }
+      break;
+    case 429:
+      showRateLimitMessage(error.headers['Retry-After']);
+      break;
+    case 500:
+      showRetryOption();
+      break;
+  }
+}
+</code></pre>
+<hr />
+<h2 id="5-error-handling-patterns">5. Error Handling Patterns</h2>
+<h3 id="error-categories-frontend-responses">Error Categories &amp; Frontend Responses</h3>
+<h4 id="1-file-validation-errors-400-bad-request">1. File Validation Errors (400 Bad Request)</h4>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;File validation failed&quot;,
+  &quot;detail&quot;: &quot;File too large: 1.2MB exceeds 0.5MB limit&quot;
+}
+</code></pre>
+<p><strong>UX Response:</strong>
+- Show inline validation message
+- Highlight file upload area in red
+- Provide clear remediation steps
+- Don't block other functionality</p>
+<h4 id="2-authentication-errors-401-unauthorized">2. Authentication Errors (401 Unauthorized)</h4>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Authentication required&quot;,
+  &quot;detail&quot;: &quot;Authentication required for premium models&quot;
+}
+</code></pre>
+<p><strong>UX Response:</strong>
+- Show authentication modal/form
+- Explain benefit of premium models
+- Offer fallback to Google Translate
+- Preserve user's file selection</p>
+<h4 id="3-translation-service-errors-400-bad-request">3. Translation Service Errors (400 Bad Request)</h4>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Translation service error&quot;,
+  &quot;detail&quot;: &quot;Invalid OpenAI API key&quot;
+}
+</code></pre>
+<p><strong>UX Response:</strong>
+- Show API key validation error
+- Link to service API key documentation
+- Suggest trying different model
+- Validate keys before job submission</p>
+<h4 id="4-rate-limiting-429-too-many-requests">4. Rate Limiting (429 Too Many Requests)</h4>
+<pre><code class="language-json">{
+  &quot;error&quot;: &quot;Rate limit exceeded&quot;,
+  &quot;detail&quot;: &quot;Rate limit exceeded. Please try again later.&quot;,
+  &quot;headers&quot;: {&quot;Retry-After&quot;: &quot;3600&quot;}
+}
+</code></pre>
+<p><strong>UX Response:</strong>
+- Show countdown timer
+- Explain rate limiting
+- Suggest model alternatives
+- Queue request for retry</p>
+<h4 id="5-job-processing-errors-job-status-failed">5. Job Processing Errors (Job Status: failed)</h4>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;failed&quot;,
+  &quot;error_message&quot;: &quot;Translation model timeout after 30 minutes&quot;
+}
+</code></pre>
+<p><strong>UX Response:</strong>
+- Show specific failure reason
+- Offer retry with different model
+- Suggest test mode for large files
+- Preserve user settings for retry</p>
+<h3 id="error-recovery-strategies">Error Recovery Strategies</h3>
+<p><strong>Progressive Degradation:</strong>
+1. Try premium model → fallback to Google Translate
+2. Try full translation → suggest test mode
+3. Try current settings → reset to defaults</p>
+<p><strong>User Communication:</strong></p>
+<pre><code class="language-javascript">const errorMessages = {
+  'file_too_large': 'Your file is larger than our 500KB limit. Try compressing or splitting it.',
+  'invalid_format': 'We support EPUB, TXT, SRT, and MD files. Please convert your file.',
+  'api_key_invalid': 'Your API key seems to be invalid. Check your account settings.',
+  'rate_limited': 'You\'ve hit your hourly limit. Upgrade for higher limits or try again later.',
+  'translation_timeout': 'Translation took too long. Try test mode first or use a different model.'
+};
+</code></pre>
+<hr />
+<h2 id="6-real-time-communication">6. Real-time Communication</h2>
+<h3 id="progress-tracking-implementation">Progress Tracking Implementation</h3>
+<p>The backend doesn't use WebSockets - instead it uses efficient polling with tqdm interception for granular progress updates.</p>
+<h4 id="polling-strategy">Polling Strategy</h4>
+<p><strong>Recommended Polling Pattern:</strong></p>
+<pre><code class="language-javascript">class TranslationProgressTracker {
+  constructor(jobId) {
+    this.jobId = jobId;
+    this.pollInterval = 2000; // Start with 2 seconds
+    this.maxPollInterval = 10000; // Max 10 seconds
+    this.backoffMultiplier = 1.2;
+  }
+
+  async startPolling() {
+    while (true) {
+      try {
+        const status = await this.checkStatus();
+
+        if (status.status === 'completed') {
+          this.onComplete(status);
+          break;
+        }
+
+        if (status.status === 'failed') {
+          this.onError(status);
+          break;
+        }
+
+        this.onProgress(status);
+        await this.sleep(this.pollInterval);
+
+        // Adaptive polling - slow down if no progress
+        if (this.lastProgress === status.progress) {
+          this.pollInterval = Math.min(
+            this.pollInterval * this.backoffMultiplier,
+            this.maxPollInterval
+          );
+        } else {
+          this.pollInterval = 2000; // Reset to fast polling
+        }
+
+        this.lastProgress = status.progress;
+
+      } catch (error) {
+        this.onError({error_message: error.message});
+        break;
+      }
+    }
+  }
+
+  async checkStatus() {
+    const response = await fetch(`/status/${this.jobId}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+    return response.json();
+  }
+}
+</code></pre>
+<h4 id="progress-granularity">Progress Granularity</h4>
+<p>The backend provides detailed progress information:</p>
+<pre><code class="language-json">{
+  &quot;progress&quot;: 67, // Overall percentage 0-100
+  &quot;total_paragraphs&quot;: 450, // Total units to process
+  &quot;processed_paragraphs&quot;: 301, // Units completed
+  &quot;status&quot;: &quot;processing&quot; // Current stage
+}
+</code></pre>
+<p><strong>UX Implementation:</strong></p>
+<pre><code class="language-javascript">function updateProgressUI(status) {
+  // Main progress bar
+  document.getElementById('progress-bar').style.width = `${status.progress}%`;
+
+  // Detailed progress text
+  document.getElementById('progress-text').textContent =
+    `Processing ${status.processed_paragraphs} of ${status.total_paragraphs} paragraphs (${status.progress}%)`;
+
+  // Estimated time remaining (calculate based on progress rate)
+  const timeRemaining = this.calculateETA(status);
+  document.getElementById('eta').textContent = `About ${timeRemaining} remaining`;
+}
+</code></pre>
+<h4 id="performance-optimizations">Performance Optimizations</h4>
+<p><strong>Efficient Polling:</strong>
+- Start with 2-second intervals during active processing
+- Back off to 10-second intervals during stall periods
+- Stop polling immediately on completion/failure
+- Use <code>If-Modified-Since</code> headers to reduce bandwidth</p>
+<p><strong>Battery/Performance Considerations:</strong></p>
+<pre><code class="language-javascript">// Pause polling when tab/window is not visible
+document.addEventListener('visibilitychange', () =&gt; {
+  if (document.hidden) {
+    this.pausePolling();
+  } else {
+    this.resumePolling();
+  }
+});
+</code></pre>
+<hr />
+<h2 id="7-security-model">7. Security Model</h2>
+<h3 id="authentication-architecture">Authentication Architecture</h3>
+<p><strong>API Key Format:</strong>
+- Prefix: <code>bbm_</code> (Bilingual Book Maker)
+- Length: 44 characters total
+- Generation: Cryptographically secure random tokens
+- Storage: SHA-256 hashed in backend</p>
+<p><strong>Token Validation:</strong></p>
+<pre><code class="language-http">Authorization: Bearer bbm_abcdef1234567890abcdef1234567890abcdef12
+</code></pre>
+<h3 id="file-upload-security">File Upload Security</h3>
+<p>The backend implements comprehensive security validation:</p>
+<h4 id="1-file-content-validation">1. File Content Validation</h4>
+<pre><code class="language-javascript">// These validations happen automatically on backend
+const securityValidations = {
+  'file_size_check': 'Files limited to 500KB',
+  'extension_validation': 'Only .epub, .txt, .srt, .md allowed',
+  'magic_bytes_check': 'File headers validated against claimed type',
+  'content_scanning': 'Malicious pattern detection',
+  'path_traversal_prevention': 'Filename sanitization',
+  'mime_type_validation': 'Content-Type header validation'
+};
+</code></pre>
+<h4 id="2-frontend-security-responsibilities">2. Frontend Security Responsibilities</h4>
+<pre><code class="language-javascript">// Client-side validation (supplement, not replacement)
+function secureFileHandling(file) {
+  // Validate on client-side for immediate feedback
+  const validation = validateFile(file);
+  if (!validation.valid) {
+    throw new Error(validation.message);
+  }
+
+  // Never trust client-side validation alone
+  // Backend will re-validate everything
+
+  // Sanitize filename for display
+  const displayName = sanitizeDisplayName(file.name);
+
+  return {file, displayName};
+}
+
+function sanitizeDisplayName(filename) {
+  // Remove path separators and limit length for display
+  return filename.replace(/[\/\\]/g, '').slice(0, 50);
+}
+</code></pre>
+<h3 id="data-protection">Data Protection</h3>
+<p><strong>File Storage Security:</strong>
+- Temporary upload files with unique UUIDs
+- Automatic cleanup after TTL expires
+- No permanent storage of user files
+- Output files auto-deleted after 24 hours</p>
+<p><strong>API Security Headers:</strong></p>
+<pre><code class="language-http">X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Security-Policy: default-src 'self'
+</code></pre>
+<h3 id="cors-configuration">CORS Configuration</h3>
+<p><strong>Development (localhost:8000):</strong></p>
+<pre><code class="language-json">{
+  &quot;allowed_origins&quot;: [&quot;http://localhost:3000&quot;, &quot;http://localhost:8080&quot;],
+  &quot;allowed_methods&quot;: [&quot;*&quot;],
+  &quot;allowed_headers&quot;: [&quot;*&quot;]
+}
+</code></pre>
+<p><strong>Production:</strong></p>
+<pre><code class="language-json">{
+  &quot;allowed_origins&quot;: [&quot;https://yourdomain.com&quot;],
+  &quot;allowed_methods&quot;: [&quot;GET&quot;, &quot;POST&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot;],
+  &quot;allowed_headers&quot;: [&quot;Content-Type&quot;, &quot;Authorization&quot;, &quot;Accept&quot;]
+}
+</code></pre>
+<hr />
+<h2 id="8-performance-characteristics">8. Performance Characteristics</h2>
+<h3 id="response-time-expectations">Response Time Expectations</h3>
+<h4 id="api-response-times">API Response Times</h4>
+<pre><code class="language-json">{
+  &quot;endpoint&quot;: &quot;/translate&quot;,
+  &quot;typical_response_time&quot;: &quot;&lt; 500ms&quot;,
+  &quot;includes&quot;: &quot;File validation, job creation, response generation&quot;
+}
+</code></pre>
+<pre><code class="language-json">{
+  &quot;endpoint&quot;: &quot;/status/{job_id}&quot;,
+  &quot;typical_response_time&quot;: &quot;&lt; 100ms&quot;,
+  &quot;includes&quot;: &quot;Job status lookup, progress calculation&quot;
+}
+</code></pre>
+<pre><code class="language-json">{
+  &quot;endpoint&quot;: &quot;/download/{job_id}&quot;,
+  &quot;typical_response_time&quot;: &quot;&lt; 200ms to start&quot;,
+  &quot;includes&quot;: &quot;File stream initiation (streaming continues)&quot;
+}
+</code></pre>
+<h4 id="translation-processing-times">Translation Processing Times</h4>
+<p><strong>File Size vs Processing Time:</strong></p>
+<pre><code class="language-javascript">const processingTimeEstimates = {
+  'small_file': {
+    'size_range': '&lt; 50KB',
+    'paragraphs': '&lt; 100',
+    'google_translate': '1-3 minutes',
+    'premium_models': '2-5 minutes'
+  },
+  'medium_file': {
+    'size_range': '50KB - 200KB',
+    'paragraphs': '100-400',
+    'google_translate': '3-8 minutes',
+    'premium_models': '5-15 minutes'
+  },
+  'large_file': {
+    'size_range': '200KB - 500KB',
+    'paragraphs': '400-1000+',
+    'google_translate': '8-20 minutes',
+    'premium_models': '15-30 minutes'
+  }
+};
+</code></pre>
+<h3 id="scaling-characteristics">Scaling Characteristics</h3>
+<p><strong>Concurrent Processing:</strong>
+- <strong>Job limit</strong>: 4 simultaneous translations (configurable)
+- <strong>Queue behavior</strong>: Additional jobs queue in PENDING status
+- <strong>Memory usage</strong>: ~50-100MB per active translation job</p>
+<p><strong>Rate Limiting:</strong></p>
+<pre><code class="language-json">{
+  &quot;anonymous_users&quot;: &quot;No limits (Google Translate only)&quot;,
+  &quot;premium_users&quot;: &quot;60 requests/hour default (configurable per key)&quot;
+}
+</code></pre>
+<h3 id="frontend-performance-optimization">Frontend Performance Optimization</h3>
+<h4 id="file-upload-optimization">File Upload Optimization</h4>
+<pre><code class="language-javascript">// Show progress during file upload
+function uploadFileWithProgress(file, onProgress) {
+  return new Promise((resolve, reject) =&gt; {
+    const xhr = new XMLHttpRequest();
+
+    xhr.upload.addEventListener('progress', (e) =&gt; {
+      if (e.lengthComputable) {
+        const percentComplete = (e.loaded / e.total) * 100;
+        onProgress(percentComplete, 'upload');
+      }
+    });
+
+    xhr.addEventListener('load', () =&gt; {
+      if (xhr.status === 200) {
+        resolve(JSON.parse(xhr.responseText));
+      } else {
+        reject(new Error(`Upload failed: ${xhr.status}`));
+      }
+    });
+
+    // Set up form data and send
+    const formData = new FormData();
+    formData.append('file', file);
+    // ... other form fields
+
+    xhr.open('POST', '/translate');
+    xhr.send(formData);
+  });
+}
+</code></pre>
+<h4 id="progress-ui-optimization">Progress UI Optimization</h4>
+<pre><code class="language-css">/* Smooth progress animations */
+.progress-bar {
+  transition: width 0.3s ease-in-out;
+  will-change: width;
+}
+
+.progress-text {
+  font-variant-numeric: tabular-nums; /* Prevents text jumping */
+}
+</code></pre>
+<hr />
+<h2 id="9-integration-guidelines">9. Integration Guidelines</h2>
+<h3 id="frontend-architecture-recommendations">Frontend Architecture Recommendations</h3>
+<h4 id="state-management">State Management</h4>
+<pre><code class="language-javascript">// Recommended state structure for translation jobs
+const translationState = {
+  currentJob: {
+    id: null,
+    status: 'idle', // idle|uploading|pending|processing|completed|failed
+    progress: 0,
+    file: null,
+    settings: {
+      model: 'google',
+      language: 'zh-cn',
+      isTest: false
+    },
+    result: null,
+    error: null
+  },
+  jobHistory: [], // Previous jobs for user
+  apiKey: null, // For premium users
+  availableModels: [] // Fetched from /models
+};
+</code></pre>
+<h4 id="component-architecture">Component Architecture</h4>
+<pre><code class="language-jsx">// React example structure
+const TranslationApp = () =&gt; {
+  return (
+    &lt;div&gt;
+      &lt;FileUpload onFileSelect={handleFileSelect} /&gt;
+      &lt;ModelSelector
+        models={availableModels}
+        selectedModel={settings.model}
+        onChange={handleModelChange}
+      /&gt;
+      &lt;AuthenticationPanel
+        show={requiresAuth}
+        onApiKeyEntered={handleApiKey}
+      /&gt;
+      &lt;TranslationProgress
+        job={currentJob}
+        onCancel={handleCancel}
+      /&gt;
+      &lt;ResultDownload
+        job={currentJob}
+        onDownload={handleDownload}
+      /&gt;
+    &lt;/div&gt;
+  );
+};
+</code></pre>
+<h3 id="api-integration-patterns">API Integration Patterns</h3>
+<h4 id="error-first-approach">Error-First Approach</h4>
+<pre><code class="language-javascript">async function startTranslation(file, settings) {
+  try {
+    // Validate before sending
+    const validation = validateTranslationRequest(file, settings);
+    if (!validation.valid) {
+      throw new ValidationError(validation.errors);
+    }
+
+    // Send request
+    const job = await apiClient.startTranslation(file, settings);
+
+    // Start progress tracking
+    const progressTracker = new ProgressTracker(job.job_id);
+    progressTracker.onProgress = updateUI;
+    progressTracker.onComplete = handleComplete;
+    progressTracker.onError = handleError;
+
+    await progressTracker.start();
+
+  } catch (error) {
+    handleError(error);
+  }
+}
+</code></pre>
+<h4 id="retry-logic">Retry Logic</h4>
+<pre><code class="language-javascript">class APIClient {
+  async makeRequest(url, options, retries = 3) {
+    for (let attempt = 1; attempt &lt;= retries; attempt++) {
+      try {
+        const response = await fetch(url, options);
+
+        if (response.ok) {
+          return response.json();
+        }
+
+        // Don't retry client errors (4xx)
+        if (response.status &gt;= 400 &amp;&amp; response.status &lt; 500) {
+          throw new APIError(response.status, await response.json());
+        }
+
+        // Retry server errors (5xx)
+        if (attempt === retries) {
+          throw new APIError(response.status, 'Max retries exceeded');
+        }
+
+        // Exponential backoff
+        await this.sleep(Math.pow(2, attempt) * 1000);
+
+      } catch (error) {
+        if (attempt === retries) throw error;
+        await this.sleep(Math.pow(2, attempt) * 1000);
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="testing-integration">Testing Integration</h3>
+<h4 id="mock-api-for-development">Mock API for Development</h4>
+<pre><code class="language-javascript">// Mock API responses for frontend development
+const mockAPI = {
+  '/translate': {
+    method: 'POST',
+    response: {
+      job_id: 'mock-job-123',
+      status: 'pending',
+      message: 'Translation job started successfully',
+      estimated_duration: '5-10 minutes (mock)'
+    }
+  },
+  '/status/mock-job-123': {
+    method: 'GET',
+    response: (callCount) =&gt; ({
+      job_id: 'mock-job-123',
+      status: callCount &lt; 5 ? 'processing' : 'completed',
+      progress: Math.min(callCount * 20, 100),
+      processed_paragraphs: Math.min(callCount * 30, 150),
+      total_paragraphs: 150,
+      download_url: callCount &gt;= 5 ? '/download/mock-job-123' : null
+    })
+  }
+};
+</code></pre>
+<hr />
+<h2 id="10-development-environment-setup">10. Development Environment Setup</h2>
+<h3 id="backend-setup-for-frontend-development">Backend Setup for Frontend Development</h3>
+<h4 id="quick-start-docker">Quick Start (Docker)</h4>
+<pre><code class="language-bash"># Clone repository
+git clone &lt;repo-url&gt;
+cd bilingual_book_maker
+
+# Start backend with Docker
+docker build -t bilingual-book-maker .
+docker run -p 8000:8000 bilingual-book-maker
+
+# Backend available at: http://localhost:8000
+# API docs at: http://localhost:8000/docs
+</code></pre>
+<h4 id="local-development-setup">Local Development Setup</h4>
+<pre><code class="language-bash"># Install dependencies
+cd api_layer
+pip install -r requirements.txt
+
+# Set environment variables
+export API_HOST=0.0.0.0
+export API_PORT=8000
+export ENVIRONMENT=development
+
+# Start development server
+python -m uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
+</code></pre>
+<h3 id="frontend-development-workflow">Frontend Development Workflow</h3>
+<h4 id="1-api-discovery">1. API Discovery</h4>
+<pre><code class="language-javascript">// First, explore available endpoints
+const endpoints = [
+  'GET /health',      // Check if backend is running
+  'GET /models',      // Get available translation models
+  'GET /stats',       // System statistics
+  'POST /translate',  // Start translation
+  'GET /status/{id}', // Check progress
+  'GET /download/{id}' // Download result
+];
+
+// Test basic connectivity
+fetch('http://localhost:8000/health')
+  .then(r =&gt; r.json())
+  .then(data =&gt; console.log('Backend is running:', data));
+</code></pre>
+<h4 id="2-development-api-key-setup">2. Development API Key Setup</h4>
+<pre><code class="language-javascript">// For testing premium features, get a demo API key
+// The backend creates demo keys on startup (development only)
+
+// Check logs for demo API keys:
+// &quot;Demo API key created: bbm_abc123...&quot;
+// &quot;Admin API key created: bbm_xyz789...&quot;
+
+const DEMO_API_KEY = 'bbm_demo_key_from_logs';
+
+// Test premium endpoints
+fetch('http://localhost:8000/translate', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${DEMO_API_KEY}`
+  },
+  body: formData // with model: 'chatgpt'
+});
+</code></pre>
+<h4 id="3-file-testing-assets">3. File Testing Assets</h4>
+<pre><code class="language-javascript">// Create test files for development
+const testFiles = {
+  'small_epub': 'test-files/small-book.epub', // &lt; 50KB
+  'text_file': 'test-files/sample.txt',      // Plain text
+  'subtitle_file': 'test-files/movie.srt',   // SRT format
+  'markdown_file': 'test-files/readme.md'    // Markdown
+};
+
+// Test different scenarios
+const testScenarios = [
+  {name: 'Anonymous + Google', file: testFiles.small_epub, model: 'google'},
+  {name: 'Premium + ChatGPT', file: testFiles.text_file, model: 'chatgpt'},
+  {name: 'Premium + Gemini Flash', file: testFiles.text_file, model: 'gemini_flash'},
+  {name: 'Test Mode', file: testFiles.small_epub, model: 'google', is_test: true},
+  {name: 'Large File Error', file: 'large-file.epub'} // &gt; 500KB
+];
+</code></pre>
+<h4 id="4-error-testing">4. Error Testing</h4>
+<pre><code class="language-javascript">// Test error scenarios during development
+const errorTests = [
+  {
+    test: 'File too large',
+    action: () =&gt; uploadFile(createLargeFile(1024*1024)) // 1MB file
+  },
+  {
+    test: 'Invalid API key',
+    action: () =&gt; translateWithAuth('invalid-key', 'chatgpt')
+  },
+  {
+    test: 'Unsupported format',
+    action: () =&gt; uploadFile(createFile('test.pdf'))
+  },
+  {
+    test: 'Missing translation API key',
+    action: () =&gt; translate({model: 'chatgpt', key: ''})
+  },
+  {
+    test: 'Invalid Gemini Flash API key',
+    action: () =&gt; translate({model: 'gemini_flash', key: 'invalid-key'})
+  }
+];
+</code></pre>
+<h3 id="cors-configuration-for-development">CORS Configuration for Development</h3>
+<p>If you're running frontend on a different port, ensure CORS is configured:</p>
+<pre><code class="language-javascript">// Backend allows these origins in development:
+const devOrigins = [
+  'http://localhost:3000',  // React default
+  'http://localhost:8080',  // Vue/Webpack default
+  'http://localhost:5173',  // Vite default
+  'http://127.0.0.1:3000'   // Alternative localhost
+];
+
+// If your frontend runs on a different port, either:
+// 1. Set CORS_ORIGINS environment variable:
+//    CORS_ORIGINS=&quot;http://localhost:3001,http://localhost:4200&quot;
+//
+// 2. Or update backend settings.py with your port
+</code></pre>
+<h3 id="production-deployment-considerations">Production Deployment Considerations</h3>
+<h4 id="environment-configuration">Environment Configuration</h4>
+<pre><code class="language-bash"># Production environment variables
+export ENVIRONMENT=production
+export API_HOST=0.0.0.0
+export API_PORT=8000
+export CORS_ORIGINS=&quot;https://yourdomain.com,https://www.yourdomain.com&quot;
+export TRUSTED_HOSTS=&quot;yourdomain.com,www.yourdomain.com&quot;
+export JOB_TTL_HOURS=12  # Shorter TTL for production
+export MAX_WORKERS=8     # Scale based on server capacity
+</code></pre>
+<h4 id="frontend-build-configuration">Frontend Build Configuration</h4>
+<pre><code class="language-javascript">// Update API base URL for production
+const config = {
+  development: {
+    API_BASE_URL: 'http://localhost:8000'
+  },
+  production: {
+    API_BASE_URL: 'https://api.yourdomain.com'
+  }
+};
+</code></pre>
+<hr />
+<h2 id="summary">Summary</h2>
+<p>This comprehensive guide provides UI/UX engineers with the technical foundation needed to build effective user experiences for the bilingual book translation service. Key takeaways:</p>
+<ol>
+<li><strong>Architecture</strong>: Async job-based processing with polling for progress</li>
+<li><strong>Business Model</strong>: Freemium with clear authentication boundaries</li>
+<li><strong>API Design</strong>: RESTful with comprehensive error handling</li>
+<li><strong>Real-time UX</strong>: Polling-based progress with adaptive intervals</li>
+<li><strong>Security</strong>: Multi-layer validation with secure file handling</li>
+<li><strong>Performance</strong>: Predictable timing with clear user expectations</li>
+<li><strong>Integration</strong>: Error-first approach with comprehensive testing</li>
+</ol>
+<p>The service is production-ready with robust error handling, security validation, and scalable architecture. Frontend implementations should focus on progressive enhancement, clear error communication, and responsive progress feedback to create optimal user experiences.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3835 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Local Async EPUB Translation API Implementation Guide - bilingual book maker</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#local-async-epub-translation-api-implementation-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="bilingual book maker" class="md-header__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bilingual book maker
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Local Async EPUB Translation API Implementation Guide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../model_lang/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../disclaimer/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Disclaimer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="bilingual book maker" class="md-nav__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    bilingual book maker
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickStart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model_lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model and languages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cmd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command line options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../book_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Translate from different source
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment setting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tweak the prompt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disclaimer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-level-system-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Level System Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#design-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Principles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#current-state-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current State Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Current State Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#existing-cli-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Existing CLI Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#existing-api-layer-basic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Existing API Layer (Basic)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technical-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technical Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technical Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-async-processing-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Async Processing Model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Async Processing Model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#threading-vs-asyncio-decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Threading vs AsyncIO Decision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Lifecycle Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-progress-reporting-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Progress Reporting System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-api-endpoint-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. API Endpoint Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. API Endpoint Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Endpoints
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-local-async-foundation-weeks-1-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Local Async Foundation (Weeks 1-2)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Phase 1: Local Async Foundation (Weeks 1-2)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#week-1-core-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 1: Core Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#week-2-integration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Week 2: Integration &amp; Testing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-docker-production-readiness-week-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: Docker &amp; Production Readiness (Week 3)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-aws-migration-preparation-week-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: AWS Migration Preparation (Week 4)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Directory Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-files-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Files Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Files Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api_layerapiservicesjob_managerpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      /api_layer/api/services/job_manager.py
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api_layerapiservicestranslationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      /api_layer/api/services/translation.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-development-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Development Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-testing-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Testing Workflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-api-script-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test API Script Example
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test Categories
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Test Categories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Unit Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Integration Tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-load-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Load Tests
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-path-to-aws" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Path to AWS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Path to AWS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Evolution
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Evolution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phase-1-local-async-current-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 1: Local Async (Current Implementation)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-2-aws-ready-with-local-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 2: AWS-Ready with Local Fallback
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phase-3-full-aws-fargate-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phase 3: Full AWS Fargate Deployment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-abstractions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Abstractions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementation Abstractions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#storage-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage Abstraction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-store-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Store Abstraction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aws-fargate-deployment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      AWS Fargate Deployment Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AWS Fargate Deployment Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terraform-infrastructure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Terraform Infrastructure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Steps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Steps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-environment-based-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 1: Environment-Based Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-factory-pattern-for-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 2: Factory Pattern for Services
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-environment-configuration-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 3: Environment Configuration Files
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-deployment-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Step 4: Deployment Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#capacity-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Capacity Planning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Capacity Planning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#local-development-capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Development Capacity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production-aws-capacity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production AWS Capacity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-size-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Size Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security &amp; Error Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security &amp; Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Security
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling &amp; Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#health-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Health Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="local-async-epub-translation-api-implementation-guide">Local Async EPUB Translation API Implementation Guide</h1>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This document provides a comprehensive implementation guide for converting the bilingual_book_maker CLI tool into a local async API service. The implementation focuses on creating a robust foundation for asynchronous EPUB translation processing that will eventually migrate to AWS Fargate. This Phase 1 concentrates on local development with in-memory job tracking, async processing, and a clean architecture that enables seamless cloud migration.</p>
+<p><strong>Key Objectives:</strong>
+- Transform synchronous CLI tool to async API service
+- Implement non-blocking translation requests with job tracking
+- Create foundation for AWS Fargate migration
+- Support 10-1000 translations/month volume
+- Ensure 99.9% reliability for local development</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#architecture-overview">Architecture Overview</a></li>
+<li><a href="#current-state-analysis">Current State Analysis</a></li>
+<li><a href="#technical-design">Technical Design</a></li>
+<li><a href="#implementation-strategy">Implementation Strategy</a></li>
+<li><a href="#code-structure">Code Structure</a></li>
+<li><a href="#development-workflow">Development Workflow</a></li>
+<li><a href="#testing-strategy">Testing Strategy</a></li>
+<li><a href="#migration-path-to-aws">Migration Path to AWS</a></li>
+<li><a href="#performance-considerations">Performance Considerations</a></li>
+<li><a href="#security--error-handling">Security &amp; Error Handling</a></li>
+</ol>
+<h2 id="architecture-overview">Architecture Overview</h2>
+<h3 id="high-level-system-design">High-Level System Design</h3>
+<pre><code>┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Client App    │────│   FastAPI App    │────│  Job Manager    │
+│                 │    │                  │    │   (In-Memory)   │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+                                │                        │
+                                │                        │
+                       ┌────────▼────────┐    ┌─────────▼─────────┐
+                       │ Translation     │    │   Progress        │
+                       │ Service         │    │   Reporter        │
+                       │ (Async)         │    │   (AsyncIO)       │
+                       └─────────────────┘    └───────────────────┘
+                                │
+                       ┌────────▼────────┐
+                       │  File Storage   │
+                       │   (Local FS)    │
+                       └─────────────────┘
+</code></pre>
+<h3 id="core-components">Core Components</h3>
+<ol>
+<li><strong>FastAPI Application</strong>: Web API framework with async support</li>
+<li><strong>Job Manager</strong>: In-memory job tracking with status updates</li>
+<li><strong>Translation Service</strong>: Async wrapper around existing translation logic</li>
+<li><strong>Progress Reporter</strong>: Real-time progress updates via asyncio</li>
+<li><strong>File Storage</strong>: Local filesystem with cleanup policies</li>
+<li><strong>Worker Pool</strong>: Async task execution with concurrency control</li>
+</ol>
+<h3 id="design-principles">Design Principles</h3>
+<ul>
+<li><strong>Async-First</strong>: All I/O operations are asynchronous</li>
+<li><strong>Non-Blocking</strong>: API responses immediate with job tracking</li>
+<li><strong>Stateless</strong>: Job state persisted for horizontal scaling preparation</li>
+<li><strong>Modular</strong>: Clean separation for AWS migration</li>
+<li><strong>Resilient</strong>: Comprehensive error handling and recovery</li>
+</ul>
+<h2 id="current-state-analysis">Current State Analysis</h2>
+<h3 id="existing-cli-architecture">Existing CLI Architecture</h3>
+<p>The current implementation is a synchronous CLI tool with the following structure:</p>
+<pre><code class="language-python"># Current Flow (Synchronous)
+cli.py → EPUBBookLoader → Translator → Output File
+</code></pre>
+<p><strong>Key Components:</strong>
+- <code>/book_maker/cli.py</code>: Command-line interface with argument parsing
+- <code>/book_maker/loader/epub_loader.py</code>: EPUB file processing
+- <code>/book_maker/translator/</code>: Various translation service implementations
+- <code>/book_maker/utils.py</code>: Shared utilities and language mappings</p>
+<p><strong>Limitations for API Use:</strong>
+- Synchronous execution blocks request thread
+- No job tracking or progress reporting
+- CLI-only interface without HTTP endpoints
+- No concurrent processing capabilities
+- Limited error handling for API scenarios</p>
+<h3 id="existing-api-layer-basic">Existing API Layer (Basic)</h3>
+<p>The current <code>/api_layer/api/main.py</code> provides a basic synchronous endpoint:</p>
+<pre><code class="language-python">@app.post(&quot;/translate&quot;)
+async def translate_epub(file, target_language, model, ...):
+    # Current implementation is synchronous despite async def
+    output_path = await translator.translate_epub(...)  # Blocking call
+    return FileResponse(output_path)
+</code></pre>
+<p><strong>Issues with Current Implementation:</strong>
+- Marked as <code>async</code> but performs blocking operations
+- No job management or progress tracking
+- Direct file response without proper cleanup
+- No timeout handling or cancellation support</p>
+<h2 id="technical-design">Technical Design</h2>
+<h3 id="1-async-processing-model">1. Async Processing Model</h3>
+<h4 id="threading-vs-asyncio-decision">Threading vs AsyncIO Decision</h4>
+<p><strong>Selected Approach: Hybrid AsyncIO + ThreadPoolExecutor</strong></p>
+<pre><code class="language-python">import asyncio
+from concurrent.futures import ThreadPoolExecutor
+from typing import Optional, Dict, Any
+
+class AsyncTranslationService:
+    def __init__(self):
+        self.executor = ThreadPoolExecutor(max_workers=4)
+        self.active_jobs: Dict[str, asyncio.Task] = {}
+
+    async def translate_epub_async(
+        self,
+        job_id: str,
+        input_path: str,
+        **kwargs
+    ) -&gt; str:
+        &quot;&quot;&quot;Async wrapper for translation with progress reporting&quot;&quot;&quot;
+        loop = asyncio.get_event_loop()
+
+        # Run translation in thread pool to avoid blocking
+        task = loop.run_in_executor(
+            self.executor,
+            self._translate_with_progress,
+            job_id,
+            input_path,
+            kwargs
+        )
+
+        self.active_jobs[job_id] = task
+        try:
+            result = await task
+            return result
+        finally:
+            self.active_jobs.pop(job_id, None)
+</code></pre>
+<p><strong>Rationale:</strong>
+- <strong>AsyncIO</strong>: For HTTP handling, job management, progress updates
+- <strong>ThreadPoolExecutor</strong>: For CPU-intensive translation work
+- <strong>Benefits</strong>: Non-blocking API, proper resource management, cancellation support</p>
+<h4 id="job-lifecycle-management">Job Lifecycle Management</h4>
+<pre><code class="language-python">from enum import Enum
+from datetime import datetime, timedelta
+from typing import Dict, Optional
+import asyncio
+
+class JobStatus(Enum):
+    PENDING = &quot;pending&quot;
+    PROCESSING = &quot;processing&quot;
+    COMPLETED = &quot;completed&quot;
+    FAILED = &quot;failed&quot;
+    CANCELLED = &quot;cancelled&quot;
+
+class JobManager:
+    def __init__(self):
+        self.jobs: Dict[str, TranslationJob] = {}
+        self.cleanup_task: Optional[asyncio.Task] = None
+
+    async def create_job(self, job_data: Dict[str, Any]) -&gt; str:
+        &quot;&quot;&quot;Create new translation job&quot;&quot;&quot;
+        job = TranslationJob(
+            job_id=str(uuid.uuid4()),
+            status=JobStatus.PENDING,
+            created_at=datetime.utcnow(),
+            **job_data
+        )
+        self.jobs[job.job_id] = job
+
+        # Start cleanup task if not running
+        if not self.cleanup_task:
+            self.cleanup_task = asyncio.create_task(self._cleanup_loop())
+
+        return job.job_id
+
+    async def _cleanup_loop(self):
+        &quot;&quot;&quot;Background cleanup of expired jobs&quot;&quot;&quot;
+        while True:
+            try:
+                await asyncio.sleep(300)  # Check every 5 minutes
+                await self._cleanup_expired_jobs()
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.error(f&quot;Cleanup error: {e}&quot;)
+
+    async def _cleanup_expired_jobs(self):
+        &quot;&quot;&quot;Remove jobs older than 3 hours&quot;&quot;&quot;
+        cutoff_time = datetime.utcnow() - timedelta(hours=3)
+        expired_jobs = [
+            job_id for job_id, job in self.jobs.items()
+            if job.completed_at and job.completed_at &lt; cutoff_time
+        ]
+
+        for job_id in expired_jobs:
+            await self._cleanup_job_files(job_id)
+            del self.jobs[job_id]
+
+        if expired_jobs:
+            logger.info(f&quot;Cleaned up {len(expired_jobs)} expired jobs&quot;)
+</code></pre>
+<h3 id="2-progress-reporting-system">2. Progress Reporting System</h3>
+<pre><code class="language-python">import asyncio
+from typing import Callable, Optional
+
+class ProgressReporter:
+    def __init__(self, job_id: str, job_manager: JobManager):
+        self.job_id = job_id
+        self.job_manager = job_manager
+        self.current_progress = 0
+
+    async def update_progress(self, percentage: int, message: str = None):
+        &quot;&quot;&quot;Update job progress (called every 10% completion)&quot;&quot;&quot;
+        if percentage &gt; self.current_progress:
+            self.current_progress = percentage
+            await self.job_manager.update_job_progress(
+                self.job_id,
+                percentage,
+                message
+            )
+            logger.info(f&quot;Job {self.job_id}: {percentage}% - {message}&quot;)
+
+    async def set_status(self, status: JobStatus, error_message: str = None):
+        &quot;&quot;&quot;Update job status&quot;&quot;&quot;
+        await self.job_manager.update_job_status(
+            self.job_id,
+            status,
+            error_message
+        )
+
+# Integration with existing translation logic
+class AsyncEPUBTranslator:
+    def __init__(self, progress_reporter: ProgressReporter):
+        self.progress_reporter = progress_reporter
+
+    async def translate_paragraphs(self, paragraphs: List[str]) -&gt; List[str]:
+        &quot;&quot;&quot;Translate paragraphs with progress reporting&quot;&quot;&quot;
+        total = len(paragraphs)
+        translated = []
+
+        for i, paragraph in enumerate(paragraphs):
+            result = await self._translate_single(paragraph)
+            translated.append(result)
+
+            # Report progress every 10%
+            progress = int((i + 1) / total * 100)
+            if progress % 10 == 0:
+                await self.progress_reporter.update_progress(
+                    progress,
+                    f&quot;Translated {i + 1}/{total} paragraphs&quot;
+                )
+
+        return translated
+</code></pre>
+<h3 id="3-api-endpoint-design">3. API Endpoint Design</h3>
+<h4 id="core-endpoints">Core Endpoints</h4>
+<pre><code class="language-python">from fastapi import FastAPI, UploadFile, Form, HTTPException
+from typing import Optional
+
+app = FastAPI(title=&quot;EPUB Translator API&quot;, version=&quot;1.0.0&quot;)
+
+@app.post(&quot;/translate&quot;, response_model=TranslationResponse)
+async def start_translation(
+    file: UploadFile,
+    target_language: str = Form(...),
+    model: TranslationModel = Form(TranslationModel.CHATGPT),
+    # ... other parameters
+) -&gt; TranslationResponse:
+    &quot;&quot;&quot;Start async translation job - returns immediately with job_id&quot;&quot;&quot;
+
+    # Validate input
+    if not file.filename.endswith('.epub'):
+        raise HTTPException(400, &quot;Only EPUB files supported&quot;)
+
+    # Create job
+    job_id = await job_manager.create_job({
+        'filename': file.filename,
+        'target_language': target_language,
+        'model': model,
+        # ... other parameters
+    })
+
+    # Save uploaded file
+    input_path = await file_storage.save_upload(job_id, file)
+
+    # Start async translation (non-blocking)
+    asyncio.create_task(translation_service.process_job(job_id, input_path))
+
+    return TranslationResponse(
+        job_id=job_id,
+        status=JobStatus.PENDING,
+        message=&quot;Translation job started&quot;,
+        estimated_duration_minutes=5  # Based on file size
+    )
+
+@app.get(&quot;/status/{job_id}&quot;, response_model=JobStatusResponse)
+async def get_job_status(job_id: str) -&gt; JobStatusResponse:
+    &quot;&quot;&quot;Get current job status and progress&quot;&quot;&quot;
+    job = await job_manager.get_job(job_id)
+    if not job:
+        raise HTTPException(404, &quot;Job not found&quot;)
+
+    return JobStatusResponse(
+        job_id=job.job_id,
+        status=job.status,
+        progress=job.progress,
+        filename=job.filename,
+        created_at=job.created_at,
+        completed_at=job.completed_at,
+        duration_seconds=job.duration_seconds,
+        error_message=job.error_message,
+        download_url=job.download_url
+    )
+
+@app.get(&quot;/download/{job_id}&quot;)
+async def download_result(job_id: str):
+    &quot;&quot;&quot;Download completed translation&quot;&quot;&quot;
+    job = await job_manager.get_job(job_id)
+    if not job:
+        raise HTTPException(404, &quot;Job not found&quot;)
+
+    if job.status != JobStatus.COMPLETED:
+        raise HTTPException(400, f&quot;Job not completed (status: {job.status})&quot;)
+
+    file_path = await file_storage.get_result_path(job_id)
+    if not os.path.exists(file_path):
+        raise HTTPException(404, &quot;Result file not found&quot;)
+
+    return FileResponse(
+        file_path,
+        filename=job.output_filename,
+        media_type='application/epub+zip'
+    )
+
+@app.delete(&quot;/jobs/{job_id}&quot;)
+async def cancel_job(job_id: str):
+    &quot;&quot;&quot;Cancel running translation job&quot;&quot;&quot;
+    success = await job_manager.cancel_job(job_id)
+    if not success:
+        raise HTTPException(404, &quot;Job not found or cannot be cancelled&quot;)
+
+    return {&quot;message&quot;: &quot;Job cancelled successfully&quot;}
+
+@app.get(&quot;/models&quot;)
+async def list_models():
+    &quot;&quot;&quot;List available translation models&quot;&quot;&quot;
+    return {
+        &quot;models&quot;: [model.value for model in TranslationModel],
+        &quot;descriptions&quot;: {
+            &quot;chatgptapi&quot;: &quot;OpenAI GPT-3.5 Turbo&quot;,
+            &quot;gpt4&quot;: &quot;OpenAI GPT-4&quot;,
+            &quot;claude&quot;: &quot;Anthropic Claude&quot;,
+            &quot;gemini&quot;: &quot;Google Gemini&quot;,
+            # ... other models
+        }
+    }
+
+@app.get(&quot;/languages&quot;)
+async def list_languages():
+    &quot;&quot;&quot;List supported target languages&quot;&quot;&quot;
+    return {
+        &quot;languages&quot;: {
+            &quot;zh&quot;: &quot;Chinese (Simplified)&quot;,
+            &quot;zh-hant&quot;: &quot;Chinese (Traditional)&quot;,
+            &quot;en&quot;: &quot;English&quot;,
+            &quot;ja&quot;: &quot;Japanese&quot;,
+            &quot;ko&quot;: &quot;Korean&quot;,
+            &quot;es&quot;: &quot;Spanish&quot;,
+            &quot;fr&quot;: &quot;French&quot;,
+            &quot;de&quot;: &quot;German&quot;,
+            # ... other languages
+        }
+    }
+</code></pre>
+<h2 id="implementation-strategy">Implementation Strategy</h2>
+<h3 id="phase-1-local-async-foundation-weeks-1-2">Phase 1: Local Async Foundation (Weeks 1-2)</h3>
+<h4 id="week-1-core-infrastructure">Week 1: Core Infrastructure</h4>
+<pre><code class="language-bash"># Task breakdown
+1. Job Management System (2 days)
+   - In-memory job storage with TTL
+   - Job lifecycle management
+   - Background cleanup tasks
+
+2. Async Translation Service (2 days)
+   - ThreadPoolExecutor integration
+   - Progress reporting hooks
+   - Error handling and retry logic
+
+3. Updated API Endpoints (1 day)
+   - Non-blocking /translate endpoint
+   - Status and download endpoints
+   - Job cancellation support
+</code></pre>
+<h4 id="week-2-integration-testing">Week 2: Integration &amp; Testing</h4>
+<pre><code class="language-bash">4. File Storage Abstraction (1 day)
+   - Local filesystem implementation
+   - AWS S3 interface preparation
+   - Cleanup policies
+
+5. Progress Integration (2 days)
+   - Modify existing loaders for progress reporting
+   - Real-time status updates
+   - Error propagation
+
+6. End-to-End Testing (2 days)
+   - Integration tests
+   - Load testing with multiple concurrent jobs
+   - Error scenario testing
+</code></pre>
+<h3 id="phase-2-docker-production-readiness-week-3">Phase 2: Docker &amp; Production Readiness (Week 3)</h3>
+<pre><code class="language-dockerfile"># Dockerfile for local development
+FROM python:3.11-slim
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/health || exit 1
+
+CMD [&quot;uvicorn&quot;, &quot;api_layer.api.main:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8000&quot;]
+</code></pre>
+<pre><code class="language-yaml"># docker-compose.yml for development
+version: '3.8'
+services:
+  epub-translator:
+    build: .
+    ports:
+      - &quot;8000:8000&quot;
+    environment:
+      - LOG_LEVEL=INFO
+      - STORAGE_MODE=local
+      - MAX_CONCURRENT_JOBS=4
+    volumes:
+      - ./temp:/app/temp
+      - ./logs:/app/logs
+    restart: unless-stopped
+</code></pre>
+<h3 id="phase-3-aws-migration-preparation-week-4">Phase 3: AWS Migration Preparation (Week 4)</h3>
+<pre><code class="language-python"># Abstract interfaces for AWS migration
+from abc import ABC, abstractmethod
+
+class StorageInterface(ABC):
+    @abstractmethod
+    async def save_upload(self, job_id: str, file: UploadFile) -&gt; str:
+        pass
+
+    @abstractmethod
+    async def save_result(self, job_id: str, file_path: str) -&gt; str:
+        pass
+
+    @abstractmethod
+    async def get_download_url(self, job_id: str) -&gt; str:
+        pass
+
+class JobStoreInterface(ABC):
+    @abstractmethod
+    async def save_job(self, job: TranslationJob):
+        pass
+
+    @abstractmethod
+    async def get_job(self, job_id: str) -&gt; Optional[TranslationJob]:
+        pass
+
+    @abstractmethod
+    async def update_job_status(self, job_id: str, status: JobStatus):
+        pass
+
+# Local implementations
+class LocalFileStorage(StorageInterface):
+    def __init__(self, base_path: str = &quot;./temp&quot;):
+        self.base_path = Path(base_path)
+        self.base_path.mkdir(exist_ok=True)
+
+class InMemoryJobStore(JobStoreInterface):
+    def __init__(self):
+        self.jobs: Dict[str, TranslationJob] = {}
+
+# Future AWS implementations
+class S3Storage(StorageInterface):
+    pass
+
+class DynamoDBJobStore(JobStoreInterface):
+    pass
+</code></pre>
+<h2 id="code-structure">Code Structure</h2>
+<h3 id="directory-organization">Directory Organization</h3>
+<pre><code>bilingual_book_maker/
+├── api_layer/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── main.py              # FastAPI app and endpoints
+│   │   ├── models.py            # Pydantic models
+│   │   ├── config.py            # Configuration management
+│   │   ├── dependencies.py      # FastAPI dependencies
+│   │   └── services/
+│   │       ├── __init__.py
+│   │       ├── job_manager.py   # Job lifecycle management
+│   │       ├── translation.py   # Async translation service
+│   │       ├── storage.py       # File storage abstraction
+│   │       └── progress.py      # Progress reporting
+│   ├── tests/
+│   │   ├── __init__.py
+│   │   ├── test_api.py          # API endpoint tests
+│   │   ├── test_integration.py  # End-to-end tests
+│   │   └── conftest.py          # Test configuration
+│   ├── scripts/
+│   │   ├── run_dev.py           # Development server
+│   │   └── cleanup.py           # Manual cleanup utilities
+│   └── requirements.txt         # API-specific dependencies
+├── book_maker/                  # Existing CLI code (enhanced)
+│   ├── async_adapters/          # New: Async wrappers
+│   │   ├── __init__.py
+│   │   ├── epub_async.py        # Async EPUB processing
+│   │   └── translator_async.py  # Async translator wrapper
+│   └── ... (existing structure)
+├── docker/
+│   ├── Dockerfile
+│   ├── docker-compose.yml
+│   └── docker-compose.prod.yml
+└── docs/
+    ├── api_reference.md
+    ├── deployment_guide.md
+    └── migration_aws.md
+</code></pre>
+<h3 id="key-files-implementation">Key Files Implementation</h3>
+<h4 id="api_layerapiservicesjob_managerpy"><code>/api_layer/api/services/job_manager.py</code></h4>
+<pre><code class="language-python">import asyncio
+import uuid
+from datetime import datetime, timedelta
+from typing import Dict, Optional, List
+from enum import Enum
+import logging
+
+from ..models import TranslationJob, JobStatus
+
+logger = logging.getLogger(__name__)
+
+class JobManager:
+    &quot;&quot;&quot;Manages translation job lifecycle and status tracking&quot;&quot;&quot;
+
+    def __init__(self, cleanup_interval_minutes: int = 5, job_ttl_hours: int = 3):
+        self.jobs: Dict[str, TranslationJob] = {}
+        self.cleanup_interval = cleanup_interval_minutes * 60
+        self.job_ttl = timedelta(hours=job_ttl_hours)
+        self.cleanup_task: Optional[asyncio.Task] = None
+        self._lock = asyncio.Lock()
+
+    async def start(self):
+        &quot;&quot;&quot;Start background cleanup task&quot;&quot;&quot;
+        if not self.cleanup_task:
+            self.cleanup_task = asyncio.create_task(self._cleanup_loop())
+            logger.info(&quot;Job manager started with cleanup interval: %d minutes&quot;,
+                       self.cleanup_interval // 60)
+
+    async def stop(self):
+        &quot;&quot;&quot;Stop background tasks&quot;&quot;&quot;
+        if self.cleanup_task:
+            self.cleanup_task.cancel()
+            try:
+                await self.cleanup_task
+            except asyncio.CancelledError:
+                pass
+            logger.info(&quot;Job manager stopped&quot;)
+
+    async def create_job(self, job_data: Dict) -&gt; str:
+        &quot;&quot;&quot;Create new translation job&quot;&quot;&quot;
+        job_id = str(uuid.uuid4())
+
+        job = TranslationJob(
+            job_id=job_id,
+            status=JobStatus.PENDING,
+            created_at=datetime.utcnow(),
+            progress=0,
+            **job_data
+        )
+
+        async with self._lock:
+            self.jobs[job_id] = job
+
+        logger.info(f&quot;Created job {job_id} for file {job_data.get('filename')}&quot;)
+        return job_id
+
+    async def get_job(self, job_id: str) -&gt; Optional[TranslationJob]:
+        &quot;&quot;&quot;Get job by ID&quot;&quot;&quot;
+        async with self._lock:
+            return self.jobs.get(job_id)
+
+    async def update_job_progress(self, job_id: str, progress: int, message: str = None):
+        &quot;&quot;&quot;Update job progress&quot;&quot;&quot;
+        async with self._lock:
+            if job_id in self.jobs:
+                self.jobs[job_id].progress = progress
+                if message:
+                    self.jobs[job_id].current_message = message
+                logger.debug(f&quot;Job {job_id}: {progress}% - {message}&quot;)
+
+    async def update_job_status(
+        self,
+        job_id: str,
+        status: JobStatus,
+        error_message: str = None,
+        download_url: str = None
+    ):
+        &quot;&quot;&quot;Update job status&quot;&quot;&quot;
+        async with self._lock:
+            if job_id in self.jobs:
+                job = self.jobs[job_id]
+                job.status = status
+
+                if status in [JobStatus.COMPLETED, JobStatus.FAILED, JobStatus.CANCELLED]:
+                    job.completed_at = datetime.utcnow()
+                    if job.created_at:
+                        job.duration_seconds = int(
+                            (job.completed_at - job.created_at).total_seconds()
+                        )
+
+                if error_message:
+                    job.error_message = error_message
+
+                if download_url:
+                    job.download_url = download_url
+
+                logger.info(f&quot;Job {job_id} status updated to {status.value}&quot;)
+
+    async def cancel_job(self, job_id: str) -&gt; bool:
+        &quot;&quot;&quot;Cancel running job&quot;&quot;&quot;
+        async with self._lock:
+            if job_id in self.jobs:
+                job = self.jobs[job_id]
+                if job.status in [JobStatus.PENDING, JobStatus.PROCESSING]:
+                    job.status = JobStatus.CANCELLED
+                    job.completed_at = datetime.utcnow()
+                    logger.info(f&quot;Job {job_id} cancelled&quot;)
+                    return True
+        return False
+
+    async def list_active_jobs(self) -&gt; List[TranslationJob]:
+        &quot;&quot;&quot;List all active (non-completed) jobs&quot;&quot;&quot;
+        async with self._lock:
+            return [
+                job for job in self.jobs.values()
+                if job.status in [JobStatus.PENDING, JobStatus.PROCESSING]
+            ]
+
+    async def _cleanup_loop(self):
+        &quot;&quot;&quot;Background cleanup of expired jobs&quot;&quot;&quot;
+        while True:
+            try:
+                await asyncio.sleep(self.cleanup_interval)
+                await self._cleanup_expired_jobs()
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                logger.error(f&quot;Cleanup error: {e}&quot;)
+
+    async def _cleanup_expired_jobs(self):
+        &quot;&quot;&quot;Remove jobs older than TTL&quot;&quot;&quot;
+        cutoff_time = datetime.utcnow() - self.job_ttl
+        expired_jobs = []
+
+        async with self._lock:
+            for job_id, job in list(self.jobs.items()):
+                if (job.completed_at and job.completed_at &lt; cutoff_time) or \
+                   (not job.completed_at and job.created_at &lt; cutoff_time):
+                    expired_jobs.append(job_id)
+                    del self.jobs[job_id]
+
+        if expired_jobs:
+            logger.info(f&quot;Cleaned up {len(expired_jobs)} expired jobs&quot;)
+            # TODO: Cleanup associated files
+</code></pre>
+<h4 id="api_layerapiservicestranslationpy"><code>/api_layer/api/services/translation.py</code></h4>
+<pre><code class="language-python">import asyncio
+import os
+import tempfile
+import shutil
+from concurrent.futures import ThreadPoolExecutor
+from typing import Dict, Any, Optional
+import logging
+
+from book_maker.loader import BOOK_LOADER_DICT
+from book_maker.translator import MODEL_DICT
+from ..models import TranslationModel, JobStatus
+from .job_manager import JobManager
+from .progress import ProgressReporter
+
+logger = logging.getLogger(__name__)
+
+class TranslationService:
+    &quot;&quot;&quot;Async translation service using ThreadPoolExecutor&quot;&quot;&quot;
+
+    def __init__(self, max_workers: int = 4, timeout_minutes: int = 30):
+        self.executor = ThreadPoolExecutor(max_workers=max_workers)
+        self.timeout_seconds = timeout_minutes * 60
+        self.active_jobs: Dict[str, asyncio.Task] = {}
+
+    async def process_job(
+        self,
+        job_id: str,
+        input_path: str,
+        job_manager: JobManager,
+        **kwargs
+    ):
+        &quot;&quot;&quot;Process translation job asynchronously&quot;&quot;&quot;
+
+        progress_reporter = ProgressReporter(job_id, job_manager)
+
+        try:
+            # Update status to processing
+            await job_manager.update_job_status(job_id, JobStatus.PROCESSING)
+
+            # Start translation with timeout
+            task = asyncio.create_task(
+                self._translate_with_timeout(
+                    job_id, input_path, progress_reporter, **kwargs
+                )
+            )
+            self.active_jobs[job_id] = task
+
+            # Wait for completion or timeout
+            output_path = await asyncio.wait_for(task, timeout=self.timeout_seconds)
+
+            # Generate download URL (local file path for now)
+            download_url = f&quot;/download/{job_id}&quot;
+
+            await job_manager.update_job_status(
+                job_id,
+                JobStatus.COMPLETED,
+                download_url=download_url
+            )
+
+            logger.info(f&quot;Job {job_id} completed successfully&quot;)
+
+        except asyncio.TimeoutError:
+            await job_manager.update_job_status(
+                job_id,
+                JobStatus.FAILED,
+                error_message=f&quot;Translation timeout after {self.timeout_seconds // 60} minutes&quot;
+            )
+            logger.error(f&quot;Job {job_id} timed out&quot;)
+
+        except Exception as e:
+            await job_manager.update_job_status(
+                job_id,
+                JobStatus.FAILED,
+                error_message=str(e)
+            )
+            logger.error(f&quot;Job {job_id} failed: {e}&quot;)
+
+        finally:
+            self.active_jobs.pop(job_id, None)
+
+    async def _translate_with_timeout(
+        self,
+        job_id: str,
+        input_path: str,
+        progress_reporter: ProgressReporter,
+        **kwargs
+    ) -&gt; str:
+        &quot;&quot;&quot;Execute translation in thread pool with progress reporting&quot;&quot;&quot;
+
+        loop = asyncio.get_event_loop()
+
+        # Run translation in executor to avoid blocking
+        output_path = await loop.run_in_executor(
+            self.executor,
+            self._translate_sync,
+            job_id,
+            input_path,
+            progress_reporter,
+            kwargs
+        )
+
+        return output_path
+
+    def _translate_sync(
+        self,
+        job_id: str,
+        input_path: str,
+        progress_reporter: ProgressReporter,
+        kwargs: Dict[str, Any]
+    ) -&gt; str:
+        &quot;&quot;&quot;Synchronous translation with progress callbacks&quot;&quot;&quot;
+
+        try:
+            # Extract parameters
+            target_language = kwargs['target_language']
+            model = kwargs['model']
+            api_keys = kwargs.get('api_keys', {})
+            single_translate = kwargs.get('single_translate', False)
+            test_mode = kwargs.get('test_mode', False)
+            test_num = kwargs.get('test_num', 10)
+            temperature = kwargs.get('temperature', 1.0)
+
+            # Get translator class
+            translate_model_class = MODEL_DICT.get(model.value)
+            if not translate_model_class:
+                raise ValueError(f&quot;Unsupported model: {model}&quot;)
+
+            # Get API key for model
+            api_key = self._get_api_key_for_model(model, api_keys)
+
+            # Create translator instance
+            translator = translate_model_class(
+                api_key,
+                target_language,
+                temperature=temperature
+            )
+
+            # Get book loader
+            file_ext = os.path.splitext(input_path)[1][1:]  # Remove dot
+            loader_class = BOOK_LOADER_DICT.get(file_ext)
+            if not loader_class:
+                raise ValueError(f&quot;Unsupported file type: {file_ext}&quot;)
+
+            # Create enhanced loader with progress reporting
+            loader = loader_class(
+                input_path,
+                translator,
+                api_key,
+                resume=False,
+                language=target_language,
+                is_test=test_mode,
+                test_num=test_num,
+                single_translate=single_translate
+            )
+
+            # Monkey patch progress reporting
+            original_translate = loader.translate_model.translate
+
+            def translate_with_progress(text, *args, **kwargs):
+                # This is a simplified progress hook
+                # In practice, you'd need to modify the loaders more extensively
+                result = original_translate(text, *args, **kwargs)
+                # Progress reporting would happen here based on loader state
+                return result
+
+            loader.translate_model.translate = translate_with_progress
+
+            # Report initial progress
+            asyncio.run_coroutine_threadsafe(
+                progress_reporter.update_progress(10, &quot;Starting translation&quot;),
+                asyncio.get_event_loop()
+            )
+
+            # Perform translation
+            loader.make_bilingual_book()
+
+            # Report completion
+            asyncio.run_coroutine_threadsafe(
+                progress_reporter.update_progress(100, &quot;Translation completed&quot;),
+                asyncio.get_event_loop()
+            )
+
+            # Generate output path
+            base_name = os.path.splitext(os.path.basename(input_path))[0]
+            if single_translate:
+                output_filename = f&quot;{base_name}_{target_language}.epub&quot;
+            else:
+                output_filename = f&quot;{base_name}_bilingual.epub&quot;
+
+            # The loader should have created the output file
+            # This is a simplification - actual implementation would need
+            # to be coordinated with the existing loader code
+            output_dir = os.path.dirname(input_path)
+            output_path = os.path.join(output_dir, output_filename)
+
+            if not os.path.exists(output_path):
+                raise RuntimeError(&quot;Translation completed but output file not found&quot;)
+
+            return output_path
+
+        except Exception as e:
+            # Report error through progress reporter
+            asyncio.run_coroutine_threadsafe(
+                progress_reporter.set_status(JobStatus.FAILED, str(e)),
+                asyncio.get_event_loop()
+            )
+            raise
+
+    def _get_api_key_for_model(self, model: TranslationModel, api_keys: Dict[str, str]) -&gt; str:
+        &quot;&quot;&quot;Get appropriate API key for the specified model&quot;&quot;&quot;
+
+        key_mapping = {
+            'chatgptapi': 'openai_key',
+            'gpt4': 'openai_key',
+            'gpt4omini': 'openai_key',
+            'gpt4o': 'openai_key',
+            'claude': 'claude_key',
+            'claude-3-opus': 'claude_key',
+            'claude-3-sonnet': 'claude_key',
+            'claude-3-haiku': 'claude_key',
+            'gemini': 'gemini_key',
+            'geminipro': 'gemini_key',
+            'deepl': 'deepl_key',
+            'groq': 'groq_key',
+            'xai': 'xai_key',
+            'qwen': 'qwen_key'
+        }
+
+        key_name = key_mapping.get(model.value)
+        if not key_name:
+            raise ValueError(f&quot;No API key mapping for model: {model}&quot;)
+
+        api_key = api_keys.get(key_name)
+        if not api_key:
+            # Try environment variables
+            env_key = f&quot;BBM_{key_name.upper()}&quot;
+            api_key = os.environ.get(env_key)
+
+        if not api_key:
+            raise ValueError(f&quot;API key required for model {model}: {key_name}&quot;)
+
+        return api_key
+
+    async def cancel_job(self, job_id: str) -&gt; bool:
+        &quot;&quot;&quot;Cancel active translation job&quot;&quot;&quot;
+        task = self.active_jobs.get(job_id)
+        if task and not task.done():
+            task.cancel()
+            try:
+                await task
+            except asyncio.CancelledError:
+                pass
+            logger.info(f&quot;Cancelled job {job_id}&quot;)
+            return True
+        return False
+</code></pre>
+<h2 id="development-workflow">Development Workflow</h2>
+<h3 id="local-development-setup">Local Development Setup</h3>
+<pre><code class="language-bash"># 1. Environment Setup
+cd bilingual_book_maker
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+pip install -r api_layer/requirements.txt
+
+# 2. Configuration
+export BBM_OPENAI_API_KEY=&quot;your-openai-key&quot;
+export BBM_CLAUDE_API_KEY=&quot;your-claude-key&quot;
+export LOG_LEVEL=&quot;DEBUG&quot;
+export STORAGE_MODE=&quot;local&quot;
+
+# 3. Start Development Server
+cd api_layer
+python -m uvicorn api.main:app --reload --host 127.0.0.1 --port 8000
+
+# 4. Test API
+curl -X GET http://localhost:8000/health
+curl -X GET http://localhost:8000/models
+curl -X GET http://localhost:8000/languages
+</code></pre>
+<h3 id="development-testing-workflow">Development Testing Workflow</h3>
+<pre><code class="language-bash"># Unit Tests
+python -m pytest api_layer/tests/test_services.py -v
+
+# Integration Tests
+python -m pytest api_layer/tests/test_integration.py -v
+
+# Load Testing (with small files)
+python api_layer/scripts/load_test.py --concurrent-jobs 5 --test-file test_books/small.epub
+
+# Manual API Testing
+python api_layer/scripts/test_api.py
+</code></pre>
+<h3 id="test-api-script-example">Test API Script Example</h3>
+<pre><code class="language-python"># api_layer/scripts/test_api.py
+import asyncio
+import aiohttp
+import time
+
+async def test_translation_flow():
+    &quot;&quot;&quot;Test complete translation workflow&quot;&quot;&quot;
+
+    async with aiohttp.ClientSession() as session:
+        # 1. Upload file and start translation
+        with open('test_books/small.epub', 'rb') as f:
+            data = aiohttp.FormData()
+            data.add_field('file', f, filename='test.epub')
+            data.add_field('target_language', 'zh')
+            data.add_field('model', 'chatgptapi')
+            data.add_field('test_mode', 'true')
+
+            async with session.post(
+                'http://localhost:8000/translate',
+                data=data
+            ) as resp:
+                result = await resp.json()
+                job_id = result['job_id']
+                print(f&quot;Started job: {job_id}&quot;)
+
+        # 2. Poll for completion
+        while True:
+            async with session.get(f'http://localhost:8000/status/{job_id}') as resp:
+                status = await resp.json()
+                print(f&quot;Status: {status['status']} ({status['progress']}%)&quot;)
+
+                if status['status'] == 'completed':
+                    break
+                elif status['status'] == 'failed':
+                    print(f&quot;Job failed: {status['error_message']}&quot;)
+                    return
+
+            await asyncio.sleep(2)
+
+        # 3. Download result
+        async with session.get(f'http://localhost:8000/download/{job_id}') as resp:
+            if resp.status == 200:
+                with open('output.epub', 'wb') as f:
+                    f.write(await resp.read())
+                print(&quot;Downloaded translated file&quot;)
+            else:
+                print(f&quot;Download failed: {resp.status}&quot;)
+
+if __name__ == &quot;__main__&quot;:
+    asyncio.run(test_translation_flow())
+</code></pre>
+<h2 id="testing-strategy">Testing Strategy</h2>
+<h3 id="test-categories">Test Categories</h3>
+<h4 id="1-unit-tests">1. Unit Tests</h4>
+<pre><code class="language-python"># api_layer/tests/test_job_manager.py
+import pytest
+import asyncio
+from datetime import datetime, timedelta
+
+from api.services.job_manager import JobManager
+from api.models import JobStatus
+
+@pytest.mark.asyncio
+async def test_job_creation():
+    &quot;&quot;&quot;Test basic job creation and retrieval&quot;&quot;&quot;
+    manager = JobManager()
+
+    job_id = await manager.create_job({
+        'filename': 'test.epub',
+        'target_language': 'zh',
+        'model': 'chatgptapi'
+    })
+
+    assert job_id is not None
+
+    job = await manager.get_job(job_id)
+    assert job is not None
+    assert job.filename == 'test.epub'
+    assert job.status == JobStatus.PENDING
+
+@pytest.mark.asyncio
+async def test_progress_updates():
+    &quot;&quot;&quot;Test progress reporting&quot;&quot;&quot;
+    manager = JobManager()
+    job_id = await manager.create_job({'filename': 'test.epub'})
+
+    await manager.update_job_progress(job_id, 50, &quot;Half complete&quot;)
+
+    job = await manager.get_job(job_id)
+    assert job.progress == 50
+
+@pytest.mark.asyncio
+async def test_job_cleanup():
+    &quot;&quot;&quot;Test automatic job cleanup&quot;&quot;&quot;
+    manager = JobManager(job_ttl_hours=0.001)  # 3.6 seconds TTL
+
+    job_id = await manager.create_job({'filename': 'test.epub'})
+    await manager.update_job_status(job_id, JobStatus.COMPLETED)
+
+    # Manually trigger cleanup
+    await manager._cleanup_expired_jobs()
+
+    job = await manager.get_job(job_id)
+    assert job is None
+</code></pre>
+<h4 id="2-integration-tests">2. Integration Tests</h4>
+<pre><code class="language-python"># api_layer/tests/test_integration.py
+import pytest
+import asyncio
+from httpx import AsyncClient
+from fastapi.testclient import TestClient
+
+from api.main import app
+
+@pytest.mark.asyncio
+async def test_full_translation_workflow():
+    &quot;&quot;&quot;Test complete translation workflow&quot;&quot;&quot;
+
+    async with AsyncClient(app=app, base_url=&quot;http://test&quot;) as client:
+        # Test file upload
+        with open('test_books/small.epub', 'rb') as f:
+            response = await client.post(
+                '/translate',
+                files={'file': ('test.epub', f, 'application/epub+zip')},
+                data={
+                    'target_language': 'zh',
+                    'model': 'chatgptapi',
+                    'test_mode': True
+                }
+            )
+
+        assert response.status_code == 200
+        result = response.json()
+        job_id = result['job_id']
+
+        # Poll for completion (with timeout)
+        max_wait = 60  # seconds
+        start_time = time.time()
+
+        while time.time() - start_time &lt; max_wait:
+            response = await client.get(f'/status/{job_id}')
+            status = response.json()
+
+            if status['status'] == 'completed':
+                break
+            elif status['status'] == 'failed':
+                pytest.fail(f&quot;Translation failed: {status['error_message']}&quot;)
+
+            await asyncio.sleep(1)
+        else:
+            pytest.fail(&quot;Translation timed out&quot;)
+
+        # Test download
+        response = await client.get(f'/download/{job_id}')
+        assert response.status_code == 200
+        assert len(response.content) &gt; 0
+
+@pytest.mark.asyncio
+async def test_concurrent_translations():
+    &quot;&quot;&quot;Test multiple concurrent translations&quot;&quot;&quot;
+
+    async with AsyncClient(app=app, base_url=&quot;http://test&quot;) as client:
+        jobs = []
+
+        # Start 3 concurrent jobs
+        for i in range(3):
+            with open('test_books/small.epub', 'rb') as f:
+                response = await client.post(
+                    '/translate',
+                    files={'file': (f'test_{i}.epub', f, 'application/epub+zip')},
+                    data={
+                        'target_language': 'zh',
+                        'model': 'chatgptapi',
+                        'test_mode': True
+                    }
+                )
+            jobs.append(response.json()['job_id'])
+
+        # Wait for all to complete
+        completed = 0
+        max_wait = 120
+        start_time = time.time()
+
+        while completed &lt; 3 and time.time() - start_time &lt; max_wait:
+            for job_id in jobs:
+                response = await client.get(f'/status/{job_id}')
+                status = response.json()
+                if status['status'] == 'completed':
+                    completed += 1
+
+            await asyncio.sleep(2)
+
+        assert completed == 3, f&quot;Only {completed}/3 jobs completed&quot;
+</code></pre>
+<h4 id="3-load-tests">3. Load Tests</h4>
+<pre><code class="language-python"># api_layer/scripts/load_test.py
+import asyncio
+import aiohttp
+import time
+import argparse
+from typing import List
+
+class LoadTester:
+    def __init__(self, base_url: str = &quot;http://localhost:8000&quot;):
+        self.base_url = base_url
+        self.results = []
+
+    async def single_translation_test(self, session: aiohttp.ClientSession, test_id: int):
+        &quot;&quot;&quot;Run single translation and measure time&quot;&quot;&quot;
+        start_time = time.time()
+
+        try:
+            # Upload file
+            with open('test_books/small.epub', 'rb') as f:
+                data = aiohttp.FormData()
+                data.add_field('file', f, filename=f'test_{test_id}.epub')
+                data.add_field('target_language', 'zh')
+                data.add_field('model', 'chatgptapi')
+                data.add_field('test_mode', 'true')
+
+                async with session.post(f'{self.base_url}/translate', data=data) as resp:
+                    if resp.status != 200:
+                        raise Exception(f&quot;Upload failed: {resp.status}&quot;)
+                    result = await resp.json()
+                    job_id = result['job_id']
+
+            # Poll for completion
+            while True:
+                async with session.get(f'{self.base_url}/status/{job_id}') as resp:
+                    status = await resp.json()
+                    if status['status'] == 'completed':
+                        break
+                    elif status['status'] == 'failed':
+                        raise Exception(f&quot;Translation failed: {status['error_message']}&quot;)
+                await asyncio.sleep(1)
+
+            duration = time.time() - start_time
+            self.results.append({
+                'test_id': test_id,
+                'duration': duration,
+                'status': 'success'
+            })
+
+        except Exception as e:
+            duration = time.time() - start_time
+            self.results.append({
+                'test_id': test_id,
+                'duration': duration,
+                'status': 'failed',
+                'error': str(e)
+            })
+
+    async def run_load_test(self, concurrent_jobs: int = 5, total_jobs: int = 20):
+        &quot;&quot;&quot;Run load test with specified parameters&quot;&quot;&quot;
+        print(f&quot;Starting load test: {concurrent_jobs} concurrent, {total_jobs} total&quot;)
+
+        connector = aiohttp.TCPConnector(limit=concurrent_jobs * 2)
+        timeout = aiohttp.ClientTimeout(total=300)  # 5 minute timeout
+
+        async with aiohttp.ClientSession(
+            connector=connector,
+            timeout=timeout
+        ) as session:
+
+            # Create semaphore to limit concurrency
+            semaphore = asyncio.Semaphore(concurrent_jobs)
+
+            async def run_with_semaphore(test_id):
+                async with semaphore:
+                    await self.single_translation_test(session, test_id)
+
+            # Run all tests
+            tasks = [run_with_semaphore(i) for i in range(total_jobs)]
+            await asyncio.gather(*tasks, return_exceptions=True)
+
+        # Print results
+        self.print_results()
+
+    def print_results(self):
+        &quot;&quot;&quot;Print load test results&quot;&quot;&quot;
+        successful = [r for r in self.results if r['status'] == 'success']
+        failed = [r for r in self.results if r['status'] == 'failed']
+
+        print(f&quot;\n{'='*50}&quot;)
+        print(f&quot;LOAD TEST RESULTS&quot;)
+        print(f&quot;{'='*50}&quot;)
+        print(f&quot;Total jobs: {len(self.results)}&quot;)
+        print(f&quot;Successful: {len(successful)}&quot;)
+        print(f&quot;Failed: {len(failed)}&quot;)
+        print(f&quot;Success rate: {len(successful)/len(self.results)*100:.1f}%&quot;)
+
+        if successful:
+            durations = [r['duration'] for r in successful]
+            print(f&quot;\nTiming Statistics:&quot;)
+            print(f&quot;  Average: {sum(durations)/len(durations):.2f}s&quot;)
+            print(f&quot;  Min: {min(durations):.2f}s&quot;)
+            print(f&quot;  Max: {max(durations):.2f}s&quot;)
+
+        if failed:
+            print(f&quot;\nFailures:&quot;)
+            for fail in failed:
+                print(f&quot;  Job {fail['test_id']}: {fail['error']}&quot;)
+
+async def main():
+    parser = argparse.ArgumentParser(description='Load test the translation API')
+    parser.add_argument('--concurrent-jobs', type=int, default=5,
+                       help='Number of concurrent jobs')
+    parser.add_argument('--total-jobs', type=int, default=20,
+                       help='Total number of jobs to run')
+    parser.add_argument('--base-url', type=str, default='http://localhost:8000',
+                       help='API base URL')
+
+    args = parser.parse_args()
+
+    tester = LoadTester(args.base_url)
+    await tester.run_load_test(args.concurrent_jobs, args.total_jobs)
+
+if __name__ == &quot;__main__&quot;:
+    asyncio.run(main())
+</code></pre>
+<h2 id="migration-path-to-aws">Migration Path to AWS</h2>
+<h3 id="architecture-evolution">Architecture Evolution</h3>
+<h4 id="phase-1-local-async-current-implementation">Phase 1: Local Async (Current Implementation)</h4>
+<pre><code>┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   FastAPI   │    │ In-Memory   │    │   Local     │
+│   Server    │────│ Job Store   │────│ File System │
+└─────────────┘    └─────────────┘    └─────────────┘
+</code></pre>
+<h4 id="phase-2-aws-ready-with-local-fallback">Phase 2: AWS-Ready with Local Fallback</h4>
+<pre><code>┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   FastAPI   │    │ Pluggable   │    │ Pluggable   │
+│   Server    │────│ Job Store   │────│ Storage     │
+└─────────────┘    └─────────────┘    └─────────────┘
+                         │                    │
+                    ┌────▼────┐        ┌─────▼─────┐
+                    │ Memory  │        │   Local   │
+                    │   or    │        │    or     │
+                    │DynamoDB │        │    S3     │
+                    └─────────┘        └───────────┘
+</code></pre>
+<h4 id="phase-3-full-aws-fargate-deployment">Phase 3: Full AWS Fargate Deployment</h4>
+<pre><code>┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  ALB/API    │    │   Fargate   │    │  DynamoDB   │    │     S3      │
+│  Gateway    │────│   Service   │────│ Job Store   │────│   Storage   │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+                         │
+                    ┌────▼────┐
+                    │ CloudWatch│
+                    │ Monitoring │
+                    └──────────┘
+</code></pre>
+<h3 id="implementation-abstractions">Implementation Abstractions</h3>
+<h4 id="storage-abstraction">Storage Abstraction</h4>
+<pre><code class="language-python"># api_layer/api/services/storage.py
+from abc import ABC, abstractmethod
+from typing import Optional
+import os
+import boto3
+from fastapi import UploadFile
+
+class StorageInterface(ABC):
+    @abstractmethod
+    async def save_upload(self, job_id: str, file: UploadFile) -&gt; str:
+        &quot;&quot;&quot;Save uploaded file and return local path&quot;&quot;&quot;
+        pass
+
+    @abstractmethod
+    async def save_result(self, job_id: str, file_path: str) -&gt; str:
+        &quot;&quot;&quot;Save result file and return storage path&quot;&quot;&quot;
+        pass
+
+    @abstractmethod
+    async def get_download_url(self, job_id: str) -&gt; Optional[str]:
+        &quot;&quot;&quot;Get download URL for result file&quot;&quot;&quot;
+        pass
+
+    @abstractmethod
+    async def cleanup_job_files(self, job_id: str):
+        &quot;&quot;&quot;Cleanup all files for a job&quot;&quot;&quot;
+        pass
+
+class LocalFileStorage(StorageInterface):
+    def __init__(self, base_path: str = &quot;./temp&quot;):
+        self.base_path = Path(base_path)
+        self.base_path.mkdir(exist_ok=True)
+
+    async def save_upload(self, job_id: str, file: UploadFile) -&gt; str:
+        job_dir = self.base_path / job_id
+        job_dir.mkdir(exist_ok=True)
+
+        file_path = job_dir / file.filename
+        with open(file_path, 'wb') as f:
+            content = await file.read()
+            f.write(content)
+
+        return str(file_path)
+
+    async def save_result(self, job_id: str, file_path: str) -&gt; str:
+        # For local storage, file is already in the right place
+        return file_path
+
+    async def get_download_url(self, job_id: str) -&gt; Optional[str]:
+        # Return API endpoint for local download
+        return f&quot;/download/{job_id}&quot;
+
+    async def cleanup_job_files(self, job_id: str):
+        job_dir = self.base_path / job_id
+        if job_dir.exists():
+            shutil.rmtree(job_dir)
+
+class S3Storage(StorageInterface):
+    def __init__(self, bucket_name: str, region: str = &quot;us-east-1&quot;):
+        self.bucket_name = bucket_name
+        self.s3_client = boto3.client('s3', region_name=region)
+
+    async def save_upload(self, job_id: str, file: UploadFile) -&gt; str:
+        # Save to local temp first for processing
+        temp_path = f&quot;/tmp/{job_id}_{file.filename}&quot;
+        with open(temp_path, 'wb') as f:
+            content = await file.read()
+            f.write(content)
+
+        # Also upload to S3 for backup
+        s3_key = f&quot;uploads/{job_id}/{file.filename}&quot;
+        self.s3_client.upload_file(temp_path, self.bucket_name, s3_key)
+
+        return temp_path
+
+    async def save_result(self, job_id: str, file_path: str) -&gt; str:
+        filename = os.path.basename(file_path)
+        s3_key = f&quot;results/{job_id}/{filename}&quot;
+
+        self.s3_client.upload_file(file_path, self.bucket_name, s3_key)
+        return s3_key
+
+    async def get_download_url(self, job_id: str) -&gt; Optional[str]:
+        # Generate presigned URL for S3 download
+        s3_key = f&quot;results/{job_id}/&quot;
+
+        # Find the result file in S3
+        response = self.s3_client.list_objects_v2(
+            Bucket=self.bucket_name,
+            Prefix=s3_key
+        )
+
+        if 'Contents' not in response:
+            return None
+
+        # Get first result file
+        file_key = response['Contents'][0]['Key']
+
+        return self.s3_client.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': self.bucket_name, 'Key': file_key},
+            ExpiresIn=3600  # 1 hour
+        )
+
+    async def cleanup_job_files(self, job_id: str):
+        # Delete all files for this job
+        prefixes = [f&quot;uploads/{job_id}/&quot;, f&quot;results/{job_id}/&quot;]
+
+        for prefix in prefixes:
+            response = self.s3_client.list_objects_v2(
+                Bucket=self.bucket_name,
+                Prefix=prefix
+            )
+
+            if 'Contents' in response:
+                objects = [{'Key': obj['Key']} for obj in response['Contents']]
+                self.s3_client.delete_objects(
+                    Bucket=self.bucket_name,
+                    Delete={'Objects': objects}
+                )
+
+class StorageFactory:
+    @staticmethod
+    def get_storage() -&gt; StorageInterface:
+        storage_mode = os.environ.get('STORAGE_MODE', 'local')
+
+        if storage_mode == 'local':
+            return LocalFileStorage()
+        elif storage_mode == 's3':
+            bucket_name = os.environ.get('S3_BUCKET_NAME')
+            if not bucket_name:
+                raise ValueError(&quot;S3_BUCKET_NAME required for S3 storage&quot;)
+            return S3Storage(bucket_name)
+        else:
+            raise ValueError(f&quot;Unknown storage mode: {storage_mode}&quot;)
+</code></pre>
+<h4 id="job-store-abstraction">Job Store Abstraction</h4>
+<pre><code class="language-python"># api_layer/api/services/job_store.py
+from abc import ABC, abstractmethod
+from typing import Dict, List, Optional
+import json
+import boto3
+from datetime import datetime
+
+from ..models import TranslationJob, JobStatus
+
+class JobStoreInterface(ABC):
+    @abstractmethod
+    async def save_job(self, job: TranslationJob):
+        pass
+
+    @abstractmethod
+    async def get_job(self, job_id: str) -&gt; Optional[TranslationJob]:
+        pass
+
+    @abstractmethod
+    async def update_job_status(
+        self,
+        job_id: str,
+        status: JobStatus,
+        **kwargs
+    ):
+        pass
+
+    @abstractmethod
+    async def list_active_jobs(self) -&gt; List[TranslationJob]:
+        pass
+
+    @abstractmethod
+    async def delete_job(self, job_id: str):
+        pass
+
+class InMemoryJobStore(JobStoreInterface):
+    def __init__(self):
+        self.jobs: Dict[str, TranslationJob] = {}
+
+    async def save_job(self, job: TranslationJob):
+        self.jobs[job.job_id] = job
+
+    async def get_job(self, job_id: str) -&gt; Optional[TranslationJob]:
+        return self.jobs.get(job_id)
+
+    async def update_job_status(self, job_id: str, status: JobStatus, **kwargs):
+        if job_id in self.jobs:
+            job = self.jobs[job_id]
+            job.status = status
+            for key, value in kwargs.items():
+                if hasattr(job, key):
+                    setattr(job, key, value)
+
+    async def list_active_jobs(self) -&gt; List[TranslationJob]:
+        return [
+            job for job in self.jobs.values()
+            if job.status in [JobStatus.PENDING, JobStatus.PROCESSING]
+        ]
+
+    async def delete_job(self, job_id: str):
+        self.jobs.pop(job_id, None)
+
+class DynamoDBJobStore(JobStoreInterface):
+    def __init__(self, table_name: str, region: str = &quot;us-east-1&quot;):
+        self.table_name = table_name
+        self.dynamodb = boto3.resource('dynamodb', region_name=region)
+        self.table = self.dynamodb.Table(table_name)
+
+    async def save_job(self, job: TranslationJob):
+        item = job.dict()
+        # Convert datetime to ISO string
+        for field in ['created_at', 'completed_at']:
+            if item.get(field):
+                item[field] = item[field].isoformat()
+
+        self.table.put_item(Item=item)
+
+    async def get_job(self, job_id: str) -&gt; Optional[TranslationJob]:
+        response = self.table.get_item(Key={'job_id': job_id})
+
+        if 'Item' not in response:
+            return None
+
+        item = response['Item']
+
+        # Convert ISO strings back to datetime
+        for field in ['created_at', 'completed_at']:
+            if item.get(field):
+                item[field] = datetime.fromisoformat(item[field])
+
+        return TranslationJob(**item)
+
+    async def update_job_status(self, job_id: str, status: JobStatus, **kwargs):
+        update_expression = &quot;SET job_status = :status&quot;
+        expression_values = {':status': status.value}
+
+        # Add other fields to update
+        for key, value in kwargs.items():
+            if key in ['progress', 'error_message', 'download_url', 'completed_at']:
+                update_expression += f&quot;, {key} = :{key}&quot;
+                if isinstance(value, datetime):
+                    value = value.isoformat()
+                expression_values[f':{key}'] = value
+
+        self.table.update_item(
+            Key={'job_id': job_id},
+            UpdateExpression=update_expression,
+            ExpressionAttributeValues=expression_values
+        )
+
+    async def list_active_jobs(self) -&gt; List[TranslationJob]:
+        # This would require a GSI on status in production
+        response = self.table.scan(
+            FilterExpression='job_status IN (:pending, :processing)',
+            ExpressionAttributeValues={
+                ':pending': JobStatus.PENDING.value,
+                ':processing': JobStatus.PROCESSING.value
+            }
+        )
+
+        jobs = []
+        for item in response['Items']:
+            # Convert ISO strings back to datetime
+            for field in ['created_at', 'completed_at']:
+                if item.get(field):
+                    item[field] = datetime.fromisoformat(item[field])
+            jobs.append(TranslationJob(**item))
+
+        return jobs
+
+    async def delete_job(self, job_id: str):
+        self.table.delete_item(Key={'job_id': job_id})
+</code></pre>
+<h3 id="aws-fargate-deployment-configuration">AWS Fargate Deployment Configuration</h3>
+<h4 id="terraform-infrastructure">Terraform Infrastructure</h4>
+<pre><code class="language-hcl"># terraform/main.tf
+terraform {
+  required_providers {
+    aws = {
+      source  = &quot;hashicorp/aws&quot;
+      version = &quot;~&gt; 5.0&quot;
+    }
+  }
+}
+
+provider &quot;aws&quot; {
+  region = var.aws_region
+}
+
+# VPC and Networking
+resource &quot;aws_vpc&quot; &quot;main&quot; {
+  cidr_block           = &quot;10.0.0.0/16&quot;
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  tags = {
+    Name = &quot;epub-translator-vpc&quot;
+  }
+}
+
+resource &quot;aws_subnet&quot; &quot;private&quot; {
+  count             = 2
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = &quot;10.0.${count.index + 1}.0/24&quot;
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+
+  tags = {
+    Name = &quot;epub-translator-private-${count.index + 1}&quot;
+  }
+}
+
+resource &quot;aws_subnet&quot; &quot;public&quot; {
+  count                   = 2
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = &quot;10.0.${count.index + 10}.0/24&quot;
+  availability_zone       = data.aws_availability_zones.available.names[count.index]
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = &quot;epub-translator-public-${count.index + 1}&quot;
+  }
+}
+
+# ECS Cluster
+resource &quot;aws_ecs_cluster&quot; &quot;main&quot; {
+  name = &quot;epub-translator&quot;
+
+  setting {
+    name  = &quot;containerInsights&quot;
+    value = &quot;enabled&quot;
+  }
+}
+
+# ECS Task Definition
+resource &quot;aws_ecs_task_definition&quot; &quot;app&quot; {
+  family                   = &quot;epub-translator&quot;
+  network_mode             = &quot;awsvpc&quot;
+  requires_compatibilities = [&quot;FARGATE&quot;]
+  cpu                      = 1024
+  memory                   = 2048
+  execution_role_arn       = aws_iam_role.ecs_execution_role.arn
+  task_role_arn           = aws_iam_role.ecs_task_role.arn
+
+  container_definitions = jsonencode([
+    {
+      name  = &quot;epub-translator&quot;
+      image = &quot;${aws_ecr_repository.app.repository_url}:latest&quot;
+
+      environment = [
+        {
+          name  = &quot;STORAGE_MODE&quot;
+          value = &quot;s3&quot;
+        },
+        {
+          name  = &quot;S3_BUCKET_NAME&quot;
+          value = aws_s3_bucket.main.id
+        },
+        {
+          name  = &quot;DYNAMODB_TABLE_NAME&quot;
+          value = aws_dynamodb_table.jobs.name
+        },
+        {
+          name  = &quot;AWS_REGION&quot;
+          value = var.aws_region
+        }
+      ]
+
+      secrets = [
+        {
+          name      = &quot;BBM_OPENAI_API_KEY&quot;
+          valueFrom = aws_ssm_parameter.openai_key.arn
+        },
+        {
+          name      = &quot;BBM_CLAUDE_API_KEY&quot;
+          valueFrom = aws_ssm_parameter.claude_key.arn
+        }
+      ]
+
+      portMappings = [
+        {
+          containerPort = 8000
+          protocol      = &quot;tcp&quot;
+        }
+      ]
+
+      logConfiguration = {
+        logDriver = &quot;awslogs&quot;
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.app.name
+          awslogs-region        = var.aws_region
+          awslogs-stream-prefix = &quot;ecs&quot;
+        }
+      }
+
+      healthCheck = {
+        command = [&quot;CMD-SHELL&quot;, &quot;curl -f http://localhost:8000/health || exit 1&quot;]
+        interval = 30
+        timeout = 5
+        retries = 3
+      }
+    }
+  ])
+}
+
+# ECS Service
+resource &quot;aws_ecs_service&quot; &quot;main&quot; {
+  name            = &quot;epub-translator&quot;
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.app.arn
+  desired_count   = 2
+  launch_type     = &quot;FARGATE&quot;
+
+  network_configuration {
+    security_groups  = [aws_security_group.ecs_tasks.id]
+    subnets         = aws_subnet.private[*].id
+    assign_public_ip = false
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.app.arn
+    container_name   = &quot;epub-translator&quot;
+    container_port   = 8000
+  }
+
+  depends_on = [aws_lb_listener.app]
+}
+
+# S3 Bucket for file storage
+resource &quot;aws_s3_bucket&quot; &quot;main&quot; {
+  bucket = &quot;epub-translator-${random_string.bucket_suffix.result}&quot;
+}
+
+resource &quot;aws_s3_bucket_lifecycle_configuration&quot; &quot;main&quot; {
+  bucket = aws_s3_bucket.main.id
+
+  rule {
+    id     = &quot;cleanup_old_files&quot;
+    status = &quot;Enabled&quot;
+
+    expiration {
+      days = 7  # Delete files after 7 days
+    }
+  }
+}
+
+# DynamoDB table for job storage
+resource &quot;aws_dynamodb_table&quot; &quot;jobs&quot; {
+  name           = &quot;epub-translator-jobs&quot;
+  billing_mode   = &quot;PAY_PER_REQUEST&quot;
+  hash_key       = &quot;job_id&quot;
+
+  attribute {
+    name = &quot;job_id&quot;
+    type = &quot;S&quot;
+  }
+
+  attribute {
+    name = &quot;status&quot;
+    type = &quot;S&quot;
+  }
+
+  global_secondary_index {
+    name     = &quot;status-index&quot;
+    hash_key = &quot;status&quot;
+  }
+
+  ttl {
+    attribute_name = &quot;ttl&quot;
+    enabled        = true
+  }
+
+  tags = {
+    Name = &quot;epub-translator-jobs&quot;
+  }
+}
+</code></pre>
+<h3 id="migration-steps">Migration Steps</h3>
+<h4 id="step-1-environment-based-configuration">Step 1: Environment-Based Configuration</h4>
+<pre><code class="language-python"># api_layer/api/config.py (Enhanced)
+import os
+from typing import List, Optional
+from pydantic import BaseSettings
+
+class Settings(BaseSettings):
+    # Basic settings
+    api_host: str = &quot;0.0.0.0&quot;
+    api_port: int = 8000
+    log_level: str = &quot;INFO&quot;
+
+    # Storage configuration
+    storage_mode: str = &quot;local&quot;  # local, s3
+    local_storage_path: str = &quot;./temp&quot;
+    s3_bucket_name: Optional[str] = None
+    aws_region: str = &quot;us-east-1&quot;
+
+    # Job store configuration
+    job_store_mode: str = &quot;memory&quot;  # memory, dynamodb
+    dynamodb_table_name: Optional[str] = None
+    job_ttl_hours: int = 3
+
+    # Processing configuration
+    max_workers: int = 4
+    translation_timeout_minutes: int = 30
+    max_file_size_mb: int = 100
+    max_concurrent_jobs: int = 10
+
+    # AWS-specific settings
+    ecs_cluster_name: Optional[str] = None
+    cloudwatch_log_group: Optional[str] = None
+
+    class Config:
+        env_file = &quot;.env&quot;
+        case_sensitive = False
+
+    def is_aws_environment(self) -&gt; bool:
+        &quot;&quot;&quot;Check if running in AWS environment&quot;&quot;&quot;
+        return self.storage_mode == &quot;s3&quot; or self.job_store_mode == &quot;dynamodb&quot;
+
+    def get_storage_config(self) -&gt; dict:
+        &quot;&quot;&quot;Get storage configuration based on mode&quot;&quot;&quot;
+        if self.storage_mode == &quot;local&quot;:
+            return {&quot;base_path&quot;: self.local_storage_path}
+        elif self.storage_mode == &quot;s3&quot;:
+            return {
+                &quot;bucket_name&quot;: self.s3_bucket_name,
+                &quot;region&quot;: self.aws_region
+            }
+        else:
+            raise ValueError(f&quot;Unknown storage mode: {self.storage_mode}&quot;)
+
+    def get_job_store_config(self) -&gt; dict:
+        &quot;&quot;&quot;Get job store configuration based on mode&quot;&quot;&quot;
+        if self.job_store_mode == &quot;memory&quot;:
+            return {}
+        elif self.job_store_mode == &quot;dynamodb&quot;:
+            return {
+                &quot;table_name&quot;: self.dynamodb_table_name,
+                &quot;region&quot;: self.aws_region
+            }
+        else:
+            raise ValueError(f&quot;Unknown job store mode: {self.job_store_mode}&quot;)
+
+settings = Settings()
+</code></pre>
+<h4 id="step-2-factory-pattern-for-services">Step 2: Factory Pattern for Services</h4>
+<pre><code class="language-python"># api_layer/api/dependencies.py
+from functools import lru_cache
+from .config import settings
+from .services.storage import StorageInterface, LocalFileStorage, S3Storage
+from .services.job_store import JobStoreInterface, InMemoryJobStore, DynamoDBJobStore
+
+@lru_cache()
+def get_storage() -&gt; StorageInterface:
+    &quot;&quot;&quot;Get storage implementation based on configuration&quot;&quot;&quot;
+    if settings.storage_mode == &quot;local&quot;:
+        return LocalFileStorage(**settings.get_storage_config())
+    elif settings.storage_mode == &quot;s3&quot;:
+        return S3Storage(**settings.get_storage_config())
+    else:
+        raise ValueError(f&quot;Unknown storage mode: {settings.storage_mode}&quot;)
+
+@lru_cache()
+def get_job_store() -&gt; JobStoreInterface:
+    &quot;&quot;&quot;Get job store implementation based on configuration&quot;&quot;&quot;
+    if settings.job_store_mode == &quot;memory&quot;:
+        return InMemoryJobStore(**settings.get_job_store_config())
+    elif settings.job_store_mode == &quot;dynamodb&quot;:
+        return DynamoDBJobStore(**settings.get_job_store_config())
+    else:
+        raise ValueError(f&quot;Unknown job store mode: {settings.job_store_mode}&quot;)
+</code></pre>
+<h4 id="step-3-environment-configuration-files">Step 3: Environment Configuration Files</h4>
+<pre><code class="language-bash"># .env.local (Local development)
+STORAGE_MODE=local
+JOB_STORE_MODE=memory
+LOCAL_STORAGE_PATH=./temp
+LOG_LEVEL=DEBUG
+MAX_WORKERS=2
+</code></pre>
+<pre><code class="language-bash"># .env.aws (AWS Fargate)
+STORAGE_MODE=s3
+JOB_STORE_MODE=dynamodb
+S3_BUCKET_NAME=epub-translator-production
+DYNAMODB_TABLE_NAME=epub-translator-jobs
+AWS_REGION=us-east-1
+LOG_LEVEL=INFO
+MAX_WORKERS=4
+</code></pre>
+<h4 id="step-4-deployment-pipeline">Step 4: Deployment Pipeline</h4>
+<pre><code class="language-yaml"># .github/workflows/deploy.yml
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build and push Docker image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: epub-translator
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+    - name: Deploy to ECS
+      run: |
+        aws ecs update-service \
+          --cluster epub-translator \
+          --service epub-translator \
+          --force-new-deployment
+</code></pre>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<h3 id="capacity-planning">Capacity Planning</h3>
+<h4 id="local-development-capacity">Local Development Capacity</h4>
+<ul>
+<li><strong>Target</strong>: 5-10 concurrent translations</li>
+<li><strong>Hardware</strong>: 8GB RAM, 4 CPU cores</li>
+<li><strong>File Size</strong>: Up to 50MB EPUBs</li>
+<li><strong>Translation Time</strong>: 2-10 minutes per book</li>
+</ul>
+<h4 id="production-aws-capacity">Production AWS Capacity</h4>
+<ul>
+<li><strong>Target</strong>: 10-1000 translations/month (1-3 concurrent peak)</li>
+<li><strong>Fargate</strong>: 1-2 tasks, 1 vCPU, 2GB RAM each</li>
+<li><strong>Auto-scaling</strong>: Based on queue depth and CPU utilization</li>
+<li><strong>Storage</strong>: S3 with lifecycle policies</li>
+</ul>
+<h3 id="memory-management">Memory Management</h3>
+<pre><code class="language-python"># Memory optimization for translation processing
+import gc
+import psutil
+from typing import Generator
+
+class MemoryOptimizedTranslator:
+    def __init__(self, max_memory_mb: int = 1024):
+        self.max_memory_mb = max_memory_mb
+
+    def check_memory_usage(self):
+        &quot;&quot;&quot;Check current memory usage&quot;&quot;&quot;
+        process = psutil.Process()
+        memory_mb = process.memory_info().rss / 1024 / 1024
+
+        if memory_mb &gt; self.max_memory_mb:
+            logger.warning(f&quot;High memory usage: {memory_mb:.1f}MB&quot;)
+            gc.collect()  # Force garbage collection
+
+    def process_in_chunks(self, paragraphs: List[str], chunk_size: int = 50) -&gt; Generator:
+        &quot;&quot;&quot;Process paragraphs in chunks to manage memory&quot;&quot;&quot;
+        for i in range(0, len(paragraphs), chunk_size):
+            chunk = paragraphs[i:i + chunk_size]
+            yield chunk
+
+            # Check memory after each chunk
+            self.check_memory_usage()
+</code></pre>
+<h3 id="file-size-optimization">File Size Optimization</h3>
+<pre><code class="language-python"># File size limits and streaming
+from fastapi import HTTPException
+import aiofiles
+
+class FileSizeValidator:
+    def __init__(self, max_size_mb: int = 100):
+        self.max_size_bytes = max_size_mb * 1024 * 1024
+
+    async def validate_upload(self, file: UploadFile) -&gt; bool:
+        &quot;&quot;&quot;Validate file size without loading entire file&quot;&quot;&quot;
+
+        # Check content-length header first
+        if hasattr(file, 'size') and file.size:
+            if file.size &gt; self.max_size_bytes:
+                raise HTTPException(
+                    status_code=413,
+                    detail=f&quot;File too large: {file.size / 1024 / 1024:.1f}MB &gt; {self.max_size_bytes / 1024 / 1024}MB&quot;
+                )
+
+        # Stream and count bytes if no size header
+        total_bytes = 0
+        async for chunk in file.stream():
+            total_bytes += len(chunk)
+            if total_bytes &gt; self.max_size_bytes:
+                raise HTTPException(
+                    status_code=413,
+                    detail=&quot;File too large&quot;
+                )
+
+        # Reset file position for actual processing
+        await file.seek(0)
+        return True
+</code></pre>
+<h3 id="caching-strategy">Caching Strategy</h3>
+<pre><code class="language-python"># Translation caching for common phrases
+import hashlib
+import json
+from typing import Dict, Optional
+import aioredis
+
+class TranslationCache:
+    def __init__(self, redis_url: Optional[str] = None):
+        self.redis_url = redis_url
+        self.redis = None
+        self.local_cache: Dict[str, str] = {}
+        self.max_local_cache = 1000
+
+    async def initialize(self):
+        &quot;&quot;&quot;Initialize Redis connection if available&quot;&quot;&quot;
+        if self.redis_url:
+            self.redis = await aioredis.from_url(self.redis_url)
+
+    def _get_cache_key(self, text: str, target_lang: str, model: str) -&gt; str:
+        &quot;&quot;&quot;Generate cache key for translation&quot;&quot;&quot;
+        content = f&quot;{text}|{target_lang}|{model}&quot;
+        return hashlib.md5(content.encode()).hexdigest()
+
+    async def get_translation(
+        self,
+        text: str,
+        target_lang: str,
+        model: str
+    ) -&gt; Optional[str]:
+        &quot;&quot;&quot;Get cached translation if available&quot;&quot;&quot;
+        key = self._get_cache_key(text, target_lang, model)
+
+        # Check local cache first
+        if key in self.local_cache:
+            return self.local_cache[key]
+
+        # Check Redis cache
+        if self.redis:
+            cached = await self.redis.get(key)
+            if cached:
+                translation = cached.decode()
+                # Store in local cache for faster access
+                self.local_cache[key] = translation
+                return translation
+
+        return None
+
+    async def cache_translation(
+        self,
+        text: str,
+        target_lang: str,
+        model: str,
+        translation: str
+    ):
+        &quot;&quot;&quot;Cache translation result&quot;&quot;&quot;
+        key = self._get_cache_key(text, target_lang, model)
+
+        # Store in local cache
+        if len(self.local_cache) &gt;= self.max_local_cache:
+            # Remove oldest entry (simple FIFO)
+            oldest_key = next(iter(self.local_cache))
+            del self.local_cache[oldest_key]
+
+        self.local_cache[key] = translation
+
+        # Store in Redis with TTL
+        if self.redis:
+            await self.redis.setex(key, 3600 * 24 * 7, translation)  # 7 days TTL
+</code></pre>
+<h2 id="security-error-handling">Security &amp; Error Handling</h2>
+<h3 id="api-security">API Security</h3>
+<pre><code class="language-python"># Security middleware and validation
+from fastapi import HTTPException, Security, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+import jwt
+from datetime import datetime, timedelta
+
+security = HTTPBearer()
+
+class SecurityManager:
+    def __init__(self, secret_key: str):
+        self.secret_key = secret_key
+
+    def create_api_token(self, user_id: str, expires_hours: int = 24) -&gt; str:
+        &quot;&quot;&quot;Create JWT token for API access&quot;&quot;&quot;
+        payload = {
+            'user_id': user_id,
+            'exp': datetime.utcnow() + timedelta(hours=expires_hours),
+            'iat': datetime.utcnow()
+        }
+        return jwt.encode(payload, self.secret_key, algorithm='HS256')
+
+    def verify_token(self, token: str) -&gt; str:
+        &quot;&quot;&quot;Verify JWT token and return user_id&quot;&quot;&quot;
+        try:
+            payload = jwt.decode(token, self.secret_key, algorithms=['HS256'])
+            return payload['user_id']
+        except jwt.ExpiredSignatureError:
+            raise HTTPException(status_code=401, detail=&quot;Token expired&quot;)
+        except jwt.InvalidTokenError:
+            raise HTTPException(status_code=401, detail=&quot;Invalid token&quot;)
+
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Security(security)):
+    &quot;&quot;&quot;Dependency to get current user from JWT token&quot;&quot;&quot;
+    if not settings.require_auth:
+        return &quot;anonymous&quot;
+
+    security_manager = SecurityManager(settings.jwt_secret)
+    return security_manager.verify_token(credentials.credentials)
+
+# Rate limiting
+from collections import defaultdict
+import time
+
+class RateLimiter:
+    def __init__(self, max_requests: int = 10, window_minutes: int = 1):
+        self.max_requests = max_requests
+        self.window_seconds = window_minutes * 60
+        self.requests = defaultdict(list)
+
+    def is_allowed(self, client_id: str) -&gt; bool:
+        &quot;&quot;&quot;Check if request is allowed for client&quot;&quot;&quot;
+        now = time.time()
+        client_requests = self.requests[client_id]
+
+        # Remove old requests outside window
+        client_requests[:] = [req_time for req_time in client_requests
+                            if now - req_time &lt; self.window_seconds]
+
+        # Check if under limit
+        if len(client_requests) &gt;= self.max_requests:
+            return False
+
+        # Add current request
+        client_requests.append(now)
+        return True
+
+rate_limiter = RateLimiter()
+
+async def check_rate_limit(request):
+    &quot;&quot;&quot;Rate limiting middleware&quot;&quot;&quot;
+    client_ip = request.client.host
+
+    if not rate_limiter.is_allowed(client_ip):
+        raise HTTPException(
+            status_code=429,
+            detail=&quot;Rate limit exceeded. Try again later.&quot;
+        )
+</code></pre>
+<h3 id="error-handling-monitoring">Error Handling &amp; Monitoring</h3>
+<pre><code class="language-python"># Comprehensive error handling
+import traceback
+import logging
+from enum import Enum
+from dataclasses import dataclass
+from typing import Optional, Dict, Any
+
+class ErrorCode(Enum):
+    VALIDATION_ERROR = &quot;VALIDATION_ERROR&quot;
+    TRANSLATION_FAILED = &quot;TRANSLATION_FAILED&quot;
+    FILE_TOO_LARGE = &quot;FILE_TOO_LARGE&quot;
+    UNSUPPORTED_FORMAT = &quot;UNSUPPORTED_FORMAT&quot;
+    API_KEY_INVALID = &quot;API_KEY_INVALID&quot;
+    TIMEOUT_ERROR = &quot;TIMEOUT_ERROR&quot;
+    STORAGE_ERROR = &quot;STORAGE_ERROR&quot;
+    RATE_LIMIT_EXCEEDED = &quot;RATE_LIMIT_EXCEEDED&quot;
+    INTERNAL_ERROR = &quot;INTERNAL_ERROR&quot;
+
+@dataclass
+class ErrorInfo:
+    code: ErrorCode
+    message: str
+    details: Optional[Dict[str, Any]] = None
+    recoverable: bool = False
+
+class ErrorHandler:
+    def __init__(self):
+        self.logger = logging.getLogger(__name__)
+
+    def handle_translation_error(self, error: Exception, job_id: str) -&gt; ErrorInfo:
+        &quot;&quot;&quot;Handle translation-specific errors&quot;&quot;&quot;
+
+        error_str = str(error).lower()
+
+        if &quot;timeout&quot; in error_str:
+            return ErrorInfo(
+                code=ErrorCode.TIMEOUT_ERROR,
+                message=&quot;Translation timed out. Try with a smaller file or contact support.&quot;,
+                recoverable=True
+            )
+        elif &quot;api key&quot; in error_str or &quot;unauthorized&quot; in error_str:
+            return ErrorInfo(
+                code=ErrorCode.API_KEY_INVALID,
+                message=&quot;Invalid API key for the selected translation model.&quot;,
+                recoverable=False
+            )
+        elif &quot;rate limit&quot; in error_str or &quot;quota&quot; in error_str:
+            return ErrorInfo(
+                code=ErrorCode.RATE_LIMIT_EXCEEDED,
+                message=&quot;Translation service rate limit exceeded. Please try again later.&quot;,
+                recoverable=True
+            )
+        else:
+            # Log full error for debugging
+            self.logger.error(
+                f&quot;Translation failed for job {job_id}: {error}&quot;,
+                extra={'job_id': job_id, 'error_type': type(error).__name__},
+                exc_info=True
+            )
+
+            return ErrorInfo(
+                code=ErrorCode.TRANSLATION_FAILED,
+                message=&quot;Translation failed due to an internal error. Please try again or contact support.&quot;,
+                details={'error_type': type(error).__name__},
+                recoverable=True
+            )
+
+    def format_user_error(self, error_info: ErrorInfo) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;Format error for user-facing API response&quot;&quot;&quot;
+        return {
+            'error_code': error_info.code.value,
+            'message': error_info.message,
+            'recoverable': error_info.recoverable,
+            'timestamp': datetime.utcnow().isoformat()
+        }
+
+# Monitoring and alerting
+import boto3
+from typing import Dict, Any
+
+class MonitoringService:
+    def __init__(self):
+        self.cloudwatch = None
+        if settings.is_aws_environment():
+            self.cloudwatch = boto3.client('cloudwatch', region_name=settings.aws_region)
+
+    async def record_translation_metrics(
+        self,
+        job_id: str,
+        duration_seconds: float,
+        success: bool,
+        model: str
+    ):
+        &quot;&quot;&quot;Record translation metrics&quot;&quot;&quot;
+
+        metrics = [
+            {
+                'MetricName': 'TranslationDuration',
+                'Value': duration_seconds,
+                'Unit': 'Seconds',
+                'Dimensions': [
+                    {'Name': 'Model', 'Value': model},
+                    {'Name': 'Success', 'Value': str(success)}
+                ]
+            },
+            {
+                'MetricName': 'TranslationCount',
+                'Value': 1,
+                'Unit': 'Count',
+                'Dimensions': [
+                    {'Name': 'Model', 'Value': model},
+                    {'Name': 'Success', 'Value': str(success)}
+                ]
+            }
+        ]
+
+        if self.cloudwatch:
+            try:
+                self.cloudwatch.put_metric_data(
+                    Namespace='EpubTranslator',
+                    MetricData=metrics
+                )
+            except Exception as e:
+                logger.error(f&quot;Failed to send metrics: {e}&quot;)
+        else:
+            # Log metrics locally for development
+            logger.info(f&quot;Metrics: {metrics}&quot;)
+
+    async def send_alert(self, message: str, severity: str = &quot;WARNING&quot;):
+        &quot;&quot;&quot;Send alert for critical issues&quot;&quot;&quot;
+
+        if severity == &quot;CRITICAL&quot; and settings.is_aws_environment():
+            # Send SNS notification in production
+            sns = boto3.client('sns', region_name=settings.aws_region)
+            try:
+                sns.publish(
+                    TopicArn=settings.alerts_topic_arn,
+                    Message=message,
+                    Subject=f&quot;EpubTranslator Alert - {severity}&quot;
+                )
+            except Exception as e:
+                logger.error(f&quot;Failed to send alert: {e}&quot;)
+
+        # Always log alerts
+        logger.error(f&quot;ALERT [{severity}]: {message}&quot;)
+</code></pre>
+<h3 id="health-monitoring">Health Monitoring</h3>
+<pre><code class="language-python"># Health check and system monitoring
+from dataclasses import dataclass
+from typing import Dict, List
+import psutil
+import asyncio
+
+@dataclass
+class HealthStatus:
+    healthy: bool
+    issues: List[str]
+    metrics: Dict[str, Any]
+
+class HealthChecker:
+    def __init__(self):
+        self.checks = [
+            self._check_memory,
+            self._check_disk_space,
+            self._check_active_jobs,
+            self._check_storage,
+            self._check_translation_service
+        ]
+
+    async def get_health_status(self) -&gt; HealthStatus:
+        &quot;&quot;&quot;Get comprehensive health status&quot;&quot;&quot;
+        issues = []
+        metrics = {}
+
+        for check in self.checks:
+            try:
+                check_result = await check()
+                if check_result.get('issues'):
+                    issues.extend(check_result['issues'])
+                metrics.update(check_result.get('metrics', {}))
+            except Exception as e:
+                issues.append(f&quot;Health check failed: {e}&quot;)
+
+        return HealthStatus(
+            healthy=len(issues) == 0,
+            issues=issues,
+            metrics=metrics
+        )
+
+    async def _check_memory(self) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;Check memory usage&quot;&quot;&quot;
+        memory = psutil.virtual_memory()
+        memory_percent = memory.percent
+
+        issues = []
+        if memory_percent &gt; 90:
+            issues.append(f&quot;High memory usage: {memory_percent:.1f}%&quot;)
+        elif memory_percent &gt; 80:
+            issues.append(f&quot;Warning: memory usage at {memory_percent:.1f}%&quot;)
+
+        return {
+            'issues': issues,
+            'metrics': {
+                'memory_usage_percent': memory_percent,
+                'memory_available_mb': memory.available / 1024 / 1024
+            }
+        }
+
+    async def _check_disk_space(self) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;Check disk space&quot;&quot;&quot;
+        disk = psutil.disk_usage('/')
+        disk_percent = (disk.used / disk.total) * 100
+
+        issues = []
+        if disk_percent &gt; 90:
+            issues.append(f&quot;Low disk space: {disk_percent:.1f}% used&quot;)
+
+        return {
+            'issues': issues,
+            'metrics': {
+                'disk_usage_percent': disk_percent,
+                'disk_free_gb': disk.free / 1024 / 1024 / 1024
+            }
+        }
+
+    async def _check_active_jobs(self) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;Check active job count&quot;&quot;&quot;
+        # This would check with the job manager
+        active_jobs = 0  # Placeholder
+
+        issues = []
+        if active_jobs &gt; settings.max_concurrent_jobs:
+            issues.append(f&quot;Too many active jobs: {active_jobs}&quot;)
+
+        return {
+            'issues': issues,
+            'metrics': {
+                'active_jobs': active_jobs,
+                'max_concurrent_jobs': settings.max_concurrent_jobs
+            }
+        }
+
+    async def _check_storage(self) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;Check storage connectivity&quot;&quot;&quot;
+        issues = []
+        metrics = {}
+
+        try:
+            storage = get_storage()
+            # Test storage connectivity
+            if hasattr(storage, 'health_check'):
+                await storage.health_check()
+            metrics['storage_mode'] = settings.storage_mode
+        except Exception as e:
+            issues.append(f&quot;Storage connectivity issue: {e}&quot;)
+
+        return {'issues': issues, 'metrics': metrics}
+
+    async def _check_translation_service(self) -&gt; Dict[str, Any]:
+        &quot;&quot;&quot;Check translation service health&quot;&quot;&quot;
+        issues = []
+        metrics = {}
+
+        # Check if translation service can initialize
+        try:
+            service = TranslationService()
+            metrics['max_workers'] = service.executor._max_workers
+        except Exception as e:
+            issues.append(f&quot;Translation service issue: {e}&quot;)
+
+        return {'issues': issues, 'metrics': metrics}
+
+# Enhanced health endpoint
+@app.get(&quot;/health/detailed&quot;)
+async def detailed_health_check():
+    &quot;&quot;&quot;Detailed health check for monitoring&quot;&quot;&quot;
+    checker = HealthChecker()
+    status = await checker.get_health_status()
+
+    return {
+        'healthy': status.healthy,
+        'timestamp': datetime.utcnow(),
+        'issues': status.issues,
+        'metrics': status.metrics,
+        'version': '1.0.0'
+    }
+</code></pre>
+<hr />
+<h2 id="implementation-conclusion">Implementation Conclusion</h2>
+<p>This comprehensive implementation guide provides a complete roadmap for converting the bilingual_book_maker CLI tool into a robust async API service. The design emphasizes:</p>
+<ol>
+<li><strong>Immediate Value</strong>: Local async processing that works out of the box</li>
+<li><strong>Cloud-Ready Architecture</strong>: Clean abstractions for seamless AWS migration</li>
+<li><strong>Production Quality</strong>: Comprehensive error handling, monitoring, and testing</li>
+<li><strong>Scalable Foundation</strong>: Supports growth from 10 to 1000+ translations/month</li>
+</ol>
+<p>The implementation can be developed incrementally, with each phase building on the previous foundation while maintaining backward compatibility and enabling smooth migration to AWS Fargate when ready.</p>
+<p><strong>Next Steps:</strong>
+1. Start with Phase 1 local async implementation (2 weeks)
+2. Add Docker and production testing (1 week)
+3. Prepare AWS abstractions and deployment pipeline (1 week)
+4. Migrate to AWS Fargate when volume justifies it</p>
+<p>This approach ensures that you have a working, valuable system quickly while building the foundation for future cloud scalability.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

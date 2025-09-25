@@ -1,0 +1,1108 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Configuration Management System - bilingual book maker</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration-management-system" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="bilingual book maker" class="md-header__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bilingual book maker
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration Management System
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../model_lang/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../disclaimer/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Disclaimer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="bilingual book maker" class="md-nav__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    bilingual book maker
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickStart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model_lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model and languages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cmd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command line options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../book_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Translate from different source
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment setting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tweak the prompt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disclaimer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constants-constantspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Constants (constants.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#securityconfig-settingspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      SecurityConfig (settings.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#settings-settingspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings (settings.py)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Settings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Job Manager
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-overrides-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Overrides (Optional)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-specific-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment-Specific Defaults
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Environment-Specific Defaults">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#development" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Staging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#production" class="md-nav__link">
+    <span class="md-ellipsis">
+      Production
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-development-default" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Development (Default)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-custom-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Custom Development
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-production-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Production Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-custom-domain-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Custom Domain Configuration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Benefits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Benefits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-hardcoded-insecure" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Before (Hardcoded - Insecure)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#after-configuration-based-secure" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ After (Configuration-Based - Secure)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#customizing-for-your-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Customizing for Your Domains
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Benefits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="configuration-management-system">Configuration Management System</h1>
+<h2 id="overview">Overview</h2>
+<p>The API now uses a centralized configuration management system to eliminate hardcoded values and improve maintainability. All configuration is environment-based with secure defaults.</p>
+<h2 id="architecture">Architecture</h2>
+<pre><code>api/
+├── config/
+│   ├── __init__.py
+│   ├── constants.py         # Application constants and magic numbers
+│   └── settings.py          # Environment-based configuration
+├── main.py                  # Uses settings for CORS, hosts, server config
+├── job_manager.py           # Uses settings for workers, TTL, paths
+└── .env.example             # Sample environment configuration
+</code></pre>
+<h2 id="configuration-classes">Configuration Classes</h2>
+<h3 id="constants-constantspy"><code>Constants</code> (constants.py)</h3>
+<p>Application constants and magic numbers organized by category:
+- <strong>NetworkConstants</strong>: Hosts, ports, protocols
+- <strong>SecurityConstants</strong>: HTTP methods, CORS headers
+- <strong>DefaultValues</strong>: Default configuration values
+- <strong>DomainConstants</strong>: Domain names and URL generation
+- <strong>StorageConstants</strong>: File extensions, MIME types
+- <strong>TimeConstants</strong>: Time conversion factors
+- <strong>ValidationConstants</strong>: Size limits, validation rules</p>
+<h3 id="securityconfig-settingspy"><code>SecurityConfig</code> (settings.py)</h3>
+<p>Environment-specific security configuration using constants:
+- <strong>CORS origins</strong> by environment (built from constants)
+- <strong>Trusted hosts</strong> by environment (built from constants)
+- <strong>CORS methods</strong> by environment (built from constants)
+- <strong>Standard headers</strong> (from SecurityConstants)</p>
+<h3 id="settings-settingspy"><code>Settings</code> (settings.py)</h3>
+<p>Main configuration class with environment variables support:
+- Server settings (host, port, reload) using DefaultValues
+- Job manager settings (workers, TTL, cleanup) using DefaultValues
+- Storage paths using DefaultValues
+- Security overrides
+- Logging configuration using DefaultValues</p>
+<h2 id="environment-variables">Environment Variables</h2>
+<h3 id="core-settings">Core Settings</h3>
+<pre><code class="language-bash">ENVIRONMENT=development          # development, staging, production
+API_HOST=0.0.0.0                # API server host
+API_PORT=8000                   # API server port
+DEBUG=true                      # Debug mode
+</code></pre>
+<h3 id="job-manager">Job Manager</h3>
+<pre><code class="language-bash">MAX_WORKERS=4                   # Concurrent translation workers
+JOB_TTL_HOURS=3                # Job time-to-live in hours
+CLEANUP_INTERVAL_MINUTES=30     # Cleanup interval
+</code></pre>
+<h3 id="storage">Storage</h3>
+<pre><code class="language-bash">UPLOAD_DIR=uploads              # Upload directory
+OUTPUT_DIR=outputs              # Output directory
+TEMP_DIR=temp                   # Temporary directory
+</code></pre>
+<h3 id="security-overrides-optional">Security Overrides (Optional)</h3>
+<pre><code class="language-bash">CORS_ORIGINS=https://yourfrontend.com,https://www.yourfrontend.com
+TRUSTED_HOSTS=yourfrontend.com,www.yourfrontend.com
+</code></pre>
+<h2 id="environment-specific-defaults">Environment-Specific Defaults</h2>
+<h3 id="development">Development</h3>
+<pre><code class="language-python">CORS_ORIGINS = [&quot;http://localhost:8000&quot;, &quot;http://127.0.0.1:8000&quot;]
+TRUSTED_HOSTS = [&quot;localhost:8000&quot;, &quot;127.0.0.1:8000&quot;, &quot;0.0.0.0:8000&quot;]
+CORS_METHODS = [&quot;*&quot;]
+</code></pre>
+<h3 id="staging">Staging</h3>
+<pre><code class="language-python">CORS_ORIGINS = [&quot;https://staging.yourdomain.com&quot;, &quot;http://localhost:8080&quot;]
+TRUSTED_HOSTS = [&quot;staging.yourdomain.com&quot;, &quot;localhost:8000&quot;, &quot;127.0.0.1:8000&quot;]
+CORS_METHODS = [&quot;*&quot;]
+</code></pre>
+<h3 id="production">Production</h3>
+<pre><code class="language-python">CORS_ORIGINS = [&quot;https://yourfrontend.com&quot;, &quot;https://www.yourfrontend.com&quot;]
+TRUSTED_HOSTS = [&quot;yourfrontend.com&quot;, &quot;www.yourfrontend.com&quot;, &quot;api.yourfrontend.com&quot;]
+CORS_METHODS = [&quot;GET&quot;, &quot;POST&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot;]
+</code></pre>
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="1-development-default">1. Development (Default)</h3>
+<pre><code class="language-bash"># No .env file needed - uses defaults
+python main.py
+</code></pre>
+<h3 id="2-custom-development">2. Custom Development</h3>
+<pre><code class="language-bash"># Create .env file
+echo &quot;MAX_WORKERS=8&quot; &gt; .env
+echo &quot;JOB_TTL_HOURS=6&quot; &gt;&gt; .env
+python main.py
+</code></pre>
+<h3 id="3-production-deployment">3. Production Deployment</h3>
+<pre><code class="language-bash"># Set environment variables
+export ENVIRONMENT=production
+export API_HOST=0.0.0.0
+export API_PORT=8000
+export MAX_WORKERS=8
+export JOB_TTL_HOURS=24
+export DEBUG=false
+
+# Or use .env file
+cp .env.example .env
+# Edit .env with production values
+
+uvicorn api.main:app --host 0.0.0.0 --port 8000
+</code></pre>
+<h3 id="4-custom-domain-configuration">4. Custom Domain Configuration</h3>
+<pre><code class="language-bash"># Override security settings for your domain
+export CORS_ORIGINS=&quot;https://myapp.com,https://www.myapp.com&quot;
+export TRUSTED_HOSTS=&quot;myapp.com,www.myapp.com,api.myapp.com&quot;
+</code></pre>
+<h2 id="security-benefits">Security Benefits</h2>
+<h3 id="before-hardcoded-insecure">✅ Before (Hardcoded - Insecure)</h3>
+<pre><code class="language-python">allow_origins=[&quot;*&quot;]                    # CORS bypass vulnerability
+allowed_hosts=[&quot;*&quot;]                    # Host header injection
+max_workers=4                          # Not configurable
+host=&quot;0.0.0.0&quot;, port=8000             # Not configurable
+</code></pre>
+<h3 id="after-configuration-based-secure">✅ After (Configuration-Based - Secure)</h3>
+<pre><code class="language-python">allow_origins=settings.get_cors_origins()     # Environment-specific
+allowed_hosts=settings.get_trusted_hosts()    # Environment-specific
+max_workers=settings.max_workers               # Configurable
+host=settings.api_host                         # Configurable
+</code></pre>
+<h2 id="customizing-for-your-domains">Customizing for Your Domains</h2>
+<ol>
+<li><strong>Update SecurityConfig</strong> in <code>api/config/settings.py</code>:</li>
+</ol>
+<pre><code class="language-python">PRODUCTION_CORS_ORIGINS = [
+    &quot;https://yourapp.com&quot;,        # Replace with your domain
+    &quot;https://www.yourapp.com&quot;,    # Replace with your domain
+]
+
+PRODUCTION_TRUSTED_HOSTS = [
+    &quot;yourapp.com&quot;,                # Replace with your domain
+    &quot;www.yourapp.com&quot;,            # Replace with your domain
+    &quot;api.yourapp.com&quot;             # Replace with your API domain
+]
+</code></pre>
+<ol>
+<li><strong>Or use environment variables</strong> (recommended for production):</li>
+</ol>
+<pre><code class="language-bash">export CORS_ORIGINS=&quot;https://yourapp.com,https://www.yourapp.com&quot;
+export TRUSTED_HOSTS=&quot;yourapp.com,www.yourapp.com,api.yourapp.com&quot;
+</code></pre>
+<h2 id="migration-benefits">Migration Benefits</h2>
+<ol>
+<li><strong>Security</strong>: Eliminates hardcoded wildcards and unsafe defaults</li>
+<li><strong>Maintainability</strong>: Single source of truth for configuration</li>
+<li><strong>Flexibility</strong>: Easy environment-specific customization</li>
+<li><strong>Deployment</strong>: Simple production configuration via environment variables</li>
+<li><strong>Documentation</strong>: Clear understanding of all configurable options</li>
+</ol>
+<h2 id="validation">Validation</h2>
+<p>The configuration system includes automatic validation:
+- Type checking for all settings
+- Environment variable parsing
+- Default value fallbacks
+- Error messages for invalid configurations</p>
+<h2 id="testing">Testing</h2>
+<pre><code class="language-bash"># Test configuration system
+python -c &quot;from api.config import settings; print(settings.get_cors_origins())&quot;
+
+# Test different environments
+ENVIRONMENT=production python -c &quot;from api.config import settings; print(settings.get_cors_origins())&quot;
+
+# Test custom overrides
+CORS_ORIGINS=&quot;https://test.com&quot; python -c &quot;from api.config import settings; print(settings.get_cors_origins())&quot;
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

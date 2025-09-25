@@ -1,0 +1,1753 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Frontend Design Guide: Bilingual Book Translation Service - bilingual book maker</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#frontend-design-guide-bilingual-book-translation-service" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="bilingual book maker" class="md-header__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bilingual book maker
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Frontend Design Guide: Bilingual Book Translation Service
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../model_lang/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../disclaimer/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Disclaimer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="bilingual book maker" class="md-nav__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    bilingual book maker
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickStart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model_lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model and languages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cmd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command line options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../book_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Translate from different source
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment setting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tweak the prompt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disclaimer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#technology-stack-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Technology Stack Recommendations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Technology Stack Recommendations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#core-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#styling-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      Styling &amp; UI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#development-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Tools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build &amp; Deployment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Structure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uiux-design-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      UI/UX Design Specifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UI/UX Design Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#design-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Design Language
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color-palette" class="md-nav__link">
+    <span class="md-ellipsis">
+      Color Palette
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typography" class="md-nav__link">
+    <span class="md-ellipsis">
+      Typography
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spacing-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spacing System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visual-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Elements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iconography" class="md-nav__link">
+    <span class="md-ellipsis">
+      Iconography
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#page-layouts-wireframes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Page Layouts &amp; Wireframes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Page Layouts &amp; Wireframes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#landing-page-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing Page Layout
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dashboard-layout-authenticated-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dashboard Layout (Authenticated Users)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translation-upload-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Translation Upload Page
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-tracking-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Tracking Page
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component-design-specifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component Design Specifications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Component Design Specifications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#file-upload-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Upload Component
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-selector-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Language Selector Component
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#progress-indicator-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Progress Indicator Component
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#translation-model-selector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Translation Model Selector
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#navigation-header" class="md-nav__link">
+    <span class="md-ellipsis">
+      Navigation Header
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-history-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      File History Table
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#toast-notification-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Toast Notification System
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-experience-flows-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Experience Flows (MVP)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Experience Flows (MVP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#anonymous-user-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anonymous User Journey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registered-user-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registered User Journey
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-recovery-flows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Recovery Flows
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#responsive-design-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Responsive Design Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Responsive Design Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#breakpoint-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Breakpoint System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mobile-first-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mobile-First Approach
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tablet-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tablet Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desktop-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Desktop Enhancement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Integration Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#api-communication-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Communication Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-time-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-time Updates
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-handling_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Handling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caching-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Caching Strategy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Development Workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Development Workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#project-setup-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project Setup Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-system-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build System Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quality-assurance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quality Assurance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deployment-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additional Considerations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additional Considerations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessibility-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accessibility Requirements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Measures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Targets
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internationalization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internationalization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="frontend-design-guide-bilingual-book-translation-service">Frontend Design Guide: Bilingual Book Translation Service</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#technology-stack-recommendations">Technology Stack Recommendations</a></li>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#uiux-design-specifications">UI/UX Design Specifications</a></li>
+<li><a href="#page-layouts--wireframes">Page Layouts &amp; Wireframes</a></li>
+<li><a href="#component-design-specifications">Component Design Specifications</a></li>
+<li><a href="#user-experience-flows">User Experience Flows</a></li>
+<li><a href="#responsive-design-strategy">Responsive Design Strategy</a></li>
+<li><a href="#integration-architecture">Integration Architecture</a></li>
+<li><a href="#development-workflow">Development Workflow</a></li>
+</ol>
+<hr />
+<h2 id="technology-stack-recommendations">Technology Stack Recommendations</h2>
+<h3 id="core-framework">Core Framework</h3>
+<ul>
+<li><strong>React 18</strong>: Latest stable version with concurrent features and improved performance</li>
+<li><strong>TypeScript</strong>: Full type safety for better developer experience and reduced runtime errors</li>
+<li><strong>Vite</strong>: Fast build tool with hot module replacement for optimal development experience</li>
+</ul>
+<h3 id="state-management">State Management</h3>
+<ul>
+<li><strong>Zustand</strong>: Lightweight state management for global app state (user auth, translation jobs)</li>
+<li><strong>React Query (TanStack Query)</strong>: Server state management for API calls, caching, and synchronization</li>
+<li><strong>React Hook Form</strong>: Performant form handling with minimal re-renders</li>
+</ul>
+<h3 id="styling-ui">Styling &amp; UI</h3>
+<ul>
+<li><strong>Tailwind CSS</strong>: Utility-first CSS framework for rapid prototyping and consistent design</li>
+<li><strong>Headless UI</strong>: Unstyled, accessible UI components that integrate seamlessly with Tailwind</li>
+<li><strong>Framer Motion</strong>: Smooth animations and transitions for enhanced user experience</li>
+<li><strong>React Hot Toast</strong>: Clean, customizable toast notifications</li>
+</ul>
+<h3 id="file-handling">File Handling</h3>
+<ul>
+<li><strong>React Dropzone</strong>: Drag-and-drop file upload with validation</li>
+<li><strong>File Type Detection</strong>: Client-side validation for EPUB, TXT, SRT, MD files</li>
+</ul>
+<h3 id="development-tools">Development Tools</h3>
+<ul>
+<li><strong>ESLint + Prettier</strong>: Code formatting and linting</li>
+<li><strong>Husky</strong>: Git hooks for pre-commit validation</li>
+<li><strong>Vitest</strong>: Fast unit testing framework</li>
+<li><strong>React Testing Library</strong>: Component testing with user-centric approach</li>
+<li><strong>Storybook</strong>: Component development and documentation</li>
+</ul>
+<h3 id="build-deployment">Build &amp; Deployment</h3>
+<ul>
+<li><strong>Vite</strong>: Production builds with code splitting and optimization</li>
+<li><strong>Docker</strong>: Containerization for consistent deployment</li>
+<li><strong>GitHub Actions</strong>: CI/CD pipeline for automated testing and deployment</li>
+</ul>
+<hr />
+<h2 id="project-structure">Project Structure</h2>
+<pre><code>frontend/
+├── public/
+│   ├── icons/
+│   └── images/
+├── src/
+│   ├── components/
+│   │   ├── ui/                    # Reusable UI components
+│   │   ├── forms/                 # Form-specific components
+│   │   ├── layout/                # Layout components
+│   │   └── features/              # Feature-specific components
+│   ├── pages/                     # Page components
+│   ├── hooks/                     # Custom React hooks
+│   ├── services/                  # API service functions
+│   ├── stores/                    # Zustand stores
+│   ├── types/                     # TypeScript type definitions
+│   ├── utils/                     # Utility functions
+│   ├── constants/                 # App constants
+│   └── styles/                    # Global styles and Tailwind config
+├── tests/
+│   ├── components/
+│   ├── pages/
+│   └── utils/
+├── docs/
+│   └── components/                # Component documentation
+└── .storybook/                    # Storybook configuration
+</code></pre>
+<hr />
+<h2 id="uiux-design-specifications">UI/UX Design Specifications</h2>
+<h3 id="design-language">Design Language</h3>
+<p><strong>Modern Minimalism with Professional Trust Signals</strong></p>
+<h3 id="color-palette">Color Palette</h3>
+<ul>
+<li><strong>Primary Blue</strong>: #2563EB (Professional, trustworthy)</li>
+<li><strong>Secondary Purple</strong>: #7C3AED (Premium feel)</li>
+<li><strong>Success Green</strong>: #059669 (Completion states)</li>
+<li><strong>Warning Orange</strong>: #EA580C (Attention states)</li>
+<li><strong>Error Red</strong>: #DC2626 (Error states)</li>
+<li><strong>Neutral Grays</strong>: #F8FAFC, #E2E8F0, #64748B, #1E293B</li>
+<li><strong>Background</strong>: #FFFFFF with subtle #F8FAFC sections</li>
+</ul>
+<h3 id="typography">Typography</h3>
+<ul>
+<li><strong>Primary Font</strong>: Inter (Clean, readable, professional)</li>
+<li><strong>Headings</strong>: Font weights 600-700, sizes 24px-48px</li>
+<li><strong>Body Text</strong>: Font weight 400, size 16px, line height 1.6</li>
+<li><strong>Small Text</strong>: Font weight 400, size 14px</li>
+<li><strong>Code/File Names</strong>: JetBrains Mono (monospace)</li>
+</ul>
+<h3 id="spacing-system">Spacing System</h3>
+<ul>
+<li><strong>Base Unit</strong>: 4px</li>
+<li><strong>Component Spacing</strong>: 8px, 16px, 24px, 32px</li>
+<li><strong>Section Spacing</strong>: 48px, 64px, 96px</li>
+<li><strong>Container Max Width</strong>: 1200px with responsive padding</li>
+</ul>
+<h3 id="visual-elements">Visual Elements</h3>
+<ul>
+<li><strong>Border Radius</strong>: 8px for cards, 12px for buttons, 6px for inputs</li>
+<li><strong>Shadows</strong>: Subtle elevation with warm gray shadows</li>
+<li><strong>Borders</strong>: 1px solid with neutral colors</li>
+<li><strong>Focus States</strong>: 2px blue outline with 2px offset</li>
+</ul>
+<h3 id="iconography">Iconography</h3>
+<ul>
+<li><strong>Icon Library</strong>: Heroicons (consistent with Headless UI)</li>
+<li><strong>Icon Sizes</strong>: 16px, 20px, 24px, 32px</li>
+<li><strong>Icon Style</strong>: Outline for most cases, solid for active states</li>
+</ul>
+<hr />
+<h2 id="page-layouts-wireframes">Page Layouts &amp; Wireframes</h2>
+<h3 id="landing-page-layout">Landing Page Layout</h3>
+<p><strong>Header Section</strong>
+- Fixed navigation bar with logo left, auth buttons right
+- Hero section with large headline, subtitle, and primary CTA
+- Visual element: Abstract book/translation graphic or animation</p>
+<p><strong>Features Section</strong>
+- Three-column grid showcasing key features
+- Icons, headlines, and brief descriptions
+- Emphasis on speed, accuracy, and ease of use</p>
+<p><strong>Pricing Tiers Section</strong>
+- Two-column comparison: Free vs Premium
+- Clear feature differentiation
+- Prominent upgrade CTA for premium tier</p>
+<p><strong>Upload Preview Section</strong>
+- Interactive file upload demonstration
+- Supported file types with icons
+- File size and format restrictions clearly stated</p>
+<p><strong>Footer</strong>
+- Links to documentation, support, terms
+- Social media links and company information</p>
+<h3 id="dashboard-layout-authenticated-users">Dashboard Layout (Authenticated Users)</h3>
+<p><strong>Sidebar Navigation</strong>
+- Collapsible sidebar with main navigation items
+- User profile section at top
+- Translation history, settings, billing links</p>
+<p><strong>Main Content Area</strong>
+- Breadcrumb navigation
+- Page-specific content with consistent spacing
+- Action buttons aligned to right</p>
+<p><strong>Status Panel</strong>
+- Real-time job status updates
+- Progress indicators for active translations
+- Quick access to recent translations</p>
+<h3 id="translation-upload-page">Translation Upload Page</h3>
+<p><strong>Centered Card Layout</strong>
+- Large file drop zone as primary focal point
+- Step-by-step process indicator at top
+- Configuration options below upload area
+- Progress through: Upload → Configure → Process → Download</p>
+<p><strong>Configuration Panel</strong>
+- Source and target language selectors
+- Translation model selection (free vs premium)
+- Additional options for premium users
+- Clear pricing information for premium features</p>
+<h3 id="progress-tracking-page">Progress Tracking Page</h3>
+<p><strong>Real-time Dashboard</strong>
+- Large progress circle or bar showing completion percentage
+- Estimated time remaining
+- Current processing step with detailed status
+- Cancel option with confirmation modal</p>
+<p><strong>Job Details Card</strong>
+- File information (name, size, type)
+- Selected languages and model
+- Start time and estimated completion
+- Option to navigate away and return later</p>
+<hr />
+<h2 id="component-design-specifications">Component Design Specifications</h2>
+<h3 id="file-upload-component">File Upload Component</h3>
+<p><strong>Visual Design</strong>
+- Large dashed border rectangle (300px height minimum)
+- Drag-and-drop area with hover state animations
+- Central upload icon (cloud with arrow)
+- Instructional text below icon
+- Supported file types listed at bottom
+- File size limit clearly stated</p>
+<p><strong>Interaction States</strong>
+- Default: Subtle gray border with upload icon
+- Hover: Border color shifts to primary blue
+- Drag Over: Background color changes to light blue
+- Error: Red border with error message
+- Success: Green border with file preview</p>
+<h3 id="language-selector-component">Language Selector Component</h3>
+<p><strong>Design Pattern</strong>
+- Searchable dropdown with flag icons
+- Popular languages at top of list
+- Alphabetical sorting for remaining languages
+- Clear visual distinction between source and target
+- Swap languages button between selectors</p>
+<p><strong>Features</strong>
+- Type-ahead search functionality
+- Flag icons for visual language identification
+- Recent language history for quick selection
+- Validation for same source/target language</p>
+<h3 id="progress-indicator-component">Progress Indicator Component</h3>
+<p><strong>Circular Progress Design</strong>
+- Large central circle with percentage text
+- Animated progress ring in primary color
+- Background ring in light gray
+- Processing stage text below circle
+- Estimated time remaining at bottom</p>
+<p><strong>Linear Progress Alternative</strong>
+- Multi-step progress bar for complex processes
+- Current step highlighted in primary color
+- Completed steps in success green
+- Future steps in light gray
+- Step labels below progress bar</p>
+<h3 id="translation-model-selector">Translation Model Selector</h3>
+<p><strong>Card-Based Layout</strong>
+- Two distinct cards: Free and Premium
+- Clear feature comparison
+- Pricing information for premium
+- Model quality indicators (speed, accuracy)
+- User tier badge for current selection</p>
+<p><strong>Premium Upsell Elements</strong>
+- "Upgrade" badge on premium card
+- Feature comparison tooltips
+- Quality examples or previews
+- Clear call-to-action for account creation</p>
+<h3 id="navigation-header">Navigation Header</h3>
+<p><strong>Layout Structure</strong>
+- Logo/brand on far left
+- Main navigation items in center
+- User account/auth controls on right
+- Responsive hamburger menu for mobile</p>
+<p><strong>Authentication States</strong>
+- Anonymous: Sign In and Sign Up buttons
+- Authenticated: User avatar, dropdown menu
+- Premium badge for upgraded users
+- Logout option in user dropdown</p>
+<h3 id="file-history-table">File History Table</h3>
+<p><strong>Table Design</strong>
+- Clean table with alternating row colors
+- Sortable columns (date, file name, status)
+- Status indicators with color coding
+- Action buttons for download/retry
+- Pagination for large lists</p>
+<p><strong>Status Indicators</strong>
+- Processing: Animated spinner with blue color
+- Completed: Green checkmark icon
+- Failed: Red X icon with error tooltip
+- Cancelled: Gray X icon</p>
+<h3 id="toast-notification-system">Toast Notification System</h3>
+<p><strong>Notification Types</strong>
+- Success: Green background with checkmark
+- Error: Red background with X icon
+- Warning: Orange background with triangle
+- Info: Blue background with info icon</p>
+<p><strong>Behavior</strong>
+- Slide in from top-right corner
+- Auto-dismiss after 5 seconds (except errors)
+- Manual dismiss option
+- Stack multiple notifications
+- Responsive positioning</p>
+<hr />
+<h2 id="user-experience-flows-mvp">User Experience Flows (MVP)</h2>
+<h3 id="anonymous-user-journey">Anonymous User Journey</h3>
+<p><strong>Initial Landing</strong>
+1. User arrives at landing page
+2. Sees clear value proposition: "Translate books instantly"
+3. Views simple upload form with Google Translate (free)
+4. Sees signup prompt for access to better models</p>
+<p><strong>Free Translation Flow</strong>
+1. User drags/selects file for upload
+2. File validation occurs client-side
+3. Selects source and target languages
+4. Only Google Translate available (no premium options)
+5. Clicks "Start Translation"
+6. Uploads file and receives job ID
+7. Redirected to progress tracking page
+8. Monitors basic progress updates
+9. Downloads completed translation
+10. Sees signup prompt for premium models</p>
+<p><strong>Signup Consideration</strong>
+1. User sees "Want better translations?" section
+2. Views benefits: ChatGPT-4, Claude, Gemini Flash
+3. Understands they bring their own API keys
+4. No payment required, just account creation</p>
+<h3 id="registered-user-journey">Registered User Journey</h3>
+<p><strong>Authentication Flow</strong>
+1. User clicks "Sign Up/Login" from header
+2. Simple form with email/password
+3. No social login complexity in MVP
+4. Successful login redirects to main page (same layout)
+5. Failed login shows clear error messages</p>
+<p><strong>Enhanced Translation Flow</strong>
+1. User sees same upload form but with all models available
+2. Models with 🔑 icon require API keys
+3. Can select premium models if API keys configured
+4. Same upload → progress → download flow
+5. No file storage or history tracking</p>
+<p><strong>API Key Setup</strong>
+1. User clicks "API Keys" in navigation
+2. Views simple setup page for each provider
+3. Adds API keys for desired models
+4. Keys are encrypted and not stored permanently
+5. Can test keys and update as needed</p>
+<p><strong>No Complex Management</strong>
+- No dashboards or analytics
+- No translation history or file management
+- No billing or subscription flows
+- No complex user preferences
+- Files automatically cleaned up after hours</p>
+<h3 id="error-recovery-flows">Error Recovery Flows</h3>
+<p><strong>File Upload Errors</strong>
+1. Invalid file type: Clear error message with supported formats
+2. File too large: Error with size limit and compression suggestions
+3. Network error: Retry option with exponential backoff
+4. Server error: Contact support option with error ID</p>
+<p><strong>Translation Failures</strong>
+1. Processing error: Retry option with different model
+2. Timeout: Explanation and retry with smaller chunks
+3. Language detection failure: Manual language selection
+4. API limit reached: Clear explanation and upgrade path</p>
+<hr />
+<h2 id="responsive-design-strategy">Responsive Design Strategy</h2>
+<h3 id="breakpoint-system">Breakpoint System</h3>
+<ul>
+<li><strong>Mobile</strong>: 320px - 767px</li>
+<li><strong>Tablet</strong>: 768px - 1023px</li>
+<li><strong>Desktop</strong>: 1024px - 1439px</li>
+<li><strong>Large Desktop</strong>: 1440px+</li>
+</ul>
+<h3 id="mobile-first-approach">Mobile-First Approach</h3>
+<p><strong>Layout Adaptations</strong>
+- Single column layouts on mobile
+- Collapsible navigation with hamburger menu
+- Touch-friendly button sizes (44px minimum)
+- Optimized file upload for mobile cameras
+- Swipe gestures for table navigation</p>
+<p><strong>Component Responsive Behavior</strong>
+- Language selectors stack vertically on mobile
+- Progress indicators scale to fit screen width
+- Tables become horizontally scrollable
+- Forms use full-width inputs with proper spacing
+- Modals become full-screen on small devices</p>
+<p><strong>Performance Considerations</strong>
+- Progressive image loading
+- Compressed images for mobile devices
+- Reduced animations on slower devices
+- Optimized bundle splitting for mobile
+- Service worker for offline functionality</p>
+<h3 id="tablet-optimization">Tablet Optimization</h3>
+<ul>
+<li>Two-column layouts where appropriate</li>
+<li>Larger touch targets for better usability</li>
+<li>Optimized keyboard interactions</li>
+<li>Portrait and landscape mode support</li>
+<li>Sidebar navigation remains accessible</li>
+</ul>
+<h3 id="desktop-enhancement">Desktop Enhancement</h3>
+<ul>
+<li>Multi-column layouts for efficient space usage</li>
+<li>Hover states and tooltips for better UX</li>
+<li>Keyboard shortcuts for power users</li>
+<li>Drag-and-drop functionality</li>
+<li>Side-by-side comparison views</li>
+</ul>
+<hr />
+<h2 id="integration-architecture">Integration Architecture</h2>
+<h3 id="api-communication-strategy">API Communication Strategy</h3>
+<p><strong>HTTP Client Configuration</strong>
+- Axios or Fetch with interceptors
+- Base URL configuration for environment switching
+- Request/response transformation
+- Error handling with user-friendly messages
+- Retry logic for network failures</p>
+<p><strong>Authentication Integration</strong>
+- Bearer token storage in httpOnly cookies
+- Token refresh mechanism
+- Automatic logout on token expiration
+- Protected route handling
+- API key management for premium users</p>
+<h3 id="real-time-updates">Real-time Updates</h3>
+<p><strong>WebSocket Integration</strong>
+- Connection management with reconnection logic
+- Progress updates for translation jobs
+- Real-time status notifications
+- Heartbeat mechanism for connection health
+- Graceful fallback to polling if needed</p>
+<p><strong>Polling Strategy</strong>
+- Progressive polling intervals (start fast, slow down)
+- Exponential backoff on errors
+- User-aware polling (pause when tab inactive)
+- Automatic stop when job completes
+- Bandwidth-conscious implementation</p>
+<h3 id="file-handling_1">File Handling</h3>
+<p><strong>Upload Strategy</strong>
+- Chunked uploads for large files
+- Progress tracking during upload
+- Resume capability for interrupted uploads
+- Client-side file validation
+- Preview generation for supported formats</p>
+<p><strong>Download Management</strong>
+- Streaming downloads for large files
+- Progress indication during download
+- Automatic filename generation
+- Browser compatibility handling
+- Error recovery for failed downloads</p>
+<h3 id="caching-strategy">Caching Strategy</h3>
+<p><strong>API Response Caching</strong>
+- Translation history cached locally
+- Language lists cached with long TTL
+- User preferences stored locally
+- Job status updates with smart invalidation
+- Offline functionality for cached data</p>
+<p><strong>Asset Caching</strong>
+- Component code splitting
+- Lazy loading for non-critical components
+- Image optimization and caching
+- Font loading optimization
+- Service worker for asset caching</p>
+<hr />
+<h2 id="development-workflow">Development Workflow</h2>
+<h3 id="project-setup-process">Project Setup Process</h3>
+<p><strong>Initial Environment</strong>
+1. Node.js version management with nvm
+2. Package manager preference (npm, yarn, or pnpm)
+3. Environment variable configuration
+4. Local development server setup
+5. Backend API connection configuration</p>
+<p><strong>Development Dependencies</strong>
+1. Code formatting tools installation
+2. Git hooks setup for pre-commit validation
+3. Testing framework configuration
+4. Storybook setup for component development
+5. Build tools and optimization plugins</p>
+<h3 id="build-system-configuration">Build System Configuration</h3>
+<p><strong>Development Build</strong>
+- Hot module replacement for fast iteration
+- Source maps for debugging
+- Development-only features (Redux DevTools)
+- Mock API integration for offline development
+- Error overlay for runtime errors</p>
+<p><strong>Production Build</strong>
+- Code minification and tree shaking
+- Asset optimization and compression
+- Bundle analysis for size optimization
+- Source map generation for error tracking
+- Environment-specific configurations</p>
+<h3 id="testing-strategy">Testing Strategy</h3>
+<p><strong>Unit Testing</strong>
+- Component testing with React Testing Library
+- Hook testing with specialized utilities
+- Utility function testing
+- Mock API responses for isolated testing
+- Coverage requirements and reporting</p>
+<p><strong>Integration Testing</strong>
+- User flow testing with realistic scenarios
+- API integration testing with mock server
+- Error handling and edge case testing
+- Performance testing for critical paths
+- Accessibility testing with automated tools</p>
+<p><strong>End-to-End Testing</strong>
+- Full user journey automation
+- Cross-browser compatibility testing
+- Mobile device testing
+- Performance monitoring in real browsers
+- Visual regression testing</p>
+<h3 id="quality-assurance">Quality Assurance</h3>
+<p><strong>Code Quality Gates</strong>
+- ESLint rules for code consistency
+- Prettier for automatic formatting
+- TypeScript strict mode for type safety
+- Pre-commit hooks for validation
+- Automated dependency vulnerability scanning</p>
+<p><strong>Performance Monitoring</strong>
+- Bundle size tracking and alerts
+- Core Web Vitals monitoring
+- User interaction tracking
+- Error boundary implementation
+- Performance budgets and enforcement</p>
+<h3 id="deployment-pipeline">Deployment Pipeline</h3>
+<p><strong>Staging Environment</strong>
+- Automatic deployment from feature branches
+- Integration testing with staging API
+- Manual QA validation process
+- Performance testing in staging
+- User acceptance testing platform</p>
+<p><strong>Production Deployment</strong>
+- Automated deployment from main branch
+- Blue-green deployment strategy
+- Database migration coordination
+- Feature flag management
+- Rollback procedures and monitoring</p>
+<p><strong>Monitoring and Maintenance</strong>
+- Application performance monitoring
+- Error tracking and alerting
+- User analytics and behavior tracking
+- A/B testing framework
+- Regular dependency updates and security patches</p>
+<hr />
+<h2 id="additional-considerations">Additional Considerations</h2>
+<h3 id="accessibility-requirements">Accessibility Requirements</h3>
+<ul>
+<li>WCAG 2.1 AA compliance</li>
+<li>Keyboard navigation support</li>
+<li>Screen reader optimization</li>
+<li>Color contrast validation</li>
+<li>Focus management for dynamic content</li>
+</ul>
+<h3 id="security-measures">Security Measures</h3>
+<ul>
+<li>Content Security Policy implementation</li>
+<li>XSS prevention mechanisms</li>
+<li>Secure file upload validation</li>
+<li>API request sanitization</li>
+<li>User data protection compliance</li>
+</ul>
+<h3 id="performance-targets">Performance Targets</h3>
+<ul>
+<li>First Contentful Paint: &lt; 1.5s</li>
+<li>Largest Contentful Paint: &lt; 2.5s</li>
+<li>Cumulative Layout Shift: &lt; 0.1</li>
+<li>First Input Delay: &lt; 100ms</li>
+<li>Bundle size: &lt; 300KB gzipped</li>
+</ul>
+<h3 id="internationalization">Internationalization</h3>
+<ul>
+<li>Multi-language UI support</li>
+<li>RTL language compatibility</li>
+<li>Cultural adaptation for different markets</li>
+<li>Date and number formatting</li>
+<li>Currency and region-specific features</li>
+</ul>
+<p>This comprehensive design guide provides the foundation for building a professional, user-friendly frontend for the bilingual book translation service while maintaining focus on the freemium business model and seamless user experience.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

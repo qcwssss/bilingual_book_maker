@@ -1,0 +1,2394 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>AWS Architecture Document: EPUB Translation Service (Ultra-Cost-Optimized) - bilingual book maker</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aws-architecture-document-epub-translation-service-ultra-cost-optimized" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="bilingual book maker" class="md-header__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            bilingual book maker
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              AWS Architecture Document: EPUB Translation Service (Ultra-Cost-Optimized)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation/" class="md-tabs__link">
+          
+  
+  
+  Getting started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../model_lang/" class="md-tabs__link">
+          
+  
+  
+  Usage
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../disclaimer/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Disclaimer
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="bilingual book maker" class="md-nav__button md-logo" aria-label="bilingual book maker" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    bilingual book maker
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    QuickStart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../model_lang/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Model and languages
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cmd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command line options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../book_source/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Translate from different source
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env_settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environment setting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prompt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tweak the prompt
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../disclaimer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Disclaimer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executive Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-level-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      High-Level Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#architecture-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Decisions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updated-requirements-analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updated Requirements Analysis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Updated Requirements Analysis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usage-pattern-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Pattern Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kindle-email-integration-premium-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kindle Email Integration (Premium Feature)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regional-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regional Deployment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#service-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Service Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Service Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compute-layer-ecs-fargate" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compute Layer - ECS Fargate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-storage-layer-amazon-s3" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Storage Layer - Amazon S3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-load-balancing-application-load-balancer" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Load Balancing - Application Load Balancer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-container-registry-amazon-ecr" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Container Registry - Amazon ECR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vpc-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      VPC Design
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Groups
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Design
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-identity-and-access-management-iam" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Identity and Access Management (IAM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-secrets-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Secrets Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-data-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Data Encryption
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-network-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Network Security
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Optimization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cost Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compute-cost-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compute Cost Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-storage-cost-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Storage Cost Optimization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-cost-monitoring-and-alerts" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Cost Monitoring and Alerts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-comparison-traditional-vs-optimized-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Comparison: Traditional vs Optimized Architecture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deployment Strategy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deployment Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CI/CD Pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-blue-green-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Blue-Green Deployment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-environment-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Environment Management
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kindle-email-integration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kindle Email Integration Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Kindle Email Integration Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#premium-feature-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Premium Feature Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-retention-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Retention Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#email-delivery-workflow-future-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Email Delivery Workflow (Future Implementation)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Considerations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-impact-of-kindle-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Impact of Kindle Feature
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-observability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring &amp; Observability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoring &amp; Observability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cloudwatch-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. CloudWatch Metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-logging-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Logging Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-alerting" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Alerting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-distributed-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Distributed Tracing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#disaster-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Disaster Recovery
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Disaster Recovery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-backup-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Backup Strategy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-multi-region-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Multi-Region Architecture
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-business-continuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Business Continuity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terraform-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Terraform Implementation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Terraform Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#infrastructure-as-code-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Infrastructure as Code Structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#core-terraform-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Terraform Modules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#environment-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Monitoring
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-runbook" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operational Runbook
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Operational Runbook">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deployment-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Deployment Checklist
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-incident-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Incident Response
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scaling-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Scaling Operations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-compliance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Compliance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Compliance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-security-controls" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Security Controls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-compliance-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Compliance Framework
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="aws-architecture-document-epub-translation-service-ultra-cost-optimized">AWS Architecture Document: EPUB Translation Service (Ultra-Cost-Optimized)</h1>
+<h2 id="executive-summary">Executive Summary</h2>
+<p>This document outlines a lean, ultra-cost-optimized AWS architecture for deploying the EPUB Translation Service, specifically designed for very low initial usage (~10 translations/month) with ability to scale to ~1000/month at high growth.</p>
+<p><strong>Key Optimizations:</strong>
+- <strong>67% cost reduction</strong>: $55/month vs $166/month traditional architecture
+- <strong>Scale-to-zero compute</strong>: ECS tasks run only when needed (~2 hours/month)
+- <strong>Single AZ deployment</strong>: 50% savings on NAT Gateway costs
+- <strong>Aggressive lifecycle policies</strong>: 3-7 day file retention for Kindle email feature
+- <strong>Simplified monitoring</strong>: Basic logging sufficient for low usage patterns</p>
+<p>The service provides synchronous translation of EPUB files via a FastAPI-based REST API, supporting multiple translation models (OpenAI, Claude, Gemini, DeepL) with secure API key management in AWS Secrets Manager and temporary file storage optimized for the upcoming premium Kindle email delivery feature.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#architecture-overview">Architecture Overview</a></li>
+<li><a href="#service-components">Service Components</a></li>
+<li><a href="#network-architecture">Network Architecture</a></li>
+<li><a href="#security-design">Security Design</a></li>
+<li><a href="#cost-optimization">Cost Optimization</a></li>
+<li><a href="#deployment-strategy">Deployment Strategy</a></li>
+<li><a href="#monitoring--observability">Monitoring &amp; Observability</a></li>
+<li><a href="#disaster-recovery">Disaster Recovery</a></li>
+<li><a href="#terraform-implementation">Terraform Implementation</a></li>
+</ol>
+<hr />
+<h2 id="architecture-overview">Architecture Overview</h2>
+<h3 id="high-level-architecture">High-Level Architecture</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                           Internet                               │
+└─────────────────────┬───────────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────────┐
+│                CloudFront CDN                                   │
+│          (Optional - for file downloads)                        │
+└─────────────────────┬───────────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────────┐
+│              Application Load Balancer                          │
+│                    (ALB)                                        │
+└─────────────────────┬───────────────────────────────────────────┘
+                      │
+┌─────────────────────▼───────────────────────────────────────────┐
+│                    VPC                                          │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │              Public Subnets                             │    │
+│  │         (Multi-AZ: us-west-2a, us-west-2b)            │    │
+│  └─────────────────────┬───────────────────────────────────┘    │
+│                        │                                        │
+│  ┌─────────────────────▼───────────────────────────────────┐    │
+│  │             Private Subnets                             │    │
+│  │         (Multi-AZ: us-west-2a, us-west-2b)            │    │
+│  │                                                         │    │
+│  │   ┌──────────────┐    ┌──────────────┐                │    │
+│  │   │ ECS Fargate  │    │ ECS Fargate  │                │    │
+│  │   │   Task 1     │    │   Task 2     │                │    │
+│  │   │              │    │              │                │    │
+│  │   │ EPUB Trans.  │    │ EPUB Trans.  │                │    │
+│  │   │   Service    │    │   Service    │                │    │
+│  │   └──────────────┘    └──────────────┘                │    │
+│  │                                                         │    │
+│  └─────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    S3 Storage                                   │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
+│  │    Uploads      │  │    Results      │  │    Backups      │  │
+│  │   Bucket        │  │   Bucket        │  │   Bucket        │  │
+│  │                 │  │                 │  │                 │  │
+│  │ Lifecycle: 7d   │  │ Lifecycle: 30d  │  │ Lifecycle: 1y   │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                Supporting Services                              │
+│                                                                 │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐            │
+│  │ AWS Secrets │  │ CloudWatch  │  │  Parameter  │            │
+│  │  Manager    │  │   Logs      │  │   Store     │            │
+│  └─────────────┘  └─────────────┘  └─────────────┘            │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="architecture-decisions">Architecture Decisions</h3>
+<p><strong>Compute Choice: ECS Fargate</strong>
+- <strong>Selected</strong>: ECS Fargate over EC2/Lambda
+- <strong>Rationale</strong>:
+  - Synchronous processing (1-10 minutes) exceeds Lambda timeout limits
+  - No server management overhead compared to EC2
+  - Pay-per-use model for sporadic workloads
+  - Easy auto-scaling and container orchestration
+  - Cost-effective for variable workloads</p>
+<p><strong>Storage Strategy: S3 with Intelligent Tiering</strong>
+- Multi-bucket approach for lifecycle management
+- Presigned URLs for secure file access
+- CloudFront integration for global distribution</p>
+<hr />
+<h2 id="updated-requirements-analysis">Updated Requirements Analysis</h2>
+<h3 id="usage-pattern-optimization">Usage Pattern Optimization</h3>
+<ul>
+<li><strong>Initial Usage</strong>: ~10 translations/month (ultra-low volume)</li>
+<li><strong>Growth Target</strong>: ~1000 translations/month (high growth scenario)</li>
+<li><strong>Activity Pattern</strong>: Sporadic usage with long idle periods</li>
+<li><strong>Cost Sensitivity</strong>: High priority on cost optimization</li>
+</ul>
+<h3 id="kindle-email-integration-premium-feature">Kindle Email Integration (Premium Feature)</h3>
+<ul>
+<li><strong>File Retention</strong>: 3-7 days for email delivery</li>
+<li><strong>Storage Requirements</strong>: Temporary storage for processed EPUBs</li>
+<li><strong>Email Service</strong>: Future integration with SES for automated delivery</li>
+<li><strong>Premium Users</strong>: Charged for advanced translation models</li>
+</ul>
+<h3 id="regional-deployment">Regional Deployment</h3>
+<ul>
+<li><strong>Primary Region</strong>: us-west-2 (user preference)</li>
+<li><strong>Availability</strong>: Single AZ sufficient (cost optimization)</li>
+<li><strong>Backup Strategy</strong>: Code in Git, no data replication needed</li>
+</ul>
+<hr />
+<h2 id="service-components">Service Components</h2>
+<h3 id="1-compute-layer-ecs-fargate">1. Compute Layer - ECS Fargate</h3>
+<p><strong>ECS Cluster Configuration:</strong></p>
+<pre><code class="language-yaml">Service: epub-translator-service
+Cluster: epub-translator-cluster
+Launch Type: Fargate
+Platform Version: 1.4.0
+
+Task Definition:
+  CPU: 512 (0.5 vCPU)  # Right-sized for low usage
+  Memory: 1024 MB (1 GB)
+  Network Mode: awsvpc
+
+Container Configuration:
+  Image: {account-id}.dkr.ecr.us-west-2.amazonaws.com/epub-translator:latest
+  Port: 8000
+  Environment Variables:
+    - STORAGE_MODE=s3
+    - S3_BUCKET=epub-translator-files
+    - AWS_REGION=us-west-2
+    - LOG_LEVEL=INFO
+    - KINDLE_EMAIL_ENABLED=true
+    - FILE_RETENTION_DAYS=7
+</code></pre>
+<p><strong>Auto Scaling Configuration:</strong></p>
+<pre><code class="language-yaml">Target Tracking Scaling:
+  - Metric: CPU Utilization
+    Target: 70%
+    Scale Out Cooldown: 300s
+    Scale In Cooldown: 300s
+
+  - Metric: Memory Utilization
+    Target: 80%
+    Scale Out Cooldown: 300s
+    Scale In Cooldown: 300s
+
+Capacity:
+  Minimum: 1 task
+  Maximum: 10 tasks
+  Desired: 2 tasks
+</code></pre>
+<h3 id="2-storage-layer-amazon-s3">2. Storage Layer - Amazon S3</h3>
+<p><strong>Bucket Strategy:</strong></p>
+<pre><code class="language-yaml">Primary Storage Bucket: epub-translator-files
+├── uploads/{job_id}/
+│   └── original.epub
+├── results/{job_id}/
+│   └── translated.epub
+└── temp/{job_id}/
+    └── processing files
+
+Backup Bucket: epub-translator-backups
+├── daily-snapshots/
+└── configuration-backups/
+
+Lifecycle Policies:
+  uploads/: Delete after 7 days
+  results/: Transition to IA after 30 days, Glacier after 90 days
+  temp/: Delete after 1 day
+</code></pre>
+<p><strong>S3 Security Configuration:</strong></p>
+<pre><code class="language-yaml">Bucket Policy:
+  - Allow ECS Task Role read/write access
+  - Deny public access
+  - Enable versioning for results bucket
+  - Enable server-side encryption (AES-256)
+
+CORS Configuration:
+  - Allow Origins: Application domains
+  - Allow Methods: GET, POST, PUT
+  - Allow Headers: Content-Type, Authorization
+</code></pre>
+<h3 id="3-load-balancing-application-load-balancer">3. Load Balancing - Application Load Balancer</h3>
+<p><strong>ALB Configuration:</strong></p>
+<pre><code class="language-yaml">Load Balancer: epub-translator-alb
+Type: Application Load Balancer
+Scheme: Internet-facing
+Security Groups:
+  - Allow HTTP/HTTPS from 0.0.0.0/0
+  - Allow outbound to ECS security group
+
+Target Group:
+  Protocol: HTTP
+  Port: 8000
+  Health Check:
+    Path: /health
+    Interval: 30s
+    Timeout: 10s
+    Healthy Threshold: 3
+    Unhealthy Threshold: 2
+
+Listeners:
+  - Port 80: Redirect to HTTPS
+  - Port 443: Forward to target group
+</code></pre>
+<h3 id="4-container-registry-amazon-ecr">4. Container Registry - Amazon ECR</h3>
+<p><strong>ECR Repository:</strong></p>
+<pre><code class="language-yaml">Repository: epub-translator
+Lifecycle Policy:
+  - Keep last 10 images
+  - Delete untagged images after 1 day
+  - Keep production tags indefinitely
+
+Image Scanning:
+  - Scan on push: Enabled
+  - Enhanced scanning: Enabled for vulnerabilities
+</code></pre>
+<hr />
+<h2 id="network-architecture">Network Architecture</h2>
+<h3 id="vpc-design">VPC Design</h3>
+<pre><code class="language-yaml">VPC Configuration:
+  CIDR: 10.0.0.0/16
+
+Subnets:
+  Public Subnets:
+    - 10.0.1.0/24 (us-west-2a) - ALB
+    - 10.0.2.0/24 (us-west-2b) - ALB
+
+  Private Subnets:
+    - 10.0.10.0/24 (us-west-2a) - ECS Tasks
+    - 10.0.20.0/24 (us-west-2b) - ECS Tasks
+
+NAT Gateway:
+  - 1 NAT Gateway per AZ for high availability
+  - Placed in public subnets
+
+Internet Gateway:
+  - Single IGW for public subnet internet access
+</code></pre>
+<h3 id="security-groups">Security Groups</h3>
+<pre><code class="language-yaml">ALB Security Group:
+  Inbound:
+    - Port 80: 0.0.0.0/0 (HTTP)
+    - Port 443: 0.0.0.0/0 (HTTPS)
+  Outbound:
+    - Port 8000: ECS Security Group
+
+ECS Security Group:
+  Inbound:
+    - Port 8000: ALB Security Group
+  Outbound:
+    - Port 443: 0.0.0.0/0 (HTTPS for external APIs)
+    - Port 80: 0.0.0.0/0 (HTTP)
+</code></pre>
+<hr />
+<h2 id="security-design">Security Design</h2>
+<h3 id="1-identity-and-access-management-iam">1. Identity and Access Management (IAM)</h3>
+<p><strong>ECS Task Role:</strong></p>
+<pre><code class="language-json">{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;s3:GetObject&quot;,
+        &quot;s3:PutObject&quot;,
+        &quot;s3:DeleteObject&quot;
+      ],
+      &quot;Resource&quot;: [
+        &quot;arn:aws:s3:::epub-translator-files/*&quot;
+      ]
+    },
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;s3:ListBucket&quot;
+      ],
+      &quot;Resource&quot;: [
+        &quot;arn:aws:s3:::epub-translator-files&quot;
+      ]
+    },
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;secretsmanager:GetSecretValue&quot;
+      ],
+      &quot;Resource&quot;: [
+        &quot;arn:aws:secretsmanager:us-west-2:*:secret:epub-translator/*&quot;
+      ]
+    },
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;logs:CreateLogGroup&quot;,
+        &quot;logs:CreateLogStream&quot;,
+        &quot;logs:PutLogEvents&quot;
+      ],
+      &quot;Resource&quot;: &quot;*&quot;
+    }
+  ]
+}
+</code></pre>
+<p><strong>ECS Execution Role:</strong></p>
+<pre><code class="language-json">{
+  &quot;Version&quot;: &quot;2012-10-17&quot;,
+  &quot;Statement&quot;: [
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;ecr:GetAuthorizationToken&quot;,
+        &quot;ecr:BatchCheckLayerAvailability&quot;,
+        &quot;ecr:GetDownloadUrlForLayer&quot;,
+        &quot;ecr:BatchGetImage&quot;
+      ],
+      &quot;Resource&quot;: &quot;*&quot;
+    },
+    {
+      &quot;Effect&quot;: &quot;Allow&quot;,
+      &quot;Action&quot;: [
+        &quot;logs:CreateLogGroup&quot;,
+        &quot;logs:CreateLogStream&quot;,
+        &quot;logs:PutLogEvents&quot;
+      ],
+      &quot;Resource&quot;: &quot;*&quot;
+    }
+  ]
+}
+</code></pre>
+<h3 id="2-secrets-management">2. Secrets Management</h3>
+<p><strong>AWS Secrets Manager Configuration:</strong></p>
+<pre><code class="language-yaml">Secrets:
+  epub-translator/openai-key:
+    Type: String
+    Encryption: KMS
+    Rotation: Manual
+
+  epub-translator/claude-key:
+    Type: String
+    Encryption: KMS
+    Rotation: Manual
+
+  epub-translator/gemini-key:
+    Type: String
+    Encryption: KMS
+    Rotation: Manual
+
+  epub-translator/deepl-key:
+    Type: String
+    Encryption: KMS
+    Rotation: Manual
+
+Access Pattern:
+  - ECS tasks retrieve secrets at runtime
+  - No hardcoded API keys in container images
+  - Automatic secret rotation capability
+</code></pre>
+<h3 id="3-data-encryption">3. Data Encryption</h3>
+<pre><code class="language-yaml">Encryption at Rest:
+  S3: AES-256 server-side encryption
+  ECS Logs: CloudWatch Logs encryption with KMS
+  Secrets Manager: AWS KMS encryption
+
+Encryption in Transit:
+  ALB: TLS 1.2+ with AWS Certificate Manager
+  S3: HTTPS-only bucket policy
+  External APIs: TLS 1.2+ for translation services
+</code></pre>
+<h3 id="4-network-security">4. Network Security</h3>
+<pre><code class="language-yaml">Network ACLs:
+  - Default VPC NACLs (allow all)
+  - Security groups provide granular control
+
+VPC Flow Logs:
+  - Enabled for all VPC traffic
+  - Stored in CloudWatch Logs
+  - Retention: 30 days
+
+AWS WAF (Optional):
+  - Rate limiting: 1000 requests/5 minutes per IP
+  - SQL injection protection
+  - XSS protection
+  - IP whitelist/blacklist capability
+</code></pre>
+<hr />
+<h2 id="cost-optimization">Cost Optimization</h2>
+<h3 id="1-compute-cost-optimization">1. Compute Cost Optimization</h3>
+<p><strong>ECS Fargate Optimization:</strong></p>
+<pre><code class="language-yaml">Spot Capacity Providers:
+  - 70% On-Demand capacity
+  - 30% Spot capacity for cost savings
+  - Spot allocation strategy: diversified
+
+Right-sizing Strategy:
+  Production: 1 vCPU, 2GB RAM
+  Development: 0.5 vCPU, 1GB RAM
+
+Auto-scaling:
+  - Scale to zero during low usage periods
+  - Target tracking based on CPU/Memory
+  - Predictive scaling for known patterns
+</code></pre>
+<p><strong>Monthly Cost Estimate (Production):</strong></p>
+<pre><code>ECS Fargate (Average 2 tasks):
+  - 2 tasks × 1 vCPU × $0.04048/hour × 730 hours = $59.10
+  - 2 tasks × 2GB × $0.004445/hour × 730 hours = $6.49
+
+ALB:
+  - $0.0225/hour × 730 hours = $16.43
+  - $0.008/LCU × estimated 5 LCUs = $0.04
+
+NAT Gateway (2 AZs):
+  - 2 × $0.045/hour × 730 hours = $65.70
+  - Data processing: ~$0.045/GB × estimated 100GB = $4.50
+
+Total Compute: ~$152/month
+</code></pre>
+<h3 id="2-storage-cost-optimization">2. Storage Cost Optimization</h3>
+<p><strong>S3 Cost Strategy:</strong></p>
+<pre><code class="language-yaml">Intelligent Tiering:
+  - Automatic transition to IA after 30 days
+  - Archive to Glacier after 90 days
+  - Delete uploads after 7 days
+
+Transfer Optimization:
+  - S3 Transfer Acceleration for global users
+  - CloudFront for frequently accessed files
+  - Multipart uploads for large files
+
+Monthly Storage Estimate:
+  - Standard: 100GB × $0.023 = $2.30
+  - IA: 50GB × $0.0125 = $0.63
+  - Requests: 10,000 × $0.0004 = $4.00
+
+Total Storage: ~$7/month
+</code></pre>
+<h3 id="3-cost-monitoring-and-alerts">3. Cost Monitoring and Alerts</h3>
+<pre><code class="language-yaml">CloudWatch Billing Alerts (Adjusted for Low Usage):
+  - Alert when monthly cost &gt; $70
+  - Alert when daily cost &gt; $3
+  - Budget tracking with $55/month baseline
+
+Cost Allocation Tags:
+  - Environment: production/development
+  - Project: epub-translator
+  - Owner: team-name
+  - CostCenter: department
+
+AWS Cost Explorer:
+  - Monthly cost reviews (reduced frequency)
+  - Basic resource utilization analysis
+  - Focus on NAT Gateway and ALB optimization
+</code></pre>
+<h3 id="cost-comparison-traditional-vs-optimized-architecture">Cost Comparison: Traditional vs Optimized Architecture</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Traditional</th>
+<th>Optimized</th>
+<th>Savings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ECS Compute</td>
+<td>$65.59</td>
+<td>$0.59</td>
+<td>99.1%</td>
+</tr>
+<tr>
+<td>NAT Gateway</td>
+<td>$70.20</td>
+<td>$33.08</td>
+<td>52.9%</td>
+</tr>
+<tr>
+<td>S3 Storage</td>
+<td>$3.45</td>
+<td>$1.04</td>
+<td>69.9%</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>$2.50</td>
+<td>$0.50</td>
+<td>80.0%</td>
+</tr>
+<tr>
+<td><strong>Total Monthly</strong></td>
+<td><strong>$165.61</strong></td>
+<td><strong>$55.05</strong></td>
+<td><strong>66.8%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Optimization Strategies Applied:</strong>
+1. <strong>Scale-to-Zero</strong>: ECS tasks run only ~2 hours/month vs 730 hours
+2. <strong>Single AZ</strong>: Eliminated second NAT Gateway and reduced complexity
+3. <strong>Aggressive Lifecycle</strong>: Files deleted after 1-7 days vs 30-90 days
+4. <strong>Basic Monitoring</strong>: Essential alerts only, reduced log retention</p>
+<hr />
+<h2 id="deployment-strategy">Deployment Strategy</h2>
+<h3 id="1-cicd-pipeline">1. CI/CD Pipeline</h3>
+<p><strong>GitHub Actions Workflow:</strong></p>
+<pre><code class="language-yaml">name: Deploy EPUB Translator
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: |
+          python -m pytest tests/
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t epub-translator .
+          docker tag epub-translator:latest $ECR_REPOSITORY:latest
+          docker tag epub-translator:latest $ECR_REPOSITORY:$GITHUB_SHA
+          docker push $ECR_REPOSITORY:latest
+          docker push $ECR_REPOSITORY:$GITHUB_SHA
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Deploy to ECS
+        run: |
+          aws ecs update-service \
+            --cluster epub-translator-cluster \
+            --service epub-translator-service \
+            --force-new-deployment
+</code></pre>
+<h3 id="2-blue-green-deployment">2. Blue-Green Deployment</h3>
+<pre><code class="language-yaml">Deployment Strategy:
+  Type: Rolling update
+  Maximum percent: 200%
+  Minimum healthy percent: 50%
+
+Health Checks:
+  - ALB health checks on /health endpoint
+  - ECS service health validation
+  - CloudWatch alarm-based rollback
+
+Rollback Strategy:
+  - Automatic rollback on health check failures
+  - Manual rollback capability via AWS CLI
+  - Previous task definition retention
+</code></pre>
+<h3 id="3-environment-management">3. Environment Management</h3>
+<pre><code class="language-yaml">Environments:
+  Development:
+    - Local deployment
+    - File storage mode for testing
+    - No AWS costs during development
+
+  Staging:
+    - Single AZ deployment (cost optimization)
+    - Minimal scale (0-1 tasks)
+    - Basic S3 setup
+
+  Production:
+    - Single AZ deployment (optimized for low usage)
+    - Scale-to-zero capability
+    - Full S3 lifecycle management
+    - Kindle email integration enabled
+</code></pre>
+<hr />
+<h2 id="kindle-email-integration-architecture">Kindle Email Integration Architecture</h2>
+<h3 id="premium-feature-overview">Premium Feature Overview</h3>
+<p>The Kindle email delivery feature allows premium users to automatically receive translated EPUBs via email, directly to their Kindle devices. This requires temporary file storage and future integration with Amazon SES.</p>
+<h3 id="file-retention-strategy">File Retention Strategy</h3>
+<pre><code class="language-yaml">Storage Buckets for Kindle Integration:
+  epub-translator-files/kindle/{job_id}/
+    - Translated EPUB files
+    - User metadata for email delivery
+    - Retention: 7 days maximum
+    - Lifecycle: Auto-delete after delivery window
+
+File Access Patterns:
+  - Upload: Immediate after translation completion
+  - Access: Within 24-48 hours for email delivery
+  - Cleanup: Automatic after 7 days
+</code></pre>
+<h3 id="email-delivery-workflow-future-implementation">Email Delivery Workflow (Future Implementation)</h3>
+<pre><code class="language-yaml">SES Integration (Phase 2):
+  1. Translation completed → Store in kindle/ prefix
+  2. Queue email delivery job
+  3. SES sends EPUB attachment to user's Kindle email
+  4. Delivery confirmation → File cleanup triggered
+  5. Failed delivery → Retry logic with exponential backoff
+
+Email Template:
+  - Subject: &quot;Your translated EPUB is ready&quot;
+  - Attachment: translated.epub
+  - Body: Simple HTML with download link backup
+</code></pre>
+<h3 id="security-considerations">Security Considerations</h3>
+<pre><code class="language-yaml">User Data Protection:
+  - No email addresses stored in S3 bucket names
+  - Temporary file access via presigned URLs only
+  - Email delivery logs in CloudWatch (retention: 7 days)
+  - GDPR compliance: Files auto-deleted after retention period
+
+Premium User Management:
+  - API key validation for premium features
+  - Usage tracking for billing purposes
+  - Rate limiting for premium endpoints
+</code></pre>
+<h3 id="cost-impact-of-kindle-feature">Cost Impact of Kindle Feature</h3>
+<pre><code class="language-yaml">Additional Monthly Costs:
+  SES Email Delivery: $0.10 per 1000 emails (~$0.001/month for 10 emails)
+  Extra S3 Storage: Minimal (files deleted after 7 days)
+  CloudWatch Logs: Included in basic logging budget
+
+Total Impact: &lt;$1/month additional cost
+</code></pre>
+<hr />
+<h2 id="monitoring-observability">Monitoring &amp; Observability</h2>
+<h3 id="1-cloudwatch-metrics">1. CloudWatch Metrics</h3>
+<p><strong>Application Metrics:</strong></p>
+<pre><code class="language-yaml">Custom Metrics:
+  - epub_translations_total (Counter)
+  - epub_translation_duration_seconds (Histogram)
+  - epub_translation_file_size_bytes (Histogram)
+  - epub_translation_errors_total (Counter)
+  - active_translation_jobs (Gauge)
+
+ECS Metrics:
+  - CPUUtilization
+  - MemoryUtilization
+  - RunningTaskCount
+  - PendingTaskCount
+
+ALB Metrics:
+  - RequestCount
+  - TargetResponseTime
+  - HTTPCode_Target_2XX_Count
+  - HTTPCode_Target_5XX_Count
+</code></pre>
+<p><strong>CloudWatch Dashboards:</strong></p>
+<pre><code class="language-yaml">Operational Dashboard:
+  - Service health overview
+  - Request volume and latency
+  - Error rates
+  - Infrastructure utilization
+
+Business Dashboard:
+  - Translation job metrics
+  - File size distribution
+  - Popular translation models
+  - Geographic usage patterns
+</code></pre>
+<h3 id="2-logging-strategy">2. Logging Strategy</h3>
+<pre><code class="language-yaml">Log Groups:
+  /aws/ecs/epub-translator:
+    Retention: 30 days
+    Encryption: Enabled
+
+Log Structure:
+  Level: INFO, WARNING, ERROR
+  Format: JSON
+  Fields:
+    - timestamp
+    - level
+    - message
+    - job_id
+    - user_id (if applicable)
+    - model_used
+    - file_size
+    - duration
+    - error_details
+</code></pre>
+<h3 id="3-alerting">3. Alerting</h3>
+<pre><code class="language-yaml">Critical Alerts:
+  - Service down (all tasks unhealthy)
+  - Error rate &gt; 5%
+  - Response time &gt; 30 seconds
+  - No successful translations in 1 hour
+
+Warning Alerts:
+  - CPU utilization &gt; 80%
+  - Memory utilization &gt; 85%
+  - Error rate &gt; 2%
+  - Response time &gt; 15 seconds
+
+Cost Alerts:
+  - Daily spend &gt; $10
+  - Monthly spend &gt; $250
+  - Unexpected cost spikes
+</code></pre>
+<h3 id="4-distributed-tracing">4. Distributed Tracing</h3>
+<pre><code class="language-yaml">AWS X-Ray Integration:
+  - Trace translation requests end-to-end
+  - Monitor external API calls
+  - Identify performance bottlenecks
+  - Track error propagation
+
+Implementation:
+  - X-Ray SDK in FastAPI application
+  - Automatic subsegment creation
+  - Custom annotations for business metrics
+</code></pre>
+<hr />
+<h2 id="disaster-recovery">Disaster Recovery</h2>
+<h3 id="1-backup-strategy">1. Backup Strategy</h3>
+<pre><code class="language-yaml">S3 Cross-Region Replication:
+  Source: us-west-2
+  Destination: us-west-2
+  Objects: All results and critical uploads
+
+ECS Configuration Backup:
+  - Task definitions in version control
+  - Service configurations in Terraform
+  - Parameter Store values backed up daily
+
+Database Backup (Future):
+  - RDS automated backups (7 days retention)
+  - Cross-region backup replication
+  - Point-in-time recovery capability
+</code></pre>
+<h3 id="2-multi-region-architecture">2. Multi-Region Architecture</h3>
+<pre><code class="language-yaml">Primary Region: us-west-2
+Secondary Region: us-west-2
+
+Failover Strategy:
+  - Route 53 health checks on ALB
+  - Automatic DNS failover to secondary region
+  - Manual service activation in secondary region
+
+Recovery Time Objective (RTO): 15 minutes
+Recovery Point Objective (RPO): 5 minutes
+</code></pre>
+<h3 id="3-business-continuity">3. Business Continuity</h3>
+<pre><code class="language-yaml">Service Dependencies:
+  - External translation APIs (OpenAI, Claude, etc.)
+  - AWS services availability
+  - DNS resolution
+
+Contingency Plans:
+  - Multi-model fallback for translation APIs
+  - Rate limiting to prevent service exhaustion
+  - Graceful degradation for non-critical features
+  - Status page for user communication
+</code></pre>
+<hr />
+<h2 id="terraform-implementation">Terraform Implementation</h2>
+<h3 id="infrastructure-as-code-structure">Infrastructure as Code Structure</h3>
+<pre><code>terraform/
+├── environments/
+│   ├── dev/
+│   ├── staging/
+│   └── prod/
+├── modules/
+│   ├── vpc/
+│   ├── ecs/
+│   ├── alb/
+│   ├── s3/
+│   ├── iam/
+│   └── monitoring/
+├── backend.tf
+├── variables.tf
+└── outputs.tf
+</code></pre>
+<h3 id="core-terraform-modules">Core Terraform Modules</h3>
+<p><strong>VPC Module (<code>modules/vpc/main.tf</code>):</strong></p>
+<pre><code class="language-hcl">resource &quot;aws_vpc&quot; &quot;main&quot; {
+  cidr_block           = var.vpc_cidr
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  tags = {
+    Name        = &quot;${var.project_name}-vpc&quot;
+    Environment = var.environment
+  }
+}
+
+resource &quot;aws_subnet&quot; &quot;public&quot; {
+  count             = length(var.availability_zones)
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.public_subnet_cidrs[count.index]
+  availability_zone = var.availability_zones[count.index]
+
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = &quot;${var.project_name}-public-${count.index + 1}&quot;
+    Type = &quot;Public&quot;
+  }
+}
+
+resource &quot;aws_subnet&quot; &quot;private&quot; {
+  count             = length(var.availability_zones)
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.private_subnet_cidrs[count.index]
+  availability_zone = var.availability_zones[count.index]
+
+  tags = {
+    Name = &quot;${var.project_name}-private-${count.index + 1}&quot;
+    Type = &quot;Private&quot;
+  }
+}
+</code></pre>
+<p><strong>ECS Module (<code>modules/ecs/main.tf</code>):</strong></p>
+<pre><code class="language-hcl">resource &quot;aws_ecs_cluster&quot; &quot;main&quot; {
+  name = &quot;${var.project_name}-cluster&quot;
+
+  setting {
+    name  = &quot;containerInsights&quot;
+    value = &quot;enabled&quot;
+  }
+
+  capacity_providers = [&quot;FARGATE&quot;, &quot;FARGATE_SPOT&quot;]
+
+  default_capacity_provider_strategy {
+    capacity_provider = &quot;FARGATE&quot;
+    weight           = 70
+  }
+
+  default_capacity_provider_strategy {
+    capacity_provider = &quot;FARGATE_SPOT&quot;
+    weight           = 30
+  }
+}
+
+resource &quot;aws_ecs_task_definition&quot; &quot;app&quot; {
+  family                   = &quot;${var.project_name}-app&quot;
+  network_mode             = &quot;awsvpc&quot;
+  requires_compatibilities = [&quot;FARGATE&quot;]
+  cpu                      = var.task_cpu
+  memory                   = var.task_memory
+  execution_role_arn       = aws_iam_role.ecs_execution_role.arn
+  task_role_arn           = aws_iam_role.ecs_task_role.arn
+
+  container_definitions = jsonencode([
+    {
+      name  = &quot;epub-translator&quot;
+      image = &quot;${var.ecr_repository_url}:latest&quot;
+
+      portMappings = [
+        {
+          containerPort = 8000
+          protocol      = &quot;tcp&quot;
+        }
+      ]
+
+      environment = [
+        {
+          name  = &quot;STORAGE_MODE&quot;
+          value = &quot;s3&quot;
+        },
+        {
+          name  = &quot;S3_BUCKET&quot;
+          value = var.s3_bucket_name
+        },
+        {
+          name  = &quot;AWS_REGION&quot;
+          value = var.aws_region
+        }
+      ]
+
+      secrets = [
+        {
+          name      = &quot;OPENAI_API_KEY&quot;
+          valueFrom = &quot;${aws_secretsmanager_secret.openai_key.arn}&quot;
+        }
+      ]
+
+      logConfiguration = {
+        logDriver = &quot;awslogs&quot;
+        options = {
+          awslogs-group         = aws_cloudwatch_log_group.app.name
+          awslogs-region        = var.aws_region
+          awslogs-stream-prefix = &quot;ecs&quot;
+        }
+      }
+    }
+  ])
+}
+</code></pre>
+<h3 id="environment-configuration">Environment Configuration</h3>
+<p><strong>Production (<code>environments/prod/terraform.tfvars</code>):</strong></p>
+<pre><code class="language-hcl"># Project
+project_name = &quot;epub-translator&quot;
+environment  = &quot;prod&quot;
+
+# VPC
+vpc_cidr = &quot;10.0.0.0/16&quot;
+availability_zones = [&quot;us-west-2a&quot;, &quot;us-west-2b&quot;]
+public_subnet_cidrs = [&quot;10.0.1.0/24&quot;, &quot;10.0.2.0/24&quot;]
+private_subnet_cidrs = [&quot;10.0.10.0/24&quot;, &quot;10.0.20.0/24&quot;]
+
+# ECS
+task_cpu    = 1024
+task_memory = 2048
+desired_count = 2
+max_capacity = 10
+min_capacity = 1
+
+# ALB
+certificate_arn = &quot;arn:aws:acm:us-west-2:123456789012:certificate/abc123&quot;
+
+# S3
+enable_s3_lifecycle = true
+upload_expiration_days = 7
+result_transition_days = 30
+
+# Monitoring
+log_retention_days = 30
+enable_detailed_monitoring = true
+</code></pre>
+<h3 id="state-management">State Management</h3>
+<p><strong>Backend Configuration (<code>backend.tf</code>):</strong></p>
+<pre><code class="language-hcl">terraform {
+  backend &quot;s3&quot; {
+    bucket         = &quot;epub-translator-terraform-state&quot;
+    key            = &quot;epub-translator/terraform.tfstate&quot;
+    region         = &quot;us-west-2&quot;
+    encrypt        = true
+    dynamodb_table = &quot;epub-translator-terraform-locks&quot;
+  }
+}
+</code></pre>
+<h3 id="cost-monitoring">Cost Monitoring</h3>
+<p><strong>Monthly Cost Breakdown:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Estimated Monthly Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ECS Fargate (2 avg tasks)</td>
+<td>$65.59</td>
+</tr>
+<tr>
+<td>Application Load Balancer</td>
+<td>$16.47</td>
+</tr>
+<tr>
+<td>NAT Gateway (2 AZs)</td>
+<td>$70.20</td>
+</tr>
+<tr>
+<td>S3 Storage (150GB)</td>
+<td>$3.45</td>
+</tr>
+<tr>
+<td>CloudWatch Logs</td>
+<td>$2.50</td>
+</tr>
+<tr>
+<td>Data Transfer</td>
+<td>$5.00</td>
+</tr>
+<tr>
+<td>Secrets Manager</td>
+<td>$2.40</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>~$165.61</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cost Optimization Opportunities:</strong>
+- Use Spot instances for 30% savings on compute
+- Implement S3 Intelligent Tiering for storage optimization
+- Optimize NAT Gateway usage with VPC endpoints
+- Right-size ECS tasks based on actual usage</p>
+<hr />
+<h2 id="operational-runbook">Operational Runbook</h2>
+<h3 id="1-deployment-checklist">1. Deployment Checklist</h3>
+<p><strong>Pre-deployment:</strong>
+- [ ] Run integration tests
+- [ ] Validate Terraform plan
+- [ ] Check resource quotas
+- [ ] Backup current configuration
+- [ ] Notify stakeholders</p>
+<p><strong>Deployment:</strong>
+- [ ] Apply Terraform changes
+- [ ] Deploy container image
+- [ ] Verify health checks
+- [ ] Test critical endpoints
+- [ ] Monitor metrics</p>
+<p><strong>Post-deployment:</strong>
+- [ ] Validate functionality
+- [ ] Check error rates
+- [ ] Monitor performance
+- [ ] Update documentation
+- [ ] Close deployment ticket</p>
+<h3 id="2-incident-response">2. Incident Response</h3>
+<p><strong>Severity Levels:</strong>
+- <strong>Critical</strong>: Service completely down
+- <strong>High</strong>: Significant functionality impaired
+- <strong>Medium</strong>: Minor functionality affected
+- <strong>Low</strong>: Cosmetic or documentation issues</p>
+<p><strong>Response Procedures:</strong>
+1. Immediate assessment and triage
+2. Activate incident response team
+3. Implement temporary workarounds
+4. Identify root cause
+5. Implement permanent fix
+6. Post-incident review</p>
+<h3 id="3-scaling-operations">3. Scaling Operations</h3>
+<p><strong>Manual Scaling:</strong></p>
+<pre><code class="language-bash"># Scale ECS service
+aws ecs update-service \
+  --cluster epub-translator-cluster \
+  --service epub-translator-service \
+  --desired-count 5
+
+# Monitor scaling
+aws ecs describe-services \
+  --cluster epub-translator-cluster \
+  --services epub-translator-service
+</code></pre>
+<p><strong>Performance Tuning:</strong>
+- Monitor CPU/Memory utilization
+- Adjust task definition resources
+- Optimize container startup time
+- Tune auto-scaling parameters</p>
+<hr />
+<h2 id="security-compliance">Security Compliance</h2>
+<h3 id="1-security-controls">1. Security Controls</h3>
+<p><strong>Data Protection:</strong>
+- Encryption at rest and in transit
+- Secure API key management
+- File access controls
+- Data retention policies</p>
+<p><strong>Network Security:</strong>
+- VPC isolation
+- Security group restrictions
+- WAF protection (optional)
+- VPC Flow Logs</p>
+<p><strong>Access Control:</strong>
+- IAM least privilege principle
+- Role-based access control
+- MFA for admin access
+- Audit logging</p>
+<h3 id="2-compliance-framework">2. Compliance Framework</h3>
+<p><strong>SOC 2 Type II Readiness:</strong>
+- Security policy documentation
+- Access control procedures
+- Change management process
+- Incident response plan
+- Continuous monitoring</p>
+<p><strong>GDPR Considerations:</strong>
+- Data processing documentation
+- User consent mechanisms
+- Data deletion procedures
+- Data portability features
+- Privacy by design</p>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p>This architecture provides a robust, scalable, and cost-effective solution for deploying the EPUB Translation Service on AWS. The design emphasizes:</p>
+<ul>
+<li><strong>Cost Optimization</strong>: Spot instances, right-sizing, and intelligent storage tiering</li>
+<li><strong>Scalability</strong>: Auto-scaling ECS Fargate tasks based on demand</li>
+<li><strong>Security</strong>: Defense in depth with IAM, encryption, and network isolation</li>
+<li><strong>Reliability</strong>: Multi-AZ deployment with automated health checks</li>
+<li><strong>Observability</strong>: Comprehensive monitoring and alerting</li>
+</ul>
+<p>The Terraform implementation ensures infrastructure consistency and enables GitOps workflows. With estimated monthly costs of ~$166 for production workloads, this architecture provides excellent value for a translation service with sporadic usage patterns.</p>
+<p><strong>Next Steps:</strong>
+1. Review and customize Terraform modules for your specific requirements
+2. Set up CI/CD pipeline with your preferred tooling
+3. Configure monitoring dashboards and alerts
+4. Implement security scanning and compliance controls
+5. Conduct load testing to validate scaling behavior</p>
+<p>This architecture serves as a solid foundation that can evolve with your business requirements while maintaining cost efficiency and operational excellence.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
